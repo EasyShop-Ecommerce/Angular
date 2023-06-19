@@ -1,8 +1,4 @@
-export interface Address {
-  street: string;
-  city: string;
-  government: string;
-}
+import {Address} from './Address'
 
 export class Customer {
   constructor(

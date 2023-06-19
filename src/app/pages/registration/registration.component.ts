@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component,OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import{Customer,Address} from '../../_Models/customer'
+import{Customer} from '../../_Models/customer'
+import { Address } from 'src/app/_Models/Address';
 
 @Component({
   selector: 'app-registration',

@@ -1,105 +1,119 @@
-<nav  class="navbar navbar-dark bg-light firstnav">
-    <img class="logo" src="../../assets/Images/images-removebg-preview.png">
-  
+<nav class="navbar navbar-dark bg-light firstnav">
+  <img class="logo" src="../../assets/Images/images-removebg-preview.png" />
 
-    <form >
-      <input
-        class=" mr-sm-2 search"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <button class="btn btn-outline-success my-2 my-sm-0" >
-        <img src="../../assets/Images/search (1).png" width="20px">
-      </button>
+  <form>
+    <input
+      class="mr-sm-2 search"
+      type="search"
+      placeholder="Search"
+      aria-label="Search"
+    />
+    <button class="btn btn-outline-success my-2 my-sm-0">
+      <img src="../../assets/Images/search (1).png" width="20px" />
+    </button>
 
-      <span >
+    <span>
       <a href="">Orders</a>
-      <a href=""><img src="../../assets/Images/shopping-cart.png" width="30px">Cart</a>
+      <a href="">
+        <span class="cart-link">
+          <span class="cart-no">5</span>
+          <img src="../../assets/Images/shopping-cart.png" width="30px" />
+        </span>cart
+      </a>
+
     </span>
-    </form>
- >
-
-  </nav>
-  
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="collapse navbar-collapse secondnav" id="navbarSupportedContent" >
-      <ul class="navbar-nav mr-auto">
-       
-        <li class="nav-item active " (click)="toggleSidebar()">
-     <button class="sidebar-toggle" (click)="toggleSidebar()" >  
-          <span (click)="toggleSidebar()" *ngIf="!isSidebarOpen"><img class="menu" src="../../assets/Images/list.png"></span>
-         </button> 
-      </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home </a>
-        </li>
-
-
-        <li class="nav-item">
-          <a class="nav-link" href="#">Electronic</a>
-        </li>
     
+  </form>
+  >
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="collapse navbar-collapse secondnav" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active" (click)="toggleSidebar()">
+        <button class="sidebar-toggle" (click)="toggleSidebar()">
+          <span (click)="toggleSidebar()" *ngIf="!isSidebarOpen"
+            ><img class="menu" src="../../assets/Images/list.png"
+          /></span>
+        </button>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#">Electronic</a>
+      </li>
+
       <li class="nav-item active">
         <a class="nav-link" href="#">Fashion </a>
       </li>
-        <li class="nav-item">
-          <a class="nav-link " href="#">Mobile Phones</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="#">Furniture</a>
-        </li>
-      </ul>
-    </div>
-    <button class="sell"><img class="rocket" style="width: 50px;" src="../../assets/Images/rocket.png">
-      Start Selling on Easy Shop Today</button>
-  </nav>
-  
- 
-     
-    
-        <div class="sidebar" [ngClass]="{ 'open': isSidebarOpen }">   
-        <h2 class="hello">Hello</h2>
-       <ul class="navcontent">
-        <li (click)="toggleDisplayDiv()">Mobile,tablet and Accsoceries<img class="arrow" src="../../assets/Images/right-arrow.png"></li>
-        <ul [hidden]="isShowDiv" class="sub">
-          <li >Mobile Phone</li>
-          <li >tablets</li>      
-          <li >Covers</li>      
-        </ul>  
-        <li (click)="togglefashion()">Fashion<img class="arrow" src="../../assets/Images/right-arrow.png"></li>
-        <ul [hidden]="isfashion" class="sub">
-          <li >men</li>
-          <li >Woman</li>      
-          <li >Kids</li>      
-        </ul>  
-        <li (click)="togglehome()">Furniture,Home<img class="arrow" src="../../assets/Images/right-arrow.png"></li>
-        <ul [hidden]="ishome" class="sub">
-          <li >carpets</li>
-          <li >curtains</li>      
-          <li >Bed</li>      
-          <li >Office</li>      
-          <li >Chair</li>      
-          <li >Sofa</li>      
-        </ul> 
-        <li (click)="togglesup()">Supermarket<img class="arrow" src="../../assets/Images/right-arrow.png"></li>
-        <ul [hidden]="issub" class="sub">
-          <li >Pasta,rice</li>
-          <li >Vegtables,Fruit</li>      
-          <li >Coffee,Tea,Beverage</li>            
-        </ul> 
-        <li >Help</li>      
-        <li >Sing in</li>      
+      <li class="nav-item">
+        <a class="nav-link" href="#">Mobile Phones</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Furniture</a>
+      </li>
+    </ul>
+  </div>
+  <button class="sell">
+    <img
+      class="rocket"
+      style="width: 50px"
+      src="../../assets/Images/rocket.png"
+    />
+    Start Selling on Easy Shop Today
+  </button>
+</nav>
 
-       </ul>                        
-       <button class="close-button" *ngIf="isSidebarOpen" (click)="toggleSidebar()">
-        <img  class="close" src="../../assets/Images/close.png">
-      </button>
-
-      
-
-        </div>
-        
-         
-         
-        
+<div class="sidebar" [ngClass]="{ open: isSidebarOpen }">
+  <h2 class="hello">Hello</h2>
+  <ul class="navcontent">
+    <li (click)="toggleDisplayDiv()">
+      Mobile,tablet and Accsoceries<img
+        class="arrow"
+        src="../../assets/Images/right-arrow.png"
+      />
+    </li>
+    <ul [hidden]="isShowDiv" class="sub">
+      <li>Mobile Phone</li>
+      <li>tablets</li>
+      <li>Covers</li>
+    </ul>
+    <li (click)="togglefashion()">
+      Fashion<img class="arrow" src="../../assets/Images/right-arrow.png" />
+    </li>
+    <ul [hidden]="isfashion" class="sub">
+      <li>men</li>
+      <li>Woman</li>
+      <li>Kids</li>
+    </ul>
+    <li (click)="togglehome()">
+      Furniture,Home<img
+        class="arrow"
+        src="../../assets/Images/right-arrow.png"
+      />
+    </li>
+    <ul [hidden]="ishome" class="sub">
+      <li>carpets</li>
+      <li>curtains</li>
+      <li>Bed</li>
+      <li>Office</li>
+      <li>Chair</li>
+      <li>Sofa</li>
+    </ul>
+    <li (click)="togglesup()">
+      Supermarket<img class="arrow" src="../../assets/Images/right-arrow.png" />
+    </li>
+    <ul [hidden]="issub" class="sub">
+      <li>Pasta,rice</li>
+      <li>Vegtables,Fruit</li>
+      <li>Coffee,Tea,Beverage</li>
+    </ul>
+    <li>Help</li>
+    <li>Sing in</li>
+  </ul>
+  <button class="close-button" *ngIf="isSidebarOpen" (click)="toggleSidebar()">
+    <img class="close" src="../../assets/Images/close.png" />
+  </button>
+</div>

@@ -1,65 +1,64 @@
 .navbar-nav {
-    list-style-type: none;
-    text-align: center;
-    display: inline-block;
+  list-style-type: none;
+  text-align: center;
+  display: inline-block;
 }
-  .navbar-nav>li {
-    display: inline-block;
-    margin-right: 10px;
-    color: white;
-  } 
-  form {
-    display: inline-block; 
-    position: absolute;
-    left: 250px;
-  }
-  .search {
-    display: inline-block;
-    width: 600px;
-    padding: 7px;
-    margin-right: 5px;
-  }
-  
-  .logo {
-    height: 210px;
-    left: -10px;
-    top: -80px;
-    bottom: -70px;
-    position: relative;
-  }
-  button {
-    display: inline-block;
-    background-color: rgb(248, 152, 83);
-    height: 43px;
-  }
-  .firstnav {
-    height: 70px;
-  }
-  span{
+.navbar-nav > li {
+  display: inline-block;
+  margin-right: 10px;
+  color: white;
+}
+form {
+  display: inline-block;
+  position: absolute;
+  left: 250px;
+}
+.search {
+  display: inline-block;
+  width: 600px;
+  padding: 7px;
+  margin-right: 5px;
+}
+
+.logo {
+  height: 210px;
+  left: -10px;
+  top: -80px;
+  bottom: -70px;
+  position: relative;
+}
+button {
+  display: inline-block;
+  background-color: rgb(248, 152, 83);
+  height: 43px;
+}
+.firstnav {
+  height: 70px;
+}
+/* span{
     position: relative;
     left: 50px;
-  }
- span a{
+  } */
+span a {
   margin-left: 90px;
   position: relative;
-    text-decoration: none;
-    color: inherit;
-    font-weight: bold;
-    font-size: large;
- }
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+  font-size: large;
+}
 
- span a:hover{
+span a:hover {
   color: chocolate;
- }
+}
 
- .navbar .secondnav>ul>li>a {
+.navbar .secondnav > ul > li > a {
   color: white !important;
   font-weight: bold;
 }
-.navbar .secondnav>ul>li>a:hover {
-  color: chocolate !important;}
- 
-
+.navbar .secondnav > ul > li > a:hover {
+  color: chocolate !important;
+}
 
 .sidebar {
   width: 250px;
@@ -70,7 +69,7 @@
   left: -250px;
   transition: left 0.3s ease;
   margin: auto;
-  overflow-y: auto; 
+  overflow-y: auto;
   z-index: 1000;
 }
 
@@ -79,14 +78,13 @@
   left: 0;
 }
 
-.sidebar-toggle{
-    background-color: rgba(51, 50, 50, 0.233);
-    color: white !important;
-    font-weight: bold;
-    margin-right: 50px;
-    border: none;
+.sidebar-toggle {
+  background-color: rgba(51, 50, 50, 0.233);
+  color: white !important;
+  font-weight: bold;
+  margin-right: 50px;
+  border: none;
 }
-
 
 .close-button {
   position: fixed;
@@ -98,68 +96,62 @@
   width: 40px;
   height: 40px;
 }
-.menu{
+.menu {
   width: 25px;
 }
-.sell{
-  background-color:  rgba(0, 0, 0, 0.13);
+.sell {
+  background-color: rgba(0, 0, 0, 0.13);
   border: none;
   color: white;
   right: 40px;
   position: absolute;
   font-weight: bold;
 }
-.sell:hover{
-  color: chocolate
+.sell:hover {
+  color: chocolate;
 }
-.navcontent > li{
+.navcontent > li {
   color: black !important;
   margin-top: 15px;
   width: 100%;
   height: 40px;
 }
 
- .navcontent > li:hover{
+.navcontent > li:hover {
   background-color: rgba(110, 119, 119, 0.555);
   width: 90%;
- 
-} 
+}
 .navcontent {
-    /* left:15px;*/
-    position: relative; 
-    list-style-type: none;
-    width: 100%;
-
-   
-  }
-  
-
+  /* left:15px;*/
+  position: relative;
+  list-style-type: none;
+  width: 100%;
+}
 
 .sub {
-  left:15px;
+  left: 15px;
   top: 10px;
   position: relative;
   list-style-type: none;
 }
-.sub>li{
+.sub > li {
   margin-top: 5px;
   height: 30px;
 }
-.sub > li:hover{
+.sub > li:hover {
   background-color: rgba(137, 145, 145, 0.555);
   width: 80%;
- 
-} 
-.hello{
+}
+.hello {
   background-color: black;
   color: white;
   width: 100%;
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   justify-content: center;
   height: 50px;
 }
-.arrow{
+.arrow {
   width: 15px;
   margin-left: 10px;
 }
@@ -167,12 +159,46 @@
 .sidebar.open {
   width: 300px;
 }
-.close{
+.close {
   width: 30px;
   height: 20px;
 }
-.rocket{
+.rocket {
   width: 20px;
   height: 40px;
+}
+/* .cart-link {
+  display: flex;
+  align-items: center;
+  position: absolute;
+}
+
+.cart-no {
+  position: absolute;
+  top: -15px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+} */
+
+.cart-link {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  right: 35px;
+}
+
+.cart-no {
+  position: absolute;
+  top: -15px;
+  right: 0;
+  color: chocolate;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: bolder;
 }
 
