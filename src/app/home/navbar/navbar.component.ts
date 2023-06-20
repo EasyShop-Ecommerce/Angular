@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { CartService } from 'src/app/_services/cart.service';
 
 @Component({
@@ -7,6 +8,7 @@ import { CartService } from 'src/app/_services/cart.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
+  searchControl!: FormControl;
   isShowDiv: boolean = true;
   isfashion: boolean = true;
   ishome: boolean = true;
@@ -24,6 +26,9 @@ export class NavbarComponent {
     });
 
     this.cartItemCount = this.cartService.cartItems.length;
+
+
+  
   }
 
   toggleSidebar() {

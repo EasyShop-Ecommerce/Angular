@@ -11,12 +11,16 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { HomeRoutingModule } from './home-routing.module';
 import { RouterModule } from '@angular/router';
 import {MatMenuModule} from '@angular/material/menu';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import {RatingModule} from 'ngx-bootstrap/rating'
+
+
 
 
 
 
 @NgModule({
-  declarations: [FooterComponent,NavbarComponent, HomepageComponent],
+  declarations: [FooterComponent,NavbarComponent, HomepageComponent, ProductDetailsComponent],
   imports: [
     CommonModule, 
    CarouselModule.forRoot(),
@@ -27,7 +31,8 @@ import {MatMenuModule} from '@angular/material/menu';
     CarouselModule,
     HomeRoutingModule,
     RouterModule,
-    MatMenuModule
+    MatMenuModule,
+    RatingModule
   ],
   exports:[
     NavbarComponent,

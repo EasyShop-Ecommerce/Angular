@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="product-details-container">
+      <div class="left-container">
+        <!-- Display product image here -->
+        <img [src]="product.image" alt="Product Image" />
+      </div>
+      <div class="right-container">
+        <h2>{{ product.name }}</h2>
+        <p>Description:{{ product.description }}</p>
+        <p>price:{{ product.price }}</p>
+        <!-- Display other product attributes here -->
+      </div>
+    </div>
+  
+    <div class="comment-section">
+      <h3>Comments</h3>
+      <textarea></textarea>
+      <!-- Implement the comment section and star rating feature here -->
+      <rating [(ngModel)]="rating" (ngModelChange)="onRatingChange($event)"></rating>
+
+    </div>
+  
+    <div class="other-products-section">
+      <h3>Other Products in the Same Category</h3>
+      <div class="other-products-container">
+        <!-- Display other product cards here -->
+        <div class="product-card" *ngFor="let otherProduct of otherProducts">
+          <!-- Display other product details in the card -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
