@@ -18,7 +18,7 @@
   }
   .card-img-top{
     width: 300px;
-    height: 200px;
+    height: 180px;
     padding: 5px;
   }
   .card{
@@ -29,6 +29,7 @@
   button{
     background-color: chocolate;
     margin-left: 5px;
+    margin-top: -4px;
   }
   button:hover{
     background-color: rgb(5, 114, 5);
@@ -37,6 +38,9 @@
   .paginator{
     position: relative;
     align-items: center;
+  }
+  .card-body{
+    margin-top: -2;
   }
   
   

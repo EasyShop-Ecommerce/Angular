@@ -1,0 +1,27 @@
+
+<div class="container">
+<h2>Shopping Cart</h2>
+
+<div class="empty" *ngIf="cartItems.length === 0">
+  <img src="../../../assets/Images/Shrug-cuate.png">
+  <p>Your cart is empty ...!</p>
+</div>
+
+<div *ngFor="let item of cartItems;let i = index" class="insidecontainer">
+  <div class="product-item">
+    <img [src]="item.Image" alt="Product Image" />
+    <span class="text">
+    <h4>{{ item.productName }}</h4>
+    <p class="price">Price: ${{ item.price }}</p>
+    <label for="quantity{{ i }}">Quantity</label>
+    <select id="quantity{{ i }}" [(ngModel)]="item.Quantity" (change)="updateCartItem(item)">
+      <option *ngFor="let quantity of quantityOptions" [value]="quantity">{{ quantity }}</option>
+    </select>
+  </span>
+    <span class="btns">
+    <button class="btn" (click)="removeFromCart(item)">Remove</button>
+    <button class="btn" (click)="removeFromCart(item)">Buy Now</button>
+  </span>
+  </div>
+</div>
+</div>

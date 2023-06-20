@@ -5,10 +5,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http'
 
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HomeModule} from './home/home.module'
 import {PagesModule} from './pages/pages.module'
+import { CartService } from './_services/cart.service';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -22,10 +25,12 @@ import {PagesModule} from './pages/pages.module'
     HomeModule,
     ReactiveFormsModule,
     PagesModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule,
+
   
   ],
-  providers: [],
+  providers: [CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

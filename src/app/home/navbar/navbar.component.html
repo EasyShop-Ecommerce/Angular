@@ -1,7 +1,14 @@
 <nav class="navbar navbar-dark bg-light firstnav">
   <img class="logo" src="../../assets/Images/images-removebg-preview.png" />
 
+  <button mat-button [matMenuTriggerFor]="menu" class="menu" >Menu</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+
   <form>
+
     <input
       class="mr-sm-2 search"
       type="search"
@@ -13,16 +20,19 @@
     </button>
 
     <span>
+      <a routerLink="signIn">signIn</a>
+      <a routerLink="signUp">signUp</a>
       <a href="">Orders</a>
-      <a href="">
+      <a routerLink="cart">
         <span class="cart-link">
-          <span class="cart-no">5</span>
-          <img src="../../assets/Images/shopping-cart.png" width="30px" />
-        </span>cart
+          <span class="cart-no">{{ cartItemCount }}</span>
+          <img class="cart"
+            src="../../assets/Images/shopping-cart.png"
+            width="30px"
+          /> </span
+        >cart
       </a>
-
     </span>
-    
   </form>
   >
 </nav>
@@ -33,12 +43,12 @@
       <li class="nav-item active" (click)="toggleSidebar()">
         <button class="sidebar-toggle" (click)="toggleSidebar()">
           <span (click)="toggleSidebar()" *ngIf="!isSidebarOpen"
-            ><img class="menu" src="../../assets/Images/list.png"
+            ><img class="menu2" src="../../assets/Images/list.png"
           /></span>
         </button>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home </a>
+        <a class="nav-link" routerLink=" ">Home </a>
       </li>
 
       <li class="nav-item">

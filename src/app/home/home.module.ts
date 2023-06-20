@@ -8,6 +8,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { HomeRoutingModule } from './home-routing.module';
+import { RouterModule } from '@angular/router';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 
 
@@ -15,13 +19,15 @@ import { MatPaginatorModule } from '@angular/material/paginator';
   declarations: [FooterComponent,NavbarComponent, HomepageComponent],
   imports: [
     CommonModule, 
-    // CarouselModule.forRoot(),
+   CarouselModule.forRoot(),
     MatButtonModule,
     MatCardModule,
     FormsModule,
     MatPaginatorModule,
-    CarouselModule
- 
+    CarouselModule,
+    HomeRoutingModule,
+    RouterModule,
+    MatMenuModule
   ],
   exports:[
     NavbarComponent,

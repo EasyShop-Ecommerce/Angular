@@ -11,7 +11,7 @@
 form {
   display: inline-block;
   position: absolute;
-  left: 250px;
+  right: 50px;
 }
 .search {
   display: inline-block;
@@ -21,10 +21,10 @@ form {
 }
 
 .logo {
-  height: 210px;
+  height: 150px;
   left: -10px;
-  top: -80px;
-  bottom: -70px;
+  top: -60px;
+  bottom: -40px;
   position: relative;
 }
 button {
@@ -33,14 +33,11 @@ button {
   height: 43px;
 }
 .firstnav {
-  height: 70px;
+  height: 50px;
 }
-/* span{
-    position: relative;
-    left: 50px;
-  } */
+
 span a {
-  margin-left: 90px;
+  margin-left: 40px;
   position: relative;
   text-decoration: none;
   color: inherit;
@@ -96,7 +93,7 @@ span a:hover {
   width: 40px;
   height: 40px;
 }
-.menu {
+.menu2 {
   width: 25px;
 }
 .sell {
@@ -152,7 +149,7 @@ span a:hover {
   height: 50px;
 }
 .arrow {
-  width: 15px;
+  width: 10px;
   margin-left: 10px;
 }
 
@@ -164,25 +161,9 @@ span a:hover {
   height: 20px;
 }
 .rocket {
-  width: 20px;
-  height: 40px;
+  width: 10px;
+  height: 25px;
 }
-/* .cart-link {
-  display: flex;
-  align-items: center;
-  position: absolute;
-}
-
-.cart-no {
-  position: absolute;
-  top: -15px;
-  right: -10px;
-  background-color: red;
-  color: white;
-  font-size: 12px;
-  padding: 2px 6px;
-  border-radius: 50%;
-} */
 
 .cart-link {
   position: absolute;
@@ -193,7 +174,7 @@ span a:hover {
 
 .cart-no {
   position: absolute;
-  top: -15px;
+  top: -5px;
   right: 0;
   color: chocolate;
   padding: 2px 6px;
@@ -202,3 +183,14 @@ span a:hover {
   font-weight: bolder;
 }
 
+.menu{
+  position: absolute;
+  left: 200px;
+}
+.secondnav{
+  height: 25px;
+}
+.cart{
+  height: 25px;
+ margin-top: 10px;
+}

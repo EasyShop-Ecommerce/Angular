@@ -3,14 +3,17 @@
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="login-form">
       <h2>Login</h2>
       <div>
-        <label for="username">Username:</label>
+        <label for="username">Username</label>
         <input type="text" id="username" name="username" [(ngModel)]="username" required>
       </div>
       <div>
-        <label for="password">Password:</label>
+        <label for="password"> Password </label>
         <input type="password" id="password" name="password" [(ngModel)]="password" required>
       </div>
+      <span class="btns">
       <button class="btn" type="submit">Login</button>
+      <button class="btn" type="submit" routerLink="">Cancel</button>
+      </span>
     </form>
 
   </div>

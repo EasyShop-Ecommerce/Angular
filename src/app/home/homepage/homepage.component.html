@@ -7,7 +7,7 @@
   </carousel>
 </div>
 
-<!-- card -->
+<!-- cards -->
 <div class="card-container">
   <div class="row">
     <div class="col-md-4" *ngFor="let product of pagedProducts">
@@ -15,16 +15,18 @@
         <img class="card-img-top" [src]="product.image" [alt]="product.name" />
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>
+          <h5 class="card-title" style="display: none">{{ product.id }}</h5>
           <p class="card-text">Price: {{ product.price }}</p>
-          <button class="btn ">Add to Cart</button>
-          <button class="btn ">Details</button>
+          <button class="btn" (click)="addToCart(product)">Add to Cart</button>
+          <button class="btn">Details</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<mat-paginator class="paginator"
+<mat-paginator
+  class="paginator"
   [length]="products.length"
   [pageSize]="pageSize"
   [pageSizeOptions]="pageSizeOptions"
@@ -32,4 +34,3 @@
   aria-label="Select page"
 >
 </mat-paginator>
-
