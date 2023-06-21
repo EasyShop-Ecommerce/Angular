@@ -16,7 +16,7 @@ export class CartService {
     productId: 0,
     productName: '',
     price: 0,
-    Quantity: 0,
+    Quantity: 1,
     Image: '',
   };
 

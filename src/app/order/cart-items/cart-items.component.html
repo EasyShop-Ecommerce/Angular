@@ -13,10 +13,10 @@
     <span class="text">
     <h4>{{ item.productName }}</h4>
     <p class="price">Price: ${{ item.price }}</p>
-    <label for="quantity{{ i }}">Quantity</label>
-    <select id="quantity{{ i }}" [(ngModel)]="item.Quantity" (change)="updateCartItem(item)">
+    <select id="quantity{{ i }}" [(ngModel)]="item.Quantity" (change)="updateCartItem(item)" class="custom-select">
       <option *ngFor="let quantity of quantityOptions" [value]="quantity">{{ quantity }}</option>
     </select>
+    
   </span>
     <span class="btns">
     <button class="btn" (click)="removeFromCart(item)">Remove</button>

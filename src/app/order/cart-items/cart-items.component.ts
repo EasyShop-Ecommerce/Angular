@@ -9,9 +9,10 @@ import { CartService } from 'src/app/_services/cart.service';
 })
 export class CartItemsComponent {
   cartItemCount: number = 0;
+  cartItem: any;
   constructor(private cartService: CartService) {}
   quantityOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  cartItems: any[] = []; // Define the type of your product object
+  cartItems: cart[] = []; 
 
   ngOnInit(): void {
     this.cartItemCount = this.cartService.getCartItemCount();
@@ -21,14 +22,19 @@ export class CartItemsComponent {
     });
 
     this.cartItems = this.cartService.cartItems; // Retrieve the cart items directly from CartService
+    console.log(this.cartItems);
   }
 
-  updateCartItem(cart: cart) {
+  updateCartItem(cart: cart): void {
     const index = this.cartItems.findIndex(
-      (cartItem: any) => cartItem.id === cart.productId
+      (cartItem: any) => cartItem.productId === cart.productId
     );
-    if (index !== -1) {
-      this.cartItems[index] = cart;
+    const element = this.cartItems?.find(
+      (e: any) => e.productId === cart.productId
+    );
+
+    if (element) {
+      element.Quantity = cart.Quantity; // Update the quantity
       // Save the updated cart items in local storage
       localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
       this.cartItemCount = this.cartItems.length;
