@@ -1,33 +1,64 @@
 <div class="container">
-    <div class="product-details-container">
-      <div class="left-container">
-        <!-- Display product image here -->
-        <img [src]="product.image" alt="Product Image" />
-      </div>
-      <div class="right-container">
-        <h2>{{ product.name }}</h2>
-        <p>Description:{{ product.description }}</p>
-        <p>price:{{ product.price }}</p>
-        <!-- Display other product attributes here -->
-      </div>
+  <div class="product-details-container">
+    <div class="left-container">
+      <!-- Display product image here -->
+      <img [src]="product.image" alt="Product Image" />
     </div>
-  
-    <div class="comment-section">
-      <h3>Comments</h3>
-      <textarea></textarea>
-      <!-- Implement the comment section and star rating feature here -->
-      <rating [(ngModel)]="rating" (ngModelChange)="onRatingChange($event)"></rating>
+    <div class="right-container">
+      <h2>{{ product.name }}</h2>
+      <p>Description:{{ product.description }}</p>
+      <p>price:{{ product.price }}</p>
+    </div>
+  </div>
 
+  <!-- add new review -->
+  <div class="comment-section">
+    <h4>Reviews</h4>
+    <rating
+      [(ngModel)]="rating"
+      (ngModelChange)="onRatingChange($event)"
+    ></rating>
+    <p>Comments</p>
+    <textarea
+      [value]="newcomment"
+      (input)="updateNewComment($event)"
+    ></textarea>
+    <button class="btn" (click)="addNewReview()">Send</button>
+  </div>
+
+  <!-- previousReviews -->
+  <div class="previousReviews">
+    <div class="stars" *ngFor="let rate of stars">
+      <rating [ngModel]="rate"></rating>
     </div>
-  
-    <div class="other-products-section">
-      <h3>Other Products in the Same Category</h3>
-      <div class="other-products-container">
-        <!-- Display other product cards here -->
-        <div class="product-card" *ngFor="let otherProduct of otherProducts">
-          <!-- Display other product details in the card -->
+    <div class="comments" *ngFor="let comment of comments">
+      <p>{{ comment }}</p>
+    </div>
+  </div>
+
+  <div class="other-products-section">
+    <h3>You might also like</h3>
+    <div class="other-products-container">
+      <!-- Display other product cards here -->
+      <div class="product-card" *ngFor="let product of randomProducts">
+        <div class="card-container">
+          <div class="row">
+            <img
+              class="card-img-top"
+              [src]="product.image"
+              [alt]="product.name"
+            />
+            <div class="card-body">
+              <h5 class="card-title">{{ product.name }}</h5>
+              <h5 class="card-title" style="display: none">{{ product.id }}</h5>
+              <p class="card-text">Price: {{ product.price }}</p>
+              <button class="btn" [routerLink]="'productDetails/' + product.id">
+                Details
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

@@ -38,8 +38,19 @@
   }
  rating {
   color: rgb(228, 98, 12); /* Set the border color to black */
-   /* Set the fill color to yellow */
- /* Add a black border */
   font-size: 30px; 
+  }
+  textarea{
+    width:400px;
+    height: 100px;
+  }
+  button{
+    background-color: chocolate;
+    margin-left: 10px;
+    margin-bottom: 30px;
+  }
+  button:hover{
+    background-color: darkgreen;
+    
   }
   
