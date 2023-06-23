@@ -1,0 +1,38 @@
+.editable input {
+  background-color: white;
+  border: 1px solid #ccc;
+}
+
+.user-info {
+  margin: 40px;
+  border: 2px solid chocolate;
+  padding: 7px;
+  font-family:serif;
+}
+
+.user-address,
+.mobile-number {
+  margin-bottom: 10px;
+}
+
+.Change {
+  margin-left: 10px;
+  background-color: chocolate;
+  margin-top: 10px;
+}
+
+.payment-methods {
+  margin-top: 20px;
+}
+
+.payment-method {
+  margin-bottom: 10px;
+}
+
+.input {
+  margin-left: 150px;
+  display: flex;
+  border: none;
+  background-color: white;
+}
+

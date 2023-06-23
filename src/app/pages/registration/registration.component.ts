@@ -10,56 +10,10 @@ import { Address } from 'src/app/_Models/Address';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit  {
-//   registrationForm!: FormGroup;
-//   submitted = false; // Track form submission
 
-//   constructor(private formBuilder: FormBuilder,private http: HttpClient) {}
-
-//   ngOnInit() {
-//     this.registrationForm = this.formBuilder.group({
-//       name: ['', Validators.required],
-//       phone: ['', Validators.required],
-//       Email:['', Validators.required],
-//     });
-//   }
-
-//   get nameControl() {
-//     return this.registrationForm.get('name');
-//   }
-
-//   get ageControl() {
-//     return this.registrationForm.get('age');
-//   }
-
- 
-
-
-
-//   onSubmit() {
-//     if (this.registrationForm.valid) {
-//       const formData = this.registrationForm.value;
-
-//       // Make an HTTP POST request to the backend API endpoint
-//       this.http.post('/api/customers', formData)
-//         .subscribe(
-//           (response) => {
-//             // Handle the successful response from the backend
-//             console.log('Customer data saved successfully:', response);
-//           },
-//           (error) => {
-//             // Handle any errors that occur during the HTTP request
-//             console.error('Error occurred while saving customer data:', error);
-//           }
-//         );
-//     }
-//   }
-
-//   onCancel() {
-//     // Add your cancel logic here
-//   }
- 
-registrationForm!: FormGroup;
-submitted = false; // Track form submission
+ registrationForm!: FormGroup;
+submitted = false; 
+customer!:Customer
 
 constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
 
@@ -108,21 +62,16 @@ onSubmit() {
   if (this.registrationForm.valid) {
     const formData = this.registrationForm.value;
     const address: Address = {
-      street: formData.street,
-      city: formData.city,
-      government: formData.government
+      Street: formData.street,
+      City: formData.city,
+      Government: formData.government
     };
-    const customer: Customer = new Customer(
-     0,
-      formData.name,
-      formData.phone,
-      formData.email,
-      formData.password,
-      address
-    );
-      console.log(customer);
+
+   
+  
+      console.log(this.customer);
     // Make an HTTP POST request to the backend API endpoint
-    this.http.post('/api/customers', customer)
+    this.http.post('/api/customers', this.customer)
       .subscribe(
         (response) => {
           // Handle the successful response from the backend

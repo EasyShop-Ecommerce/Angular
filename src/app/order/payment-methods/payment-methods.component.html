@@ -1,0 +1,40 @@
+<div class="user-info">
+  <h2>Your Information</h2>
+  <form [formGroup]="userForm" (ngSubmit)="saveUserAddress()">
+    <div class="user-address" [ngClass]="{ editable: isEditable }">
+      <label for="street">Street:</label>
+      <input class="input" id="street" type="text" formControlName="street" />
+    </div>
+    <div class="user-address" [ngClass]="{ editable: isEditable }">
+      <label for="city">City:</label>
+      <input class="input" id="city" type="text" formControlName="city" />
+    </div>
+    <div class="user-address" [ngClass]="{ editable: isEditable }">
+      <label for="government">Government:</label>
+      <input class="input" id="government" type="text" formControlName="government" />
+    </div>
+    <div class="phone" [ngClass]="{ editable: isEditable }">
+      <label for="phone">Mobile Number:</label>
+      <input class="input" id="phone" type="text" formControlName="phone" />
+    </div>
+    <button class="btn Change" type="button" (click)="toggleEditState()">
+      Change
+    </button>
+    <button class="btn Change" type="submit" *ngIf="isEditable">Save</button>
+  </form>
+</div>
+
+<div class="payment-methods user-info">
+  <h2>Payment Methods</h2>
+  <div *ngFor="let method of paymentMethods" class="payment-method">
+    <input
+      type="radio"
+      name="paymentMethod"
+      [value]="method"
+      [(ngModel)]="selectedMethod"
+    />
+    <label>{{ method }}</label>
+  </div>
+</div>
+<button class="btn Change" (click)="submitPaymentMethod()">Submit</button>
+

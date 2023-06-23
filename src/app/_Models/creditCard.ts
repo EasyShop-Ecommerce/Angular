@@ -1,7 +1,6 @@
-export interface creditCard{
-    id:number,
-    username:string,
-    expirationDate:Date,
-    customerId:number
-
+export interface creditCard {
+  Id: number;
+  Cardholder_name: string;
+  ExpirationDate: Date;
+  CustomerId: number;
 }

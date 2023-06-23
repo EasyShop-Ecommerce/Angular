@@ -1,4 +1,4 @@
 export interface Store{
-    id:number,
-    location:string
+    Id:number,
+    Location:string
 }

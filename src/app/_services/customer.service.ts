@@ -9,7 +9,7 @@ export class CustomerService {
 
   constructor(private http: HttpClient) { }
 
-  dbUrl: string = '';
+  dbUrl: string = 'https://localhost:44364/Customer/';
 
   getAllCustomers() {
     return this.http.get<Customer[]>(this.dbUrl);

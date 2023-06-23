@@ -1,12 +1,10 @@
-import {Address} from './Address'
+import { Address } from './Address';
 
-export class Customer {
-  constructor(
-    public id: number,
-    public name: string,
-    public phone: number,
-    public Email: string,
-    public password: string,
-    public address: Address
-  ) {}
+export interface Customer {
+  id: number;
+  name: string;
+  phone: number;
+  email: string;
+  password: string;
+  address: Address;
 }

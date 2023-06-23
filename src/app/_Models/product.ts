@@ -1,7 +1,14 @@
 export interface Product {
   id: number;
-  name: string;
+  brandName: string;
+  title: string;
   price: number;
   description: string;
-  image: string;
+  operatingSystem: string;
+  specialFeatures: string;
+  memoryStorageCapacity: string;
+  subCategoryId: number;
+  sellerId: number;
+  hardDiskSize: string;
+  material: string;
 }

@@ -2,12 +2,21 @@
   <div class="product-details-container">
     <div class="left-container">
       <!-- Display product image here -->
-      <img [src]="product.image" alt="Product Image" />
+      <!-- <img [src]="product.image" alt="Product Image" /> -->
     </div>
     <div class="right-container">
-      <h2>{{ product.name }}</h2>
-      <p>Description:{{ product.description }}</p>
-      <p>price:{{ product.price }}</p>
+      <h2>{{ product.title }}</h2>
+      <p *ngIf="product.description">Description: {{ product.description }}</p>
+      <p *ngIf="product.price">price: {{ product.price }}</p>
+      <p *ngIf="product.brandName">BrandName: {{ product.brandName }}</p>
+      <p *ngIf="product.hardDiskSize">
+        HardDiskSize: {{ product.hardDiskSize }}
+      </p>
+      <p *ngIf="product.material">Material: {{ product.material }}</p>
+      <p *ngIf="product.memoryStorageCapacity">
+        MemoryStorageCapacity: {{ product.memoryStorageCapacity }}
+      </p>
+      <p *ngIf="product.operatingSystem">OperatingSystem: {{ product.operatingSystem }}</p>
     </div>
   </div>
 
@@ -18,22 +27,28 @@
       [(ngModel)]="rating"
       (ngModelChange)="onRatingChange($event)"
     ></rating>
-    <p>Comments</p>
-    <textarea
+    <p class="text">Comments</p>
+    <textarea placeholder="Write Comment..."
       [value]="newcomment"
       (input)="updateNewComment($event)"
     ></textarea>
     <button class="btn" (click)="addNewReview()">Send</button>
   </div>
 
-  <!-- previousReviews -->
   <div class="previousReviews">
-    <div class="stars" *ngFor="let rate of stars">
-      <rating [ngModel]="rate"></rating>
-    </div>
-    <div class="comments" *ngFor="let comment of comments">
-      <p>{{ comment }}</p>
-    </div>
+   
+      <div class="stars" *ngFor="let review of productreviews">
+
+        <ng-container *ngFor="let customer of allCustomers">
+          <ng-container *ngIf="review.customerId === customer.id">
+      <h4>{{ customer.name }}</h4>
+        
+      </ng-container>
+      </ng-container>
+      <rating [ngModel]="review.rate"></rating>
+      <p class="text">{{ review.comment }}</p>
+      </div>
+   
   </div>
 
   <!-- randomProducts -->
@@ -44,15 +59,18 @@
       <div class="product-card" *ngFor="let product of randomProducts">
         <div class="card-container">
           <div class="row">
-            <img
+            <!-- <img
               class="card-img-top"
               [src]="product.image"
-              [alt]="product.name"
-            />
+              [alt]="product."
+            /> -->
             <div class="card-body">
-              <h5 class="card-title">{{ product.name }}</h5>
-              <h5 class="card-title" style="display: none">{{ product.id }}</h5>
+              <h5 class="card-title">{{ product.title }}</h5>
+              <h5 class="card-title" style="display: none">
+                {{ product.id }}
+              </h5>
               <p class="card-text">Price: {{ product.price }}</p>
+         
               <button class="btn" [routerLink]="'productDetails/' + product.id">
                 Details
               </button>

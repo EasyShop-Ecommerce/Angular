@@ -1,5 +1,6 @@
 .container {
     margin: 20px;
+   
   }
   
   .product-details-container {
@@ -13,11 +14,14 @@
   
   .right-container {
     flex: 2;
-    margin-left: 20px;
+    margin-left: 50px;
+    font-weight: bold;
+  
   }
   
   .comment-section {
     margin-top: 20px;
+    
   }
   
   .other-products-section {
@@ -52,5 +56,8 @@
   button:hover{
     background-color: darkgreen;
     
+  }
+  .text{
+    font-weight: bold;
   }
   

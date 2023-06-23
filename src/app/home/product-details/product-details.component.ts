@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Review } from 'src/app/_Models/Review';
+import { Customer } from 'src/app/_Models/customer';
 import { Product } from 'src/app/_Models/product';
+import { CustomerService } from 'src/app/_services/customer.service';
 import { ProductService } from 'src/app/_services/product.service';
 import { ReviewService } from 'src/app/_services/review.service';
 
@@ -12,36 +14,41 @@ import { ReviewService } from 'src/app/_services/review.service';
 })
 export class ProductDetailsComponent {
   productId: number = 0;
-  rating: number = 3;
+  rating: number = 5;
   newcomment: string = '';
-  stars: number[] = [];
-  comments: string[] = [];
   products: Product[] = [];
-  randomProducts:Product[]=[]
+  customers: number[] = [];
+  allCustomers: Customer[] = [];
+  customerNames: string[] = [];
+  randomProducts: Product[] = [];
   reviews: Review[] = [];
   productreviews: Review[] = [];
   product: Product = {
-    name: 'Product Name',
+    title: 'Product Name',
     description: 'Product description',
     price: 100,
-    image: ' ',
+    operatingSystem: '',
     id: 0,
+    specialFeatures: '',
+    brandName: '',
+    subCategoryId: 1,
+    sellerId: 0,
+    hardDiskSize: '',
+    material: '',
+    memoryStorageCapacity: '',
   };
   newReview: Review = {
-    ProductId: this.productId,
-    CustomerId: 0,
+    productId: this.productId,
+    customerId: 0,
     rate: this.rating,
     comment: this.newcomment,
   };
 
-  otherProducts: Product[] = [
-    // Other products in the same category
-  ];
-
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private customerService: CustomerService
   ) {}
 
   ngOnInit() {
@@ -52,21 +59,39 @@ export class ProductDetailsComponent {
     //the product u opend
     this.productService.getProductById(this.productId).subscribe((data) => {
       this.product = data;
+      console.log(this.product);
     });
     // All reviews
     this.reviewService.getAllReviews().subscribe((data) => {
       this.reviews = data;
+      console.log(this.reviews);
       // the review of this product
       this.productreviews =
-        this.reviews?.filter((e) => e.ProductId == this.productId) || [];
-    });
-    // all previous review about this product
-    this.stars = this.productreviews.map((e) => e.rate);
-    this.comments = this.productreviews.map((e) => e.comment);
+        this.reviews?.filter((e) => e.productId == this.productId) || [];
+      console.log(this.productreviews);
 
-    //randomProducts
-    this. randomProducts = this.getRandomProducts(3);
-    console.log(this. randomProducts);
+      // all previous review about this product
+      this.customers = this.productreviews.map((e) => e.customerId);
+      console.log(this.customers);
+
+      this.customerService.getAllCustomers().subscribe((data) => {
+        this.allCustomers = data;
+        console.log(this.allCustomers);
+
+        this.customerNames = this.customers.map((customerId) => {
+          const customer = this.allCustomers.find((c) => c.id === customerId);
+          return customer ? customer.name : ''; // Use empty string if customer not found
+        });
+        console.log(this.customerNames);
+      });
+    });
+    this.productService.getAllProducts().subscribe((data) => {
+      this.products = data;
+
+      //randomProducts
+      this.randomProducts = this.getRandomProducts(3);
+      console.log(this.randomProducts);
+    });
   }
 
   onRatingChange(event: number) {
@@ -90,24 +115,24 @@ export class ProductDetailsComponent {
 
   getRandomProducts(count: number): any[] {
     const productsCount = this.products.length;
-  
+    console.log(productsCount);
+
     if (count >= productsCount) {
       return this.products;
     }
-  
+
     const randomIndices: number[] = []; // Explicitly declare the type as number[]
     const randomProducts = [];
-  
+
     while (randomIndices.length < count) {
       const randomIndex = Math.floor(Math.random() * productsCount);
-  
+
       if (!randomIndices.includes(randomIndex)) {
         randomIndices.push(randomIndex);
         randomProducts.push(this.products[randomIndex]);
       }
     }
-  
+
     return randomProducts;
   }
-  
 }

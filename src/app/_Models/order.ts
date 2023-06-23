@@ -1,11 +1,11 @@
 export interface Order {
-  id: number;
-  totalPrice: number;
-  date: Date;
-  customerId: number;
-  statusId: number;
-  paymentId: number;
-  shipperId: number;
-  sellerId: number;
-  shipPrice: number;
+  Id: number;
+  TotalPrice: number;
+  Date: Date;
+  CustomerId: number;
+  StatusId: number;
+  PaymentMethodId: number;
+  ShipperId: number;
+  SellerId: number;
+  ShipPrice: number;
 }

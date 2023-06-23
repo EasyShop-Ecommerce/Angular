@@ -1,12 +1,12 @@
 import { Address } from './Address';
 export interface Seller {
-  id: number;
+  Id: number;
   FirstName: string;
-  Middle: string;
+  MiddleName: string;
   LastName: string;
   SSN: number;
   Phone: number;
-  Businessmen: string;
-  email: string;
+  BusinessName: string;
+  Email: string;
   address: Address;
 }

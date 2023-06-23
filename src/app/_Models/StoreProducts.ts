@@ -1,6 +1,6 @@
 export interface StoreProducts {
   ProductId: number;
-  sellerId: number;
-  storeId: number;
+  SellerId: number;
+  StoreId: number;
   Quantity: number;
 }

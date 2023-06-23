@@ -1,0 +1,28 @@
+<div class="form-container">
+  <h2>Credit Card Information</h2>
+  <form [formGroup]="creditCardForm" (ngSubmit)="submitCreditCardForm()">
+    <div class="form-group">
+      <label for="id">Card Number</label>
+      <input type="text" id="id" formControlName="id" />
+    </div>
+    <div class="form-group">
+      <label for="username">user name</label>
+      <input type="text" id="username" formControlName="username" />
+    </div>
+    <mat-form-field>
+      <mat-label>Month and Year</mat-label>
+      <input matInput [matDatepicker]="dp" formControlName="expirationDate"  oninput="newdate($event)"/>
+      <mat-hint>MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+      <mat-datepicker
+        #dp
+        startView="multi-year"
+        (monthSelected)="setMonthAndYear($event, dp)"
+        panelClass="example-month-picker"
+      >
+      </mat-datepicker>
+    </mat-form-field>
+
+    <button class="btn submit-btn" type="submit">Submit</button>
+  </form>
+</div>

@@ -9,7 +9,7 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  dbUrl: string = '';
+  dbUrl: string = 'https://localhost:44364/api/Product/';
 
   getAllProducts() {
     return this.http.get<Product[]>(this.dbUrl);
@@ -23,7 +23,7 @@ export class ProductService {
     return this.http.get<Product>(this.dbUrl + id);
   }
   updateProduct(id: number, pro: Product) {
-    return this.http.patch<Product>(this.dbUrl + id, pro);
+    return this.http.put<Product>(this.dbUrl + id, pro);
   }
 
   deleteProductById(id: number) {

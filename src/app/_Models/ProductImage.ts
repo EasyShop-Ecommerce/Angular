@@ -1,8 +1,8 @@
 export interface ProductImages{
-    id:number,
-    color:string,
-    file:string,
-    productId:number
+    Id:number,
+    Color:string,
+    ImageUrl:string,
+    ProductId:number
 }
 
 

@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CartItemsComponent } from '../order/cart-items/cart-items.component';
 import { PagesRoutingModule } from './pages-routing.module';
 
 @NgModule({
-  declarations: [LoginComponent, RegistrationComponent, CartItemsComponent],
+  declarations: [LoginComponent, RegistrationComponent],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, PagesRoutingModule],
-  exports: [LoginComponent, RegistrationComponent, CartItemsComponent],
+  exports: [LoginComponent, RegistrationComponent],
 })
 export class PagesModule {}

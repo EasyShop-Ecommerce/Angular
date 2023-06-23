@@ -9,7 +9,7 @@ export class ReviewService {
 
   constructor(private http: HttpClient) { }
   
-  dbUrl: string = '';
+  dbUrl: string = 'https://localhost:44364/api/Review/';
 
   getAllReviews() {
     return this.http.get<Review[]>(this.dbUrl);
