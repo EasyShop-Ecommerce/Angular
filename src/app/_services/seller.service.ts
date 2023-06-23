@@ -9,7 +9,7 @@ export class SellerService {
 
   constructor(private http: HttpClient) { }
 
-  dbUrl: string = '';
+  dbUrl: string = 'https://localhost:44364/Seller/';
 
   getAllSellers() {
     return this.http.get<Seller[]>(this.dbUrl);

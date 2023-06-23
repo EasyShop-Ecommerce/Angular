@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Review } from 'src/app/_Models/Review';
 import { Customer } from 'src/app/_Models/customer';
 import { Product } from 'src/app/_Models/product';
+import { CartService } from 'src/app/_services/cart.service';
 import { CustomerService } from 'src/app/_services/customer.service';
 import { ProductService } from 'src/app/_services/product.service';
 import { ReviewService } from 'src/app/_services/review.service';
@@ -48,7 +49,8 @@ export class ProductDetailsComponent {
     private route: ActivatedRoute,
     private productService: ProductService,
     private reviewService: ReviewService,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private cartService:CartService
   ) {}
 
   ngOnInit() {
@@ -135,4 +137,9 @@ export class ProductDetailsComponent {
 
     return randomProducts;
   }
+
+  addToCart(product: Product): void {
+    this.cartService.addToCart(product);
+  }
+
 }

@@ -16,7 +16,13 @@
       <p *ngIf="product.memoryStorageCapacity">
         MemoryStorageCapacity: {{ product.memoryStorageCapacity }}
       </p>
-      <p *ngIf="product.operatingSystem">OperatingSystem: {{ product.operatingSystem }}</p>
+      <p *ngIf="product.operatingSystem">
+        OperatingSystem: {{ product.operatingSystem }}
+      </p>
+      <button class="btn" (click)="addToCart(product)">Add To Cart</button>
+      <button class="btn" routerLink="/paymentMethod/{{ product.id }}">
+        Buy Now
+      </button>
     </div>
   </div>
 
@@ -28,7 +34,8 @@
       (ngModelChange)="onRatingChange($event)"
     ></rating>
     <p class="text">Comments</p>
-    <textarea placeholder="Write Comment..."
+    <textarea
+      placeholder="Write Comment..."
       [value]="newcomment"
       (input)="updateNewComment($event)"
     ></textarea>
@@ -36,19 +43,16 @@
   </div>
 
   <div class="previousReviews">
-   
-      <div class="stars" *ngFor="let review of productreviews">
-
-        <ng-container *ngFor="let customer of allCustomers">
-          <ng-container *ngIf="review.customerId === customer.id">
-      <h4>{{ customer.name }}</h4>
-        
-      </ng-container>
+    <div class="stars" *ngFor="let review of productreviews">
+      <ng-container *ngFor="let customer of allCustomers">
+        <ng-container *ngIf="review.customerId === customer.id">
+          <h4>{{ customer.name }}</h4>
+        </ng-container>
       </ng-container>
       <rating [ngModel]="review.rate"></rating>
       <p class="text">{{ review.comment }}</p>
-      </div>
-   
+      <button>Remove</button>
+    </div>
   </div>
 
   <!-- randomProducts -->
@@ -70,7 +74,7 @@
                 {{ product.id }}
               </h5>
               <p class="card-text">Price: {{ product.price }}</p>
-         
+
               <button class="btn" [routerLink]="'productDetails/' + product.id">
                 Details
               </button>

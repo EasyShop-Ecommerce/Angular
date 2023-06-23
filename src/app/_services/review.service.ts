@@ -26,7 +26,7 @@ export class ReviewService {
     return this.http.patch<Review>(this.dbUrl + id, Review);
   }
 
-  deleteReviewById(id: number) {
-    return this.http.delete(this.dbUrl + id);
+  deleteReviewById(id: number,productId:number) {
+    return this.http.delete(this.dbUrl + id + productId);
   }
 }
