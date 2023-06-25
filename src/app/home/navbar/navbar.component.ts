@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { Subcategory } from 'src/app/_Models/Subcategory';
 import { CartService } from 'src/app/_services/cart.service';
 import { ProductSearchServiceService } from 'src/app/_services/product-search-service.service';
+import { SearchbycatService } from 'src/app/_services/searchbycat.service';
 import { SubSubcategoryService } from 'src/app/_services/sub-category.service';
+import { SearchByCatComponent } from 'src/app/product/search-by-cat/search-by-cat.component';
 
 @Component({
   selector: 'app-navbar',
@@ -21,13 +23,15 @@ export class NavbarComponent {
   isbutton = false;
   subcategories: Subcategory[] = [];
   selectedCategoryId: number | null = null;
+  try:number=0
   cartItemCount = 0;
 
   constructor(
     private cartService: CartService,
     private productSearchService: ProductSearchServiceService,
     private router: Router,
-    private subcategoryService: SubSubcategoryService
+    private subcategoryService: SubSubcategoryService,
+    private bycatservice:SearchbycatService
   ) {}
 
   ngOnInit(): void {
@@ -71,15 +75,13 @@ export class NavbarComponent {
     this.router.navigate(['/search']);
   }
 
-  // onCategorySelect(categoryId: number | null): void {
-  //   this.productSearchService.setSelectedCategoryId(categoryId);
-  //   // Handle the selected category here
-  //   console.log(categoryId); // Example: Output the selected category ID
-  // }
+
 
   onCategoryChange(categoryId: number | null): void {
+    this.bycatservice.setSelectedCategoryId(categoryId);
     console.log(categoryId)
-    this.productSearchService.setSelectedCategoryId(categoryId);
     this.router.navigate(['/searchCat']);
+    console.log(categoryId)
+
   }
 }

@@ -3,8 +3,8 @@ import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/_Models/product';
 import { CartService } from 'src/app/_services/cart.service';
-import { ProductSearchServiceService } from 'src/app/_services/product-search-service.service';
 import { ProductService } from 'src/app/_services/product.service';
+import { SearchbycatService } from 'src/app/_services/searchbycat.service';
 
 @Component({
   selector: 'app-search-by-cat',
@@ -15,10 +15,15 @@ export class SearchByCatComponent {
   pageSize = 6;
   pageSizeOptions: number[] = [6, 18, 25, 100];
   pagedProducts: Product[] = [];
+  selectedCategoryId: number | null = null;
+  filteredProducts: Product[] = [];
+  products: Product[] = [];
+  private selectedCategoryIdSubscription: Subscription | undefined;
+
   constructor(
     private productService: ProductService,
     private cartService: CartService,
-    private productSearchService: ProductSearchServiceService
+    private bucatServise:SearchbycatService
   ) {
     this.onPageChange({
       pageIndex: 0,
@@ -27,39 +32,40 @@ export class SearchByCatComponent {
     });
   }
 
-  selectedCategoryId: number | null = null;
-  filteredProducts: Product[] = [];
-  products: Product[] = [];
-  private selectedCategoryIdSubscription: Subscription | undefined;
+
 
   ngOnInit() {
     this.productService.getAllProducts().subscribe((data) => {
       this.products = data;
-      this.filterProducts();
-      this.updatePageData();
+      console.log(this.products)
+      // this.filterProducts();
+      // this.updatePageData();
+      console.log(this.filteredProducts)
     });
 
-    this.selectedCategoryIdSubscription =
-      this.productSearchService.selectedCategoryId$.subscribe((categoryId) => {
-        this.selectedCategoryId = categoryId;
-        this.filterProducts();
-        this.updatePageData();
-      });
+    this.selectedCategoryIdSubscription = this.bucatServise.selectedCategoryId$.subscribe((categoryId) => {
+      this.selectedCategoryId = categoryId;
+      console.log(this.products)
+
+      console.log(this.selectedCategoryId)
+      this.filterProducts();
+      console.log(this.filteredProducts)
+
+      this.updatePageData();
+      console.log(this.filteredProducts)
+
+    });
   }
 
-  // this.selectedCategoryId= this.productSearchService.select
-  // this.productSearchService.getSelectedCategoryId().subscribe(categoryId => {
-  //   this.selectedCategoryId = categoryId;
-  //   this.filterProducts();
-  // });
 
   private filterProducts(): void {
-    if (this.selectedCategoryId == null) {
+    console.log(this.selectedCategoryId)
+console.log(this.products)
+    if (this.selectedCategoryId === null) {
       this.filteredProducts = this.products;
     } else {
-      this.filteredProducts = this.products.filter(
-        (product) => product.subCategoryId == this.selectedCategoryId
-      );
+      this.filteredProducts = this.products.filter(product => product.subCategoryId === this.selectedCategoryId);
+      console.log(this.filteredProducts)
     }
   }
 
@@ -88,13 +94,8 @@ export class SearchByCatComponent {
     this.cartService.addToCart(product);
   }
 
-  ngOnDestroy() {
-    this.selectedCategoryIdSubscription?.unsubscribe();
-  }
-
-  // onPageChange(event: any): void {
-  //   const startIndex = event.pageIndex * event.pageSize;
-  //   const endIndex = startIndex + event.pageSize;
-  //   this.pagedProducts = this.filteredProducts.slice(startIndex, endIndex);
+  // ngOnDestroy() {
+  //   this.selectedCategoryIdSubscription?.unsubscribe();
   // }
+
 }
