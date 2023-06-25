@@ -9,7 +9,7 @@ export class CreditCardService {
 
   constructor(private http: HttpClient) { }
 
-  dbUrl: string = '';
+  dbUrl: string = 'https://localhost:44364/CreditCard/';
 
   getAllcreditCards() {
     return this.http.get<creditCard[]>(this.dbUrl);

@@ -9,7 +9,7 @@ export class SubSubcategoryService {
 
   constructor(private http: HttpClient) { }
 
-  dbUrl: string = '';
+  dbUrl: string = 'https://localhost:44364/api/Subcategory/';
 
   getAllSubcategories() {
     return this.http.get<Subcategory[]>(this.dbUrl);

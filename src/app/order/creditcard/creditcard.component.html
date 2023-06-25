@@ -1,17 +1,49 @@
 <div class="form-container">
-  <h2>Credit Card Information</h2>
+  <img class="credit" src="../../../assets/Images/transaction.png" />
   <form [formGroup]="creditCardForm" (ngSubmit)="submitCreditCardForm()">
     <div class="form-group">
-      <label for="id">Card Number</label>
-      <input type="text" id="id" formControlName="id" />
+      <label for="cardNumber">Card Number</label>
+      <input type="text" id="cardNumber" formControlName="cardNumber" />
+      <div
+        class="error-message"
+        *ngIf="
+          cardNumberControl?.hasError('required') &&
+          (cardNumberControl?.touched || submitted)
+        "
+      >
+        CardNumber is required...!
+      </div>
+      <div
+        class="error-message"
+        *ngIf="
+          cardNumberControl?.hasError('pattern') &&
+          (cardNumberControl?.touched || submitted)
+        "
+      >
+        Invalid Card Number.
+      </div>
     </div>
+
     <div class="form-group">
-      <label for="username">user name</label>
-      <input type="text" id="username" formControlName="username" />
+      <label for="cardholder_name">cardholder_name</label>
+      <input
+        type="text"
+        id="cardholder_name"
+        formControlName="cardholder_name"
+      />
+      <div
+        class="error-message"
+        *ngIf="
+          cardholder_nameControl?.hasError('required') &&
+          (cardholder_nameControl?.touched || submitted)
+        "
+      >
+        Cardholder_name is required...!
+      </div>
     </div>
     <mat-form-field>
       <mat-label>Month and Year</mat-label>
-      <input matInput [matDatepicker]="dp" formControlName="expirationDate"  oninput="newdate($event)"/>
+      <input matInput [matDatepicker]="dp" [formControl]="date" />
       <mat-hint>MM/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
       <mat-datepicker

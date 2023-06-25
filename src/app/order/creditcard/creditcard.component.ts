@@ -1,9 +1,7 @@
 import { formatDate } from '@angular/common';
+import Swal from 'sweetalert2';
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  Inject,
-  LOCALE_ID }
-  from '@angular/core';
+import { Inject, LOCALE_ID } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -23,6 +21,7 @@ import {
   MatDatepicker,
   MatDatepickerModule,
 } from '@angular/material/datepicker';
+import { Data } from '@angular/router';
 
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
@@ -68,47 +67,70 @@ export const MY_FORMATS = {
 export class CreditcardComponent {
   constructor(
     private formBuilder: FormBuilder,
-    private creditCard:CreditCardService,
-    @Inject(LOCALE_ID) public locale: string) {}
-  date = new FormControl(moment());
+    private creditCard: CreditCardService,
+    @Inject(LOCALE_ID) public locale: string
+  ) {}
+
   creditCardForm!: FormGroup;
-  credit:creditCard={
-    Id:0,
-    CustomerId:0,
-    ExpirationDate:new Date('2023/06'),
-    Cardholder_name:''
-  }
-  selectedDate=new Date('2023/06')
-   month=formatDate(this.selectedDate,'MM-YYYY',this.locale)
+  selectedDate: any;
+  submitted = false;
+  credit: creditCard = {
+    id: 0,
+    customerId: 3,
+    expirationDate: new Date('2025/06'),
+    cardholder_name: '',
+    cardNumber: '',
+  };
 
   ngOnInit(): void {
+    console.log(this.date.value?.toISOString());
     this.buildForm();
-  }
-  newdate(e:any){
-    console.log(e)
-      this.selectedDate=e.value
+    console.log(this.date.value);
   }
 
   buildForm(): void {
     this.creditCardForm = this.formBuilder.group({
-      id: ['', Validators.required],
-      expirationDate: [this.month, Validators.required],
-      username: ['', Validators.required]
-  
+      cardNumber: [
+        '',
+        [Validators.required, Validators.pattern('^4[0-9]{12}(?:[0-9]{3})?$')],
+      ],
+      expirationDate: [this.date.value?.toISOString(), Validators.required],
+      cardholder_name: ['', Validators.required],
+      customerId: 3,
     });
+    console.log(this.creditCardForm.value);
   }
-
+  get cardNumberControl() {
+    return this.creditCardForm.get('cardNumber');
+  }
+  get cardholder_nameControl() {
+    return this.creditCardForm.get('cardholder_name');
+  }
   submitCreditCardForm(): void {
     console.log(this.creditCardForm.value);
 
-    if (this.creditCardForm.valid) {
-      // Process the form data and submit
-      this.creditCard.addcreditCard(this.creditCardForm.value).subscribe(data=>{
-        console.log(data)
-      })
-      console.log(this.creditCardForm.value);
-    }
+    // if (this.creditCardForm.valid) {
+    // Process the form data and submit
+    this.submitted = true;
+    this.creditCard
+      .addcreditCard(this.creditCardForm.value)
+      .subscribe((data) => {
+        console.log(data);
+      });
+    Swal.fire({
+      title: 'Success!',
+      text: 'Data has been added successfully.',
+      icon: 'success',
+      showCloseButton: true,
+      confirmButtonText: 'Close',
+    }).then(() => {
+      // Optional: Perform any additional actions after the alert is closed
+      // ...
+      this.creditCardForm.reset();
+    });
+    console.log(this.creditCardForm.value);
   }
+  // }
 
   setMonthAndYear(
     normalizedMonthAndYear: Moment,
@@ -118,6 +140,10 @@ export class CreditcardComponent {
     ctrlValue.month(normalizedMonthAndYear.month());
     ctrlValue.year(normalizedMonthAndYear.year());
     this.date.setValue(ctrlValue);
+    console.log(this.date.value);
+    console.log(this.date.value?.format('MM-YYYY'));
+    this.selectedDate = this.date.value?.format('MM-YYYY');
     datepicker.close();
   }
+  date = new FormControl(moment());
 }

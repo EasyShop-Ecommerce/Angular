@@ -1,6 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subcategory } from 'src/app/_Models/Subcategory';
 import { CartService } from 'src/app/_services/cart.service';
+import { ProductSearchServiceService } from 'src/app/_services/product-search-service.service';
+import { SubSubcategoryService } from 'src/app/_services/sub-category.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,20 +19,27 @@ export class NavbarComponent {
   issub: boolean = true;
   isSidebarOpen = false;
   isbutton = false;
-
+  subcategories: Subcategory[] = [];
+  selectedCategoryId: number | null = null;
   cartItemCount = 0;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private productSearchService: ProductSearchServiceService,
+    private router: Router,
+    private subcategoryService: SubSubcategoryService
+  ) {}
 
   ngOnInit(): void {
     this.cartService.cartItemCount$.subscribe((count) => {
       this.cartItemCount = count;
     });
+    this.subcategoryService.getAllSubcategories().subscribe((data) => {
+      this.subcategories = data;
+      console.log(this.subcategories);
+    });
 
     this.cartItemCount = this.cartService.cartItems.length;
-
-
-  
   }
 
   toggleSidebar() {
@@ -51,5 +62,24 @@ export class NavbarComponent {
   }
   togglesup() {
     this.issub = !this.issub;
+  }
+
+  updateSearchQuery(e: any): void {
+    const query = e.target.value;
+    console.log(query);
+    this.productSearchService.setSearchQuery(query);
+    this.router.navigate(['/search']);
+  }
+
+  // onCategorySelect(categoryId: number | null): void {
+  //   this.productSearchService.setSelectedCategoryId(categoryId);
+  //   // Handle the selected category here
+  //   console.log(categoryId); // Example: Output the selected category ID
+  // }
+
+  onCategoryChange(categoryId: number | null): void {
+    console.log(categoryId)
+    this.productSearchService.setSelectedCategoryId(categoryId);
+    this.router.navigate(['/searchCat']);
   }
 }

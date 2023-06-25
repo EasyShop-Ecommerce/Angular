@@ -17,7 +17,8 @@ export class AppComponent {
     const disallowedRoutes = [
       '/signIn',
       '/signUp',
-      '/seller'
+      '/seller',
+      '/creditCard'
     ];
   
     // Check if the current route is in the disallowed routes

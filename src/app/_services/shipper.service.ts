@@ -9,7 +9,7 @@ export class ShipperService {
 
   constructor(private http: HttpClient) { }
 
-  dbUrl: string = '';
+  dbUrl: string = 'https://localhost:44364/Shipper/';
 
   getAllShippers() {
     return this.http.get<Shipper[]>(this.dbUrl);

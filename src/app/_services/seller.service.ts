@@ -12,7 +12,7 @@ export class SellerService {
   dbUrl: string = 'https://localhost:44364/Seller/';
 
   getAllSellers() {
-    return this.http.get<Seller[]>(this.dbUrl);
+    return this.http.get<Seller[]>(this.dbUrl).pipe();
   }
 
   addSeller(newSeller: Seller) {

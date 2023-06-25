@@ -9,7 +9,7 @@ export class CategoryService {
 
   constructor(private http: HttpClient) { }
 
-  dbUrl: string = '';
+  dbUrl: string = 'https://localhost:44364/api/Category/';
 
   getAllCategories() {
     return this.http.get<Category[]>(this.dbUrl);

@@ -8,6 +8,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ProductModule} from './product/product.module'
 
 
 
@@ -36,7 +37,8 @@ import { RouterModule } from '@angular/router';
     MatDatepickerModule,
     MatInputModule,
     MatFormFieldModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ProductModule
   
   ],
   providers: [CartService],

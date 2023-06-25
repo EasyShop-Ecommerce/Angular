@@ -4,26 +4,26 @@ import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HomeRoutingModule } from './home-routing.module';
 import { RouterModule } from '@angular/router';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-import {RatingModule} from 'ngx-bootstrap/rating'
-
-
-
-
-
+import { RatingModule } from 'ngx-bootstrap/rating';
 
 @NgModule({
-  declarations: [FooterComponent,NavbarComponent, HomepageComponent, ProductDetailsComponent],
+  declarations: [
+    FooterComponent,
+    NavbarComponent,
+    HomepageComponent,
+    ProductDetailsComponent,
+  ],
   imports: [
-    CommonModule, 
-   CarouselModule.forRoot(),
+    CommonModule,
+    CarouselModule.forRoot(),
     MatButtonModule,
     MatCardModule,
     FormsModule,
@@ -32,13 +32,8 @@ import {RatingModule} from 'ngx-bootstrap/rating'
     HomeRoutingModule,
     RouterModule,
     MatMenuModule,
-    RatingModule
+    RatingModule,
   ],
-  exports:[
-    NavbarComponent,
-    FooterComponent,
-    HomepageComponent,
-
-  ]
+  exports: [NavbarComponent, FooterComponent, HomepageComponent],
 })
 export class HomeModule {}

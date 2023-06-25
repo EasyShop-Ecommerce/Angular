@@ -14,7 +14,6 @@ const routes: Routes = [
         (m) => m.HomeModule
       ),
   },
-  // {path:"productDetails",component:PagesModule},
   {path:"paymentMethod/:id",component:PaymentMethodsComponent},
   {path:"creditCard",component:CreditcardComponent},
   {
@@ -31,7 +30,13 @@ const routes: Routes = [
         (m) => m.OrderModule
       ),
   },
-  
+  {
+    path: 'product',
+    loadChildren: () =>
+      import('./product/product.module').then(
+        (m) => m.ProductModule
+      ),
+  },
 ];
 
 @NgModule({

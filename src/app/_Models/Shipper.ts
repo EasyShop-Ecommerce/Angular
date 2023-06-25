@@ -1,5 +1,5 @@
 export interface Shipper{
-    Id:number,
-    Name:string,
-    PricePerKm:number
+    id:number,
+    name:string,
+    pricePerKm:number
 }

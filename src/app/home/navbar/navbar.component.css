@@ -185,7 +185,10 @@ span a:hover {
 
 .menu{
   position: absolute;
-  left: 200px;
+  left: 170px;
+  height: 40px;
+  width: 50px;
+  
 }
 .secondnav{
   height: 25px;
@@ -193,4 +196,9 @@ span a:hover {
 .cart{
   height: 25px;
  margin-top: 10px;
+}
+.down{
+  width: 25px;
+  height: 20px;
+  margin-left: -5px;
 }

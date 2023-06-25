@@ -8,18 +8,6 @@ const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'cart', component: CartItemsComponent },
   { path: 'productDetails/:id', component: ProductDetailsComponent },
-  // { path: 'edit/:id', component: DoctorEditComponent },
-
-  // {
-  //   path: 'dash',
-
-  //   children: [
-  //     { path: '', component: DashComponent },
-  //     { path: 'docAppoint/:id', component: DocAppointComponent },
-  //     { path: 'addpress/:id', component: AddpresComponent },
-  //     { path: 'docPres/:id', component: DocPresComponent },
-  //   ],
-  // },
 ];
 
 @NgModule({
