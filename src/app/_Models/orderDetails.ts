@@ -1,6 +1,6 @@
 export interface OrderDetails {
-  OrderId: number;
-  ProductId: number;
-  UnitPrice: number;
-  Quantity: number;
+  orderId: number;
+  productId: number;
+  unitPrice: number;
+  quantity: number;
 }

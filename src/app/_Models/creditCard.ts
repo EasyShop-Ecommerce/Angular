@@ -3,5 +3,5 @@ export interface creditCard {
   cardholder_name: string;
   expirationDate: Date;
   customerId: number;
- cardNumber:string
+  cardNumber: string;
 }

@@ -1,8 +1,11 @@
 export interface ProductImages{
-    Id:number,
-    Color:string,
-    ImageUrl:string,
-    ProductId:number
+    id:number,
+    color:string,
+    imagePath:string,
+    image:string
+    imageName:string,
+    productId:number,
+    isDefault:boolean
 }
 
 

@@ -1,13 +1,10 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../../_Models/product';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { PageEvent } from '@angular/material/paginator';
 import { CartService } from 'src/app/_services/cart.service';
 import { ProductService } from 'src/app/_services/product.service';
-import { ProductSearchServiceService } from '../../_services/product-search-service.service';
+import { ProductSearchServiceService } from '../../_services/product-search.service';
 
 @Component({
   selector: 'app-search',
@@ -89,8 +86,7 @@ export class SearchComponent {
       this.filteredProducts = this.products.filter((product) => {
         return (
           product.brandName.toLowerCase().includes(lowerCaseQuery) ||
-          product.title.toLowerCase().includes(lowerCaseQuery) 
-         
+          product.title.toLowerCase().includes(lowerCaseQuery)
         );
       });
     }
