@@ -10,8 +10,13 @@
     <div class="product-item">
       <img [src]="item.Image" alt="Product Image" />
       <span class="text">
-        <h4>{{ item.productName }}</h4>
-        <p class="price">Price: ${{ item.price }}</p>
+        <h5>{{ item.productName }}</h5>
+
+        <ng-container *ngFor="let price of prices">
+          <ng-container *ngIf="item.productId === price.productId">
+            <h6>Price: ${{ price.price }}</h6>
+          </ng-container>
+        </ng-container>
         <select
           id="quantity{{ i }}"
           [(ngModel)]="item.Quantity"

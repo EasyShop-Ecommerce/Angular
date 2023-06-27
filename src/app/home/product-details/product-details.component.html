@@ -7,7 +7,7 @@
     <div class="right-container">
       <h2>{{ product.title }}</h2>
       <p *ngIf="product.description">Description: {{ product.description }}</p>
-      <!-- <p *ngIf="product.price">price: {{ product.price }}</p> -->
+
       <ng-container *ngFor="let price of prices">
         <ng-container *ngIf="product.id === price.productId">
           <p>Price: ${{ price.price }}</p>

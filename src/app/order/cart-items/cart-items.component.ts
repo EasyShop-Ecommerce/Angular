@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { ProductSellers } from 'src/app/_Models/ProductSellers';
 import { cart } from 'src/app/_Models/cart';
+import { ProductSellersService } from 'src/app/_services/ProductSellers.service';
 import { CartService } from 'src/app/_services/cart.service';
 
 @Component({
@@ -10,13 +12,20 @@ import { CartService } from 'src/app/_services/cart.service';
 export class CartItemsComponent {
   cartItemCount: number = 0;
   cartItem: any;
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private productSellerService:ProductSellersService
+    ) {}
   quantityOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   cartItems: cart[] = []; 
+  prices:ProductSellers[]=[]
 
   ngOnInit(): void {
     this.cartItemCount = this.cartService.getCartItemCount();
 
+    this.productSellerService.getAllProductSeller().subscribe(data=>{
+      this.prices=data
+    })
     this.cartService.cartItemCount$.subscribe((count) => {
       this.cartItemCount = count;
     });
