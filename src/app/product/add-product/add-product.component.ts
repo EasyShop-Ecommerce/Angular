@@ -61,8 +61,8 @@ export class AddProductComponent {
       operatingSystem: [''],
       specialFeatures: [''],
       memoryStorageCapacity: [''],
-      subCategoryId: [null,Validators.required],
-      shipperId: [null,Validators.required],
+      subCategoryId: [null, Validators.required],
+      shipperId: [null, Validators.required],
       hardDiskSize: [''],
       material: [''],
       color: [''],
@@ -124,10 +124,17 @@ export class AddProductComponent {
   }
 
   onCategoryChange(event: any): void {
-    const categoryId = event.target['value'];
-    console.log(categoryId);
-    this.selectedCategoryId = categoryId;
+    const categoryId = event.target.value;
+    const selectedCategory = this.categories.find(
+      (category) => category.id === categoryId
+    );
 
+    if (selectedCategory) {
+      this.selectedCategoryName = selectedCategory.categoryName;
+    } else {
+      this.selectedCategoryName = ''; // or any default value if needed
+    }
+    console.log(this.selectedCategoryName);
     if (categoryId) {
       this.filteredSubCategories = this.subCategories.filter(
         (subCategory) => subCategory.categoryId == categoryId
