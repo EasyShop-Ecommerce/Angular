@@ -3,13 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Product } from '../_Models/product';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  dbUrl: string = 'https://localhost:44364/api/Product/';
+  //dbUrl: string = 'https://localhost:44364/api/Product/';
+  dbUrl: string = 'https://localhost:7239/api/Product/';
 
   getAllProducts() {
     return this.http.get<Product[]>(this.dbUrl);
@@ -29,5 +29,20 @@ export class ProductService {
   deleteProductById(id: number) {
     return this.http.delete(this.dbUrl + id);
   }
-}
 
+  uploadImages(productId: number, color: string, files: FileList) {
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append('fileCollection', files[i]);
+    }
+
+    return this.http.put(
+      `${this.dbUrl}${productId}/UploadImages/${color}`,
+      formData
+    );
+  }
+
+  getProductImages(productId: number, color: string) {
+    return this.http.get(this.dbUrl + productId + '/images/color/' + color);
+  }
+}
