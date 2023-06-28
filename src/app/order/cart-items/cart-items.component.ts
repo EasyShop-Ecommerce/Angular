@@ -12,7 +12,7 @@ export class CartItemsComponent {
   cartItem: any;
   constructor(private cartService: CartService) {}
   quantityOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  cartItems: cart[] = []; 
+  cartItems: cart[] = [];
 
   ngOnInit(): void {
     this.cartItemCount = this.cartService.getCartItemCount();

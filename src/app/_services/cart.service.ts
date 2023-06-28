@@ -44,7 +44,7 @@ export class CartService {
 
     this.cart.productId = product.id;
     (this.cart.productName = product.title), (this.cart.price = product.price);
-   // this.cart.Image = product.image;
+    this.cart.Image = product.defaultImage;
 
     // Add the new product to the cart items
     this.cartItems.push(this.cart);
@@ -56,7 +56,9 @@ export class CartService {
   }
 
   removeFromCart(item: cart): void {
-    const index = this.cartItems.findIndex((cartItem) => cartItem.productId === item.productId);
+    const index = this.cartItems.findIndex(
+      (cartItem) => cartItem.productId === item.productId
+    );
 
     if (index !== -1) {
       this.cartItems.splice(index, 1);
