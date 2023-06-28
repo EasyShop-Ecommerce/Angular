@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { concatMap } from 'rxjs/operators';
 import { Category } from 'src/app/_Models/Category';
+import { ProductSellers } from 'src/app/_Models/ProductSellers';
 import { Shipper } from 'src/app/_Models/Shipper';
 import { Subcategory } from 'src/app/_Models/Subcategory';
 import { CategoryService } from 'src/app/_services/category.service';
@@ -24,16 +26,6 @@ export class AddProductComponent {
   selectedCategoryId: number | null = null;
   selectedCategoryName: string = '';
   images: FileList;
-  availableColors: string[] = [
-    'Red',
-    'Blue',
-    'Green',
-    'Yellow',
-    'Black',
-    'White',
-    'Mixed',
-  ];
-  selectedColor: string;
   constructor(
     private formBuilder: FormBuilder,
     private subcatService: SubSubcategoryService,
@@ -64,12 +56,13 @@ export class AddProductComponent {
       brandName: ['', Validators.required],
       title: ['', Validators.required],
       price: [null, Validators.required],
+      quantity: ['', Validators.required],
       description: [''],
       operatingSystem: [''],
       specialFeatures: [''],
       memoryStorageCapacity: [''],
-      subCategoryId: [null],
-      shipperId: [null],
+      subCategoryId: [null,Validators.required],
+      shipperId: [null,Validators.required],
       hardDiskSize: [''],
       material: [''],
       color: [''],
@@ -80,72 +73,55 @@ export class AddProductComponent {
     this.submitted = true;
 
     if (this.productForm.valid) {
-      // Process the form data and submit
       console.log(this.productForm.value);
-      this.productService.addProduct(this.productForm.value).subscribe(
-        (response) => {
-          const productId = response['id'];
-          console.log(productId);
-          console.log(response.id);
+      this.productService
+        .addProduct(this.productForm.value)
+        .pipe(
+          concatMap((productResponse) => {
+            const productId = productResponse.id;
+            console.log(productId);
 
-          this.uploadImages(productId);
-          console.log('Product added successfully:', response);
-          // Reset the form or perform any other necessary actions
-          Swal.fire({
-            title: 'Product Added',
-            text: 'The product has been added successfully.',
-            icon: 'success',
-            showCloseButton: true,
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Close',
-          });
-          this.productForm.reset();
-        },
-        (error) => {
-          console.error('Error adding product:', error);
-          // Handle the error as needed
-        }
-      );
-      // Show success alert
+            const productSeller: ProductSellers = {
+              quantity: this.productForm.get('quantity').value,
+              price: this.productForm.get('price').value,
+              productId: productId,
+              sellerId: 5,
+            };
+
+            return this.productService.addProductSeller(productSeller);
+          }),
+          concatMap((sellerResponse) => {
+            const sellerId = sellerResponse['sellerId'];
+            console.log(sellerId);
+
+            return this.productService.uploadImages(
+              sellerResponse['productId'],
+              this.productForm.get('color')?.value,
+              this.images
+            );
+          })
+        )
+        .subscribe({
+          next: (response) => {
+            console.log('Images uploaded successfully:', response);
+
+            Swal.fire({
+              title: 'Product Added',
+              text: 'The product has been added successfully.',
+              icon: 'success',
+              showCloseButton: true,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Close',
+            });
+            this.productForm.reset();
+          },
+          error: (error) => {
+            console.error('Error adding product:', error);
+            console.log(error);
+          },
+        });
     }
   }
-
-  // submitProductForm(): void {
-  //   this.submitted = true;
-
-  //   if (this.productForm.valid) {
-  //     const colors: string[] = this.productForm.value.colors; // Get the selected colors from the form
-
-  //     this.productService.addProduct(this.productForm.value).subscribe(
-  //       (response) => {
-  //         const productId = response['id'];
-  //         console.log(productId);
-  //         console.log(response.id);
-
-  //         for (const color of colors) {
-  //           this.uploadImages(productId, color); // Pass each color to the uploadImages method
-  //         }
-
-  //         console.log('Product added successfully:', response);
-  //         // Reset the form or perform any other necessary actions
-  //         Swal.fire({
-  //           title: 'Product Added',
-  //           text: 'The product has been added successfully.',
-  //           icon: 'success',
-  //           showCloseButton: true,
-  //           confirmButtonColor: '#3085d6',
-  //           confirmButtonText: 'Close',
-  //         });
-  //         this.productForm.reset();
-  //       },
-  //       (error) => {
-  //         console.error('Error adding product:', error);
-  //         // Handle the error as needed
-  //       }
-  //     );
-  //     // Show success alert
-  //   }
-  // }
 
   onCategoryChange(event: any): void {
     const categoryId = event.target['value'];
@@ -162,25 +138,8 @@ export class AddProductComponent {
     }
   }
 
-  uploadImages(productId: number) {
-    if (this.images && this.images.length > 0) {
-      const color = this.productForm.get('color')?.value;
-
-      this.productService.uploadImages(productId, color, this.images).subscribe(
-        (response) => {
-          console.log('Images uploaded successfully:', response);
-        },
-        (error) => {
-          console.error('Error uploading images:', error);
-        }
-      );
-    }
-  }
-
   onFileChange(event: any) {
     console.log(event.target.files);
     this.images = event.target.files;
   }
-
-
 }

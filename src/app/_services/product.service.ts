@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../_Models/product';
+import { ProductSellers } from '../_Models/ProductSellers';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +29,13 @@ export class ProductService {
 
   deleteProductById(id: number) {
     return this.http.delete(this.dbUrl + id);
+  }
+
+  addProductSeller(productSeller: ProductSellers) {
+    return this.http.post<ProductSellers>(
+      `https://localhost:7239/api/productSeller`,
+      productSeller
+    );
   }
 
   uploadImages(productId: number, color: string, files: FileList) {
