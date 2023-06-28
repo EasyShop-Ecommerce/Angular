@@ -25,10 +25,16 @@
       <p *ngIf="product.operatingSystem">
         OperatingSystem: {{ product.operatingSystem }}
       </p>
+
       <button class="btn" (click)="addToCart(product)">Add To Cart</button>
-      <button class="btn" routerLink="/paymentMethod/{{ product.id }}">
+      <button class="btn" (click)="buyNow(product)" routerLink="/paymentMethod/{{ product.id }}">
         Buy Now
       </button>
+    </div>
+    <div class="deliverDetails">
+      <img class="Delivery" src="../../../assets/Images/fast-delivery.png" />
+      <p>Shipping Price: ${{ shipper.pricePerKm }}</p>
+      <p>Delivery On: {{ estimatedDeliveryDate }}</p>
     </div>
   </div>
 
@@ -80,7 +86,6 @@
       >
         Edit
       </button>
-
     </div>
   </div>
 

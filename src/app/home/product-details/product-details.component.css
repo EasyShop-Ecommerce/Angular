@@ -69,3 +69,14 @@ button:hover {
 .comment {
   display: inline-block;
 }
+.deliverDetails{
+  display: inline-block;
+  border:2px solid chocolate;
+  padding: 7px;
+  font-weight: bold;
+  text-align: center;
+}
+.Delivery{
+  width: 100px;
+  height: 100px;
+}

@@ -6,6 +6,7 @@ import { PagesModule } from './pages/pages.module';
 import { PaymentMethodsComponent } from './order/payment-methods/payment-methods.component';
 import { CreditcardComponent } from './order/creditcard/creditcard.component';
 import { ProductDetailsComponent } from './home/product-details/product-details.component';
+import { SubmitOrderComponent } from './order/submit-order/submit-order.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'productDetails/:id', component: ProductDetailsComponent },
   {path:"paymentMethod/:id",component:PaymentMethodsComponent},
   {path:"creditCard",component:CreditcardComponent},
+  {path:"submitOrder",component:SubmitOrderComponent},
   {
     path: 'pages',
     loadChildren: () =>

@@ -1,15 +1,19 @@
+import { formatDate } from '@angular/common';
 import { ThisReceiver } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductSellers } from 'src/app/_Models/ProductSellers';
 import { Review } from 'src/app/_Models/Review';
+import { Shipper } from 'src/app/_Models/Shipper';
 import { Customer } from 'src/app/_Models/customer';
+import { Order } from 'src/app/_Models/order';
 import { Product } from 'src/app/_Models/product';
 import { ProductSellersService } from 'src/app/_services/ProductSellers.service';
 import { CartService } from 'src/app/_services/cart.service';
 import { CustomerService } from 'src/app/_services/customer.service';
 import { ProductService } from 'src/app/_services/product.service';
 import { ReviewService } from 'src/app/_services/review.service';
+import { ShipperService } from 'src/app/_services/shipper.service';
 
 @Component({
   selector: 'app-product-details',
@@ -28,11 +32,14 @@ export class ProductDetailsComponent {
   reviews: Review[] = [];
   productreviews: Review[] = [];
   prices: ProductSellers[] = [];
+  sellerId:number=0
+
+  shipper!: Shipper;
+  estimatedDeliveryDate!: any;
 
   product: Product = {
     title: 'Product Name',
     description: 'Product description',
-
     operatingSystem: '',
     id: 0,
     specialFeatures: '',
@@ -53,26 +60,30 @@ export class ProductDetailsComponent {
     private customerService: CustomerService,
     private cartService: CartService,
     private productSellerService: ProductSellersService,
-    private router:Router,
-    
+    private router: Router,
+    private shipperService: ShipperService
   ) {}
 
   ngOnInit() {
-    //the id product u opend
-    // const productIdString = this.route.snapshot.paramMap.get('id');
-    // this.productId = productIdString ? parseInt(productIdString, 10) : 0;
-    // console.log(this.productId);
-
-
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.productId = +params['id']; // Convert the route parameter to a number
       console.log(this.productId);
-   
+    });
+
     //the product u opend
     this.productService.getProductById(this.productId).subscribe((data) => {
       this.product = data;
       console.log(this.product);
-    }); })
+      this.shipperService
+        .getShipperById(this.product.shipperId)
+        .subscribe((data) => {
+          this.shipper = data;
+          console.log(this.shipper);
+          console.log(this.shipper.daysForShipment);
+          this.calculateEstimatedDeliveryDate(this.shipper.daysForShipment);
+          console.log(this.shipper);
+        });
+    });
     // All reviews
     this.reviewService.getAllReviews().subscribe((data) => {
       this.reviews = data;
@@ -110,6 +121,11 @@ export class ProductDetailsComponent {
       console.log(this.randomProducts);
     });
 
+this.productSellerService.getAllProductSeller().subscribe(data=>{
+  //this.sellerId=data.filter(e=>e.productId == this.product.id)
+})
+
+
     this.productreviews = this.productreviews.map((review) => ({
       ...review,
       isEditable: false,
@@ -130,19 +146,13 @@ export class ProductDetailsComponent {
 
   saveReview(review: Review): void {
     review.isEditable = false;
-    console.log(review);
     this.editedReview.isEditable = false;
-    console.log(this.editedReview);
-   
-    this.reviewService.updateReview(this.productId, 1, review).subscribe(
+    this.reviewService.updateReview(this.productId, 2, review).subscribe(
       () => {
         console.log('Review saved successfully');
-        review.rate = this.editedReview.rate;
-        review.comment = this.editedReview.comment;
       },
       (error) => {
         console.log('Error saving review:', error);
-      
       }
     );
   }
@@ -182,7 +192,7 @@ export class ProductDetailsComponent {
       return this.products;
     }
 
-    const randomIndices: number[] = []; 
+    const randomIndices: number[] = [];
     const randomProducts = [];
 
     while (randomIndices.length < count) {
@@ -202,7 +212,7 @@ export class ProductDetailsComponent {
   }
 
   deleteReview(reviewId: number) {
-    this.reviewService.deleteReviewById(this.productId, 1).subscribe(
+    this.reviewService.deleteReviewById(this.productId, 2).subscribe(
       () => {
         console.log('Review deleted successfully');
         // Remove the deleted review from the productreviews array
@@ -220,4 +230,38 @@ export class ProductDetailsComponent {
   goToProductDetails(productId: number): void {
     this.router.navigate(['/productDetails', productId]);
   }
-}
+  calculateEstimatedDeliveryDate(duration: number): void {
+    const today = new Date();
+    const estimatedDate = new Date();
+    estimatedDate.setDate(today.getDate() + duration);
+
+    const formattedDate = this.formatDate(estimatedDate);
+
+    this.estimatedDeliveryDate = formattedDate;
+  }
+
+  formatDate(date: Date): string {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  }
+  buyNow(product:Product){
+    localStorage.setItem('selectedProduct', JSON.stringify(product));
+    localStorage.setItem('Shipdate', JSON.stringify(this.estimatedDeliveryDate));
+  }
+
+  // id: number;
+  // totalPrice: number;
+ 
+ 
+ 
+  // paymentMethodId: number;
+  // sellerId: number;
+  
+ 
+
+
+  }
+

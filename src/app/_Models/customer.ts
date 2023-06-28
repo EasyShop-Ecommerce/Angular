@@ -6,5 +6,7 @@ export interface Customer {
   phone: number;
   email: string;
   password: string;
-  address: Address;
+  street: string;
+  city: string;
+  government: string;
 }

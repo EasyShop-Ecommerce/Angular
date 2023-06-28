@@ -3,5 +3,6 @@ export interface Shipper{
     name:string,
     pricePerKm:number
     email:string,
-    password:string
+    password:string,
+    daysForShipment:number
 }
