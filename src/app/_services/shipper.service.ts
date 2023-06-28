@@ -8,8 +8,8 @@ import { Shipper } from '../_Models/Shipper';
 export class ShipperService {
   constructor(private http: HttpClient) {}
 
-  // dbUrl: string = 'https://localhost:44364/Shipper/';
-  dbUrl: string = 'https://localhost:7239/Shipper/';
+  dbUrl: string = 'https://localhost:44364/Shipper/';
+  // dbUrl: string = 'https://localhost:7239/Shipper/';
 
   getAllShippers() {
     return this.http.get<Shipper[]>(this.dbUrl);
