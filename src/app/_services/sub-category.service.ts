@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Subcategory} from '../_Models/Subcategory'
+import { Subcategory } from '../_Models/Subcategory';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SubSubcategoryService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  dbUrl: string = 'https://localhost:44364/api/Subcategory/';
+  //dbUrl: string = 'https://localhost:44364/api/Subcategory/';
+  dbUrl: string = 'https://localhost:7239/api/Subcategory/';
 
   getAllSubcategories() {
     return this.http.get<Subcategory[]>(this.dbUrl);

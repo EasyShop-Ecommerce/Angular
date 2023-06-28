@@ -37,6 +37,7 @@ export class ProductDetailsComponent {
     hardDiskSize: '',
     material: '',
     memoryStorageCapacity: '',
+    defaultImage: null,
   };
   newReview: Review = {
     productId: this.productId,
@@ -44,13 +45,13 @@ export class ProductDetailsComponent {
     rate: this.rating,
     comment: this.newcomment,
   };
-
+  defaultImage: string;
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
     private reviewService: ReviewService,
     private customerService: CustomerService,
-    private cartService:CartService
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
@@ -61,7 +62,8 @@ export class ProductDetailsComponent {
     //the product u opend
     this.productService.getProductById(this.productId).subscribe((data) => {
       this.product = data;
-      console.log(this.product);
+      console.log(this.product.defaultImage);
+      this.defaultImage = 'data:image/jpeg;base64,' + data.defaultImage;
     });
     // All reviews
     this.reviewService.getAllReviews().subscribe((data) => {
@@ -98,7 +100,6 @@ export class ProductDetailsComponent {
 
   onRatingChange(event: number) {
     this.rating = event;
-
     console.log('New rating:', this.rating);
   }
 
@@ -141,5 +142,4 @@ export class ProductDetailsComponent {
   addToCart(product: Product): void {
     this.cartService.addToCart(product);
   }
-
 }
