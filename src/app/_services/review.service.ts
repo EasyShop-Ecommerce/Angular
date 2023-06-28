@@ -10,6 +10,7 @@ export class ReviewService {
   constructor(private http: HttpClient) { }
   
   dbUrl: string = 'https://localhost:44364/api/Review/';
+  isEditable?: boolean;
 
   getAllReviews() {
     return this.http.get<Review[]>(this.dbUrl);
@@ -22,11 +23,11 @@ export class ReviewService {
   getReviewById(id: number) {
     return this.http.get<Review>(this.dbUrl + id);
   }
-  updateReview(id: number, Review: Review) {
-    return this.http.patch<Review>(this.dbUrl + id, Review);
+  updateReview(productId:number,customerId: number, review:Review) {
+    return this.http.put<Review>(`${this.dbUrl}product/${productId}/customer/${customerId}`,review);
   }
 
-  deleteReviewById(id: number,productId:number) {
-    return this.http.delete(this.dbUrl + id + productId);
+  deleteReviewById(productId:number,customerId: number) {
+    return this.http.delete(`${this.dbUrl}product/${productId}/customer/${customerId}`);
   }
 }

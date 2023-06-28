@@ -91,9 +91,9 @@ onSubmit() {
     console.log(formData)
     this.seller=formData
     const address: Address = {
-      Street: formData.street,
-      City: formData.city,
-      Government: formData.government
+      street: formData.street,
+      city: formData.city,
+      government: formData.government
     };
 
    

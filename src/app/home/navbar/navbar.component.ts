@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subcategory } from 'src/app/_Models/Subcategory';
 import { CartService } from 'src/app/_services/cart.service';
-import { ProductSearchServiceService } from 'src/app/_services/product-search-service.service';
+import { ProductSearchServiceService } from 'src/app/_services/product-search.service';
 import { SearchbycatService } from 'src/app/_services/searchbycat.service';
 import { SubSubcategoryService } from 'src/app/_services/sub-category.service';
 import { SearchByCatComponent } from 'src/app/product/search-by-cat/search-by-cat.component';
@@ -23,7 +23,7 @@ export class NavbarComponent {
   isbutton = false;
   subcategories: Subcategory[] = [];
   selectedCategoryId: number | null = null;
-  try:number=0
+  try: number = 0;
   cartItemCount = 0;
 
   constructor(
@@ -31,7 +31,7 @@ export class NavbarComponent {
     private productSearchService: ProductSearchServiceService,
     private router: Router,
     private subcategoryService: SubSubcategoryService,
-    private bycatservice:SearchbycatService
+    private bycatservice: SearchbycatService
   ) {}
 
   ngOnInit(): void {
@@ -75,13 +75,10 @@ export class NavbarComponent {
     this.router.navigate(['/search']);
   }
 
-
-
   onCategoryChange(categoryId: number | null): void {
     this.bycatservice.setSelectedCategoryId(categoryId);
-    console.log(categoryId)
+    console.log(categoryId);
     this.router.navigate(['/searchCat']);
-    console.log(categoryId)
-
+    console.log(categoryId);
   }
 }

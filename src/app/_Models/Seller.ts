@@ -8,5 +8,6 @@ export interface Seller {
   phone: string;
   businessName: string;
   email: string;
+  password: string;
   address: Address;
 }

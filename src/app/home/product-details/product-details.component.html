@@ -7,7 +7,13 @@
     <div class="right-container">
       <h2>{{ product.title }}</h2>
       <p *ngIf="product.description">Description: {{ product.description }}</p>
-      <p *ngIf="product.price">price: {{ product.price }}</p>
+
+      <ng-container *ngFor="let price of prices">
+        <ng-container *ngIf="product.id === price.productId">
+          <p>Price: ${{ price.price }}</p>
+        </ng-container>
+      </ng-container>
+
       <p *ngIf="product.brandName">BrandName: {{ product.brandName }}</p>
       <p *ngIf="product.hardDiskSize">
         HardDiskSize: {{ product.hardDiskSize }}
@@ -46,12 +52,35 @@
     <div class="stars" *ngFor="let review of productreviews">
       <ng-container *ngFor="let customer of allCustomers">
         <ng-container *ngIf="review.customerId === customer.id">
-          <h4>{{ customer.name }}</h4>
+          <span class="text">{{ customer.name }}</span>
         </ng-container>
       </ng-container>
-      <rating [ngModel]="review.rate"></rating>
-      <p class="text">{{ review.comment }}</p>
-      <button>Remove</button>
+
+      <rating
+        [(ngModel)]="review.rate"
+        [disabled]="!review.isEditable"
+      ></rating>
+
+      <p *ngIf="!review.isEditable" class="text comment">
+        {{ review.comment }}
+      </p>
+
+      <div *ngIf="review.isEditable">
+        <textarea [(ngModel)]="review.comment"></textarea>
+        <button class="remove" (click)="saveReview(review)">Save</button>
+      </div>
+
+      <button class="remove" (click)="deleteReview(review.productId)">
+        Remove
+      </button>
+      <button
+        class="remove"
+        *ngIf="!review.isEditable"
+        (click)="enableEdit(review)"
+      >
+        Edit
+      </button>
+
     </div>
   </div>
 
@@ -69,13 +98,19 @@
               [alt]="product."
             /> -->
             <div class="card-body">
-              <h5 class="card-title">{{ product.title }}</h5>
-              <h5 class="card-title" style="display: none">
+              <h6 class="card-title">{{ product.title }}</h6>
+              <h6 class="card-title" style="display: none">
                 {{ product.id }}
-              </h5>
-              <p class="card-text">Price: {{ product.price }}</p>
+              </h6>
+              <h6 class="card-title">{{ product.brandName }}</h6>
 
-              <button class="btn" [routerLink]="'productDetails/' + product.id">
+              <ng-container *ngFor="let price of prices">
+                <ng-container *ngIf="product.id === price.productId">
+                  <h6>Price: ${{ price.price }}</h6>
+                </ng-container>
+              </ng-container>
+
+              <button class="btn" (click)="goToProductDetails(product.id)">
                 Details
               </button>
             </div>

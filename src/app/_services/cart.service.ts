@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Product } from '../_Models/product';
 import { cart } from '../_Models/cart';
+import { ProductSellersService } from './ProductSellers.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class CartService {
     Image: '',
   };
 
-  constructor() {
+  constructor(private productSeller: ProductSellersService) {
     const cartItemsString = localStorage.getItem('cartItems');
     if (cartItemsString) {
       this.cartItems = JSON.parse(cartItemsString);
@@ -42,9 +43,11 @@ export class CartService {
       this.cartItems = JSON.parse(cartItemsString);
     }
 
+    //this.productSeller.getProductSellerById()
     this.cart.productId = product.id;
-    (this.cart.productName = product.title), (this.cart.price = product.price);
-    this.cart.Image = product.defaultImage;
+    (this.cart.productName = product.title),
+      //(this.cart.price = product.price);
+      (this.cart.Image = product.defaultImage);
 
     // Add the new product to the cart items
     this.cartItems.push(this.cart);
