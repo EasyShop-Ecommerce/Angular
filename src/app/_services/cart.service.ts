@@ -47,7 +47,7 @@ export class CartService {
     this.cart.productId = product.id;
     (this.cart.productName = product.title),
       //(this.cart.price = product.price);
-      (this.cart.Image = product.defaultImage);
+     // (this.cart.Image = product.defaultImage);
 
     // Add the new product to the cart items
     this.cartItems.push(this.cart);

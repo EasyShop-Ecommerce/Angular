@@ -7,4 +7,7 @@ export interface Order {
   paymentMethodId: number;
   sellerId: number;
   shipPrice: number;
+  unitPrice:number;
+  quantity:number;
+  prodductId:number
 }

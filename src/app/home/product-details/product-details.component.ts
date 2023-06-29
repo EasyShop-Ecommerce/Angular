@@ -49,7 +49,12 @@ export class ProductDetailsComponent {
     hardDiskSize: '',
     material: '',
     memoryStorageCapacity: '',
-    defaultImage: null,
+    price:0,
+    sellerId:1,
+    code:'',
+    AvailableQuantity:1
+
+  
   };
 
   newReview!: Review;

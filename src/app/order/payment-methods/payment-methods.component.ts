@@ -134,7 +134,7 @@ export class PaymentMethodsComponent {
     city: 'City',
     government: 'Government',
 
-    phone: 45542555,
+    phone: '45542555',
     password: '',
   };
 }
