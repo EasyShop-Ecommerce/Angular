@@ -17,13 +17,14 @@
     
   }
   .card-img-top{
-    width: 300px;
+    width: 270px;
     height: 180px;
     padding: 5px;
+    margin: auto;
   }
   .card{
     margin: 10px;
-    height: 310px;
+    height: 420px;
     width: 300px;
   }
   button{

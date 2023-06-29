@@ -19,7 +19,9 @@ export class AppComponent {
       '/signIn',
       '/signUp',
       '/seller',
-      '/creditCard'
+      '/creditCard',
+      '/CustomerAccount/login',
+      '/CustomerAccount/register'
     ];
   
     // Check if the current route is in the disallowed routes

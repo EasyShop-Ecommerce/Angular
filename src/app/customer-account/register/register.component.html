@@ -62,7 +62,7 @@
           class="error-message"
           *ngIf="phoneControl?.dirty && phoneControl?.hasError('pattern')"
         >
-          Phone should start with 015, 012, 011, or 010 and length is 11.
+          Phone should start with 015, 012, 011,010 and length=11
         </div>
       </div>
       <div>
@@ -126,6 +126,7 @@
         type="password" 
         id="confirmPassword" 
         formControlName="confirmPassword"
+        class="red-border"
         />
         <div
           class="error-message"

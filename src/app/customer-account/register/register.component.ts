@@ -68,10 +68,10 @@ onSubmit() {
   this.submitted = true; // Set submitted to true
   if (this.registrationForm.valid) {
     const formData = this.registrationForm.value;
-    const address: Address = {
-      Street: formData.street,
-      City: formData.city,
-      Government: formData.government
+    
+      this.customer.street= formData.street ,
+      this.customer.city= formData.city,
+      this.customer.government= formData.government
     }
 
     this.customerService.register(this.registrationForm.value).subscribe(
@@ -95,4 +95,4 @@ onSubmit() {
   }
 }
 
-}
+
