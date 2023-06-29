@@ -10,4 +10,5 @@ export interface Product {
   shipperId: number;
   hardDiskSize: string;
   material: string;
+  defaultImage: string;
 }

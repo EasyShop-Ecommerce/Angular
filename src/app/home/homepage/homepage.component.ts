@@ -19,6 +19,7 @@ export class HomepageComponent {
   prices: ProductSellers[] = [];
   pageSize = 6;
   pageSizeOptions: number[] = [6, 18, 25, 100];
+  defaultImage: string;
 
   constructor(
     private cartSrvices: CartService,
@@ -34,6 +35,8 @@ export class HomepageComponent {
   ngOnInit() {
     this.productservice.getAllProducts().subscribe((data) => {
       this.products = data;
+      // this.defaultImage = 'data:image/jpeg;base64,' + data.defaultImage;
+
       this.onPageChange({
         pageIndex: 0,
         pageSize: this.pageSize,
@@ -44,7 +47,7 @@ export class HomepageComponent {
 
     this.productSellerService.getAllProductSeller().subscribe((data) => {
       this.prices = data;
-      console.log(this.prices)
+      console.log(this.prices);
     });
 
     console.log(this.pagedProducts);

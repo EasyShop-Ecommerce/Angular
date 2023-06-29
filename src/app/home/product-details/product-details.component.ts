@@ -49,10 +49,12 @@ export class ProductDetailsComponent {
     hardDiskSize: '',
     material: '',
     memoryStorageCapacity: '',
+    defaultImage: null,
   };
 
   newReview!: Review;
   editedReview!: Review;
+  defaultImage: string;
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
@@ -60,30 +62,19 @@ export class ProductDetailsComponent {
     private customerService: CustomerService,
     private cartService: CartService,
     private productSellerService: ProductSellersService,
-    private router: Router,
-    private shipperService: ShipperService
+    private router:  Routerprivate shipperService: ShipperService
   ) {}
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.productId = +params['id']; // Convert the route parameter to a number
       console.log(this.productId);
-    });
-
+   
     //the product u opend
     this.productService.getProductById(this.productId).subscribe((data) => {
       this.product = data;
       console.log(this.product);
-      this.shipperService
-        .getShipperById(this.product.shipperId)
-        .subscribe((data) => {
-          this.shipper = data;
-          console.log(this.shipper);
-          console.log(this.shipper.daysForShipment);
-          this.calculateEstimatedDeliveryDate(this.shipper.daysForShipment);
-          console.log(this.shipper);
-        });
-    });
+    }); })
     // All reviews
     this.reviewService.getAllReviews().subscribe((data) => {
       this.reviews = data;
@@ -135,7 +126,6 @@ this.productSellerService.getAllProductSeller().subscribe(data=>{
   ///rate value
   onRatingChange(event: number) {
     this.rating = event;
-
     console.log('New rating:', this.rating);
   }
 
@@ -147,6 +137,9 @@ this.productSellerService.getAllProductSeller().subscribe(data=>{
   saveReview(review: Review): void {
     review.isEditable = false;
     this.editedReview.isEditable = false;
+    console.log(this.editedReview);
+
+    this.reviewService.updateReview(this.productId, 1, review).subscribe(
     this.reviewService.updateReview(this.productId, 2, review).subscribe(
       () => {
         console.log('Review saved successfully');
@@ -192,6 +185,7 @@ this.productSellerService.getAllProductSeller().subscribe(data=>{
       return this.products;
     }
 
+    const randomIndices: number[] = [];
     const randomIndices: number[] = [];
     const randomProducts = [];
 

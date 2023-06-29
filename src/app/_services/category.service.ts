@@ -3,13 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Category } from '../_Models/Category';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoryService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   dbUrl: string = 'https://localhost:44364/api/Category/';
+  //dbUrl: string = 'https://localhost:7239/api/Category/';
 
   getAllCategories() {
     return this.http.get<Category[]>(this.dbUrl);

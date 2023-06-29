@@ -1,66 +1,165 @@
 <div class="form-container">
-    <h2>Add New Product</h2>
-    <form [formGroup]="productForm" (ngSubmit)="submitProductForm()">
-      <div class="form-group">
-        <label for="brandName">Brand Name</label>
-        <input type="text" id="brandName" formControlName="brandName" />
+  <h2>Add New Product</h2>
+  <form [formGroup]="productForm" (ngSubmit)="submitProductForm()">
+    <div class="form-group">
+      <label for="brandName">Brand Name</label>
+      <input type="text" id="brandName" formControlName="brandName" />
+      <div
+        *ngIf="
+          productForm.controls['brandName'].errors &&
+          productForm.controls['brandName'].errors['required']
+        "
+        class="error-message"
+      >
+        Brand Name is required.
       </div>
-      <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" id="title" formControlName="title" />
+    </div>
+
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" formControlName="title" />
+      <div
+        *ngIf="
+          productForm.controls['title'].errors &&
+          productForm.controls['title'].errors['required']
+        "
+        class="error-message"
+      >
+        Product Title is required.
       </div>
-      <div class="form-group">
-        <label for="price">Price</label>
-        <input type="number" id="price" formControlName="price" />
+    </div>
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" id="price" formControlName="price" />
+      <div
+        *ngIf="
+          productForm.controls['price'].errors &&
+          productForm.controls['price'].errors['required']
+        "
+        class="error-message"
+      >
+        Product Price is required.
       </div>
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea id="description" formControlName="description"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" formControlName="quantity" />
+      <div
+        *ngIf="
+          productForm.controls['quantity'].errors &&
+          productForm.controls['quantity'].errors['required']
+        "
+        class="error-message"
+      >
+        Product Available Quantity is required.
       </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="material">Material</label>
+      <input type="text" id="material" formControlName="material" />
+    </div>
+
+    <div class="form-group">
+      <label for="specialFeatures">Special Features</label>
+      <textarea
+        id="specialFeatures"
+        formControlName="specialFeatures"
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="categoryId">Category</label>
+      <select id="categoryId" (change)="onCategoryChange($event)">
+        <option value="" disabled selected>---Select Category---</option>
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.categoryName }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="subCategoryId">Sub Category</label>
+      <select id="subCategoryId" formControlName="subCategoryId">
+        <option value="" disabled selected>---Select Sub Category---</option>
+        <option
+          *ngFor="let subCategory of filteredSubCategories"
+          [value]="subCategory.id"
+        >
+          {{ subCategory.subCategoryName }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          productForm.controls['subCategoryId'].errors &&
+          productForm.controls['subCategoryId'].errors['required']
+        "
+        class="error-message"
+      >
+        SubCategory is required.
+      </div>
+    </div>
+
+    <div *ngIf="selectedCategoryName == 'Electronics'">
       <div class="form-group">
         <label for="operatingSystem">Operating System</label>
-        <input type="text" id="operatingSystem" formControlName="operatingSystem" />
-      </div>
-      <div class="form-group">
-        <label for="specialFeatures">Special Features</label>
-        <textarea id="specialFeatures" formControlName="specialFeatures"></textarea>
+        <input
+          type="text"
+          id="operatingSystem"
+          formControlName="operatingSystem"
+        />
       </div>
       <div class="form-group">
         <label for="memoryStorageCapacity">Memory Storage Capacity</label>
-        <input type="text" id="memoryStorageCapacity" formControlName="memoryStorageCapacity" />
-      </div>
-      <div class="form-group">
-        <label for="categoryId">Category</label>
-        <select id="categoryId" (change)="onCategoryChange($event)">
-          <option *ngFor="let category of categories" [value]="category.id">{{ category.categoryName }}</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="subCategoryId">Sub Category</label>
-        <select id="subCategoryId" formControlName="subCategoryId">
-          <option *ngFor="let subCategory of filteredSubCategories" [value]="subCategory.id">{{ subCategory.subCategoryName }}</option>
-        </select>
-      </div>
-      
-  
-      
-      
-      <div class="form-group">
-        <label for="shipperId">Shipper</label>
-        <select id="shipperId" formControlName="shipperId">
-          <option *ngFor="let shipper of shippers" [value]="shipper.id">{{ shipper.name }}</option>
-        </select>
+        <input
+          type="text"
+          id="memoryStorageCapacity"
+          formControlName="memoryStorageCapacity"
+        />
       </div>
       <div class="form-group">
         <label for="hardDiskSize">Hard Disk Size</label>
         <input type="text" id="hardDiskSize" formControlName="hardDiskSize" />
       </div>
-      <div class="form-group">
-        <label for="material">Material</label>
-        <input type="text" id="material" formControlName="material" />
+    </div>
+    <div class="form-group">
+      <label for="shipperId">Shipper</label>
+      <select id="shipperId" formControlName="shipperId">
+        <option *ngFor="let shipper of shippers" [value]="shipper.id">
+          {{ shipper.name }} | {{ shipper.pricePerKm }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          productForm.controls['shipperId'].errors &&
+          productForm.controls['shipperId'].errors['required']
+        "
+        class="error-message"
+      >
+        Shipper is required.
       </div>
-  
-      <button class="btn submit-btn" type="submit">Add Product</button>
-    </form>
-  </div>
-  
+    </div>
+
+    <div class="form-group">
+      <label for="color">Color</label>
+      <input type="text" id="color" formControlName="color" />
+    </div>
+
+    <div class="mb-3">
+      <label for="formFileMultiple" class="form-label">Add Images</label>
+      <input
+        class="form-control"
+        type="file"
+        id="formFileMultiple"
+        (change)="onFileChange($event)"
+        name="images"
+        multiple
+      />
+    </div>
+
+    <button class="btn submit-btn" type="submit">Add Product</button>
+  </form>
+</div>

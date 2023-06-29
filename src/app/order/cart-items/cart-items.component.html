@@ -8,7 +8,7 @@
 
   <div *ngFor="let item of cartItems; let i = index" class="insidecontainer">
     <div class="product-item">
-      <img [src]="item.Image" alt="Product Image" />
+      <img [src]="'data:image/jpeg;base64,' + item.Image" alt="Product Image" />
       <span class="text">
         <h5>{{ item.productName }}</h5>
 

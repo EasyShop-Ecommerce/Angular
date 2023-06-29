@@ -12,7 +12,11 @@
   <div class="row">
     <div class="col-md-4" *ngFor="let product of pagedProducts">
       <div class="card">
-        <!-- <img class="card-img-top" [src]="product.image" [alt]="product.name" /> -->
+        <img
+          class="card-img-top"
+          [src]="'data:image/jpeg;base64,' + product.defaultImage"
+          alt="Product Image"
+        />
         <div class="card-body">
           <h5 class="card-title">{{ product.title }}</h5>
           <h6 class="card-title">BrandName: {{ product.brandName }}</h6>
