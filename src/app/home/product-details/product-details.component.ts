@@ -62,7 +62,8 @@ export class ProductDetailsComponent {
     private customerService: CustomerService,
     private cartService: CartService,
     private productSellerService: ProductSellersService,
-    private router:  Routerprivate shipperService: ShipperService
+    private router:  Router,
+    private  shipperService: ShipperService
   ) {}
 
   ngOnInit() {
@@ -140,7 +141,6 @@ this.productSellerService.getAllProductSeller().subscribe(data=>{
     console.log(this.editedReview);
 
     this.reviewService.updateReview(this.productId, 1, review).subscribe(
-    this.reviewService.updateReview(this.productId, 2, review).subscribe(
       () => {
         console.log('Review saved successfully');
       },
@@ -186,7 +186,7 @@ this.productSellerService.getAllProductSeller().subscribe(data=>{
     }
 
     const randomIndices: number[] = [];
-    const randomIndices: number[] = [];
+
     const randomProducts = [];
 
     while (randomIndices.length < count) {
