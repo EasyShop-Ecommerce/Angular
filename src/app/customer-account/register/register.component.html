@@ -1,0 +1,199 @@
+<div class="registration-container">
+    <h2>Registration Form</h2>
+    <img
+      src="../../assets/Images/man.png"
+      alt="Image"
+      class="registration-image"
+    />
+    <form 
+     [formGroup]="registrationForm"
+      class="registration-form"
+      (ngSubmit)="onSubmit()"
+    >
+      <div>
+        <label for="name">Name </label>
+        <input type="text" id="name" formControlName="name" class="red-border" />
+        <div
+          class="error-message"
+          *ngIf="
+            nameControl?.hasError('required') &&
+            (nameControl?.touched || submitted)
+          "
+        >
+          Name is required...!
+        </div>
+        <div
+          class="error-message"
+          *ngIf="
+            nameControl?.hasError('minlength') &&
+            (nameControl?.touched || submitted)
+          "
+        >
+          minlength is 3... !
+        </div>
+        <div
+          class="error-message"
+          *ngIf="
+            nameControl?.hasError('pattern') &&
+            (nameControl?.touched || submitted)
+          "
+        >
+          Accept alphabetic characters only.
+        </div>
+      </div>
+      <div>
+        <label for="phone">Phone </label>
+        <input
+          type="text"
+          id="phone"
+          formControlName="phone"
+          class="red-border"
+        />
+        <div
+          class="error-message"
+          *ngIf="
+            phoneControl?.hasError('required') &&
+            (phoneControl?.touched || submitted)
+          "
+        >
+          phone is required.
+        </div>
+        <div
+          class="error-message"
+          *ngIf="phoneControl?.dirty && phoneControl?.hasError('pattern')"
+        >
+          Phone should start with 015, 012, 011, or 010 and length is 11.
+        </div>
+      </div>
+      <div>
+        <label for="email">Email </label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="red-border"
+        />
+        <div
+          class="error-message"
+          *ngIf="
+            emailControl?.hasError('required') &&
+            (emailControl?.touched || submitted)
+          "
+        >
+          Email is required.
+        </div>
+        <div
+          class="error-message"
+          *ngIf="
+            emailControl?.hasError('email') &&
+            (emailControl?.touched || submitted)
+          "
+        >
+          Invalid email format.
+        </div>
+      </div>
+      <div>
+        <label for="password">password </label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="red-border"
+        />
+        <div
+          class="error-message"
+          *ngIf="
+            passwordControl?.hasError('required') &&
+            (passwordControl?.touched || submitted)
+          "
+        >
+          password is required.
+        </div>
+        <div
+          class="error-message"
+          *ngIf="
+            passwordControl?.hasError('minlength') &&
+            (passwordControl?.touched || submitted)
+          "
+        >
+          minlength is 8.
+        </div>
+      </div>
+
+      <div>
+        <label for="confirmPassword">Confirm Password</label>
+        <input 
+        type="password" 
+        id="confirmPassword" 
+        formControlName="confirmPassword"
+        />
+        <div
+          class="error-message"
+          *ngIf="
+          confirmPasswordControl?.hasError('required') &&
+            (confirmPasswordControl?.touched || submitted)
+          "
+        >
+          Confirm Password is required.
+        </div>
+      </div>
+  
+      <h3>Address</h3>
+      <div>
+        <label for="street">Street</label>
+        <input
+          type="text"
+          id="street"
+          formControlName="street"
+          class="red-border"
+        />
+        <div
+          class="error-message"
+          *ngIf="
+            streetControl?.hasError('required') &&
+            (streetControl?.touched || submitted)
+          "
+        >
+          Street is required.
+        </div>
+      </div>
+      <div>
+        <label for="city">City</label>
+        <input type="text" id="city" formControlName="city" class="red-border" />
+        <div
+          class="error-message"
+          *ngIf="
+            cityControl?.hasError('required') &&
+            (cityControl?.touched || submitted)
+          "
+        >
+          City is required.
+        </div>
+      </div>
+      <div>
+        <label for="government">Government</label>
+        <input
+          type="text"
+          id="government"
+          formControlName="government"
+          class="red-border"
+        />
+        <div
+          class="error-message"
+          *ngIf="
+            governmentControl?.hasError('required') &&
+            (governmentControl?.touched || submitted)
+          "
+        >
+          Government is required.
+        </div>
+      </div>
+      <div class="registration-buttons">
+        <button class="btn" type="submit" class="red-button">Submit</button>
+        <button class="btn" type="button" routerLink="" class="red-button">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+  

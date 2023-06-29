@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CustomerAccountService } from './customer-account/customer-account.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'app';
-  constructor(private router: Router) {}
+  constructor(private router: Router,private customerService:CustomerAccountService) {}
   shouldDisplayNavbarAndFooter(): boolean {
     // Get the current route path
     const currentRoute = this.router.url;
@@ -25,4 +26,9 @@ export class AppComponent {
     return !disallowedRoutes.includes(currentRoute);
   }
   
+  loadCurrentUser()
+  {
+    const token=localStorage.getItem('token')
+    if(token) this.customerService.loadCurrentUser(token).subscribe()
+  }
 }

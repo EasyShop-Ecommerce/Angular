@@ -6,6 +6,7 @@ import { CartService } from 'src/app/_services/cart.service';
 import { ProductSearchServiceService } from 'src/app/_services/product-search-service.service';
 import { SearchbycatService } from 'src/app/_services/searchbycat.service';
 import { SubSubcategoryService } from 'src/app/_services/sub-category.service';
+import { CustomerAccountService } from 'src/app/customer-account/customer-account.service';
 import { SearchByCatComponent } from 'src/app/product/search-by-cat/search-by-cat.component';
 
 @Component({
@@ -31,7 +32,8 @@ export class NavbarComponent {
     private productSearchService: ProductSearchServiceService,
     private router: Router,
     private subcategoryService: SubSubcategoryService,
-    private bycatservice:SearchbycatService
+    private bycatservice:SearchbycatService,
+    public customerService:CustomerAccountService
   ) {}
 
   ngOnInit(): void {

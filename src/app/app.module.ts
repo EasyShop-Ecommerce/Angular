@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {HttpClientModule} from '@angular/common/http'
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -38,7 +39,8 @@ import { RouterModule } from '@angular/router';
     MatInputModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
-    ProductModule
+    ProductModule,
+    BsDropdownModule.forRoot()
   
   ],
   providers: [CartService],

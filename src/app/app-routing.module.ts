@@ -37,6 +37,7 @@ const routes: Routes = [
         (m) => m.ProductModule
       ),
   },
+  { path: 'CustomerAccount',loadChildren: () =>import('./customer-account/customer-account.module').then((m) => m.CustomerAccountModule),},
 ];
 
 @NgModule({
