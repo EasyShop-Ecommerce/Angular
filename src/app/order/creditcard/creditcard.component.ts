@@ -138,7 +138,7 @@ export class CreditcardComponent {
         ].updateValueAndValidity();
       });
       console.log(this.creditCardForm.value);
-      this.router.navigate(['submitOrder']);
+      this.router.navigate(['submitOrder/1']);
 
     }
   }

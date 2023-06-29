@@ -6,5 +6,6 @@ export interface cart {
   Quantity?: number;
   Image?: string;
   sellerId?:number;
+  shipperId?:number
   shipPrice?:number
 }

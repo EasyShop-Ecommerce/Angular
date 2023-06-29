@@ -11,6 +11,7 @@ import { PaymentMethodsComponent } from './payment-methods/payment-methods.compo
 import { CartItemsComponent } from './cart-items/cart-items.component';
 import { CreditcardComponent } from './creditcard/creditcard.component';
 import { SubmitOrderComponent } from './submit-order/submit-order.component';
+import { UserOrdersComponent } from './user-orders/user-orders.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SubmitOrderComponent } from './submit-order/submit-order.component';
     CartItemsComponent,
     CreditcardComponent,
     SubmitOrderComponent,
+    UserOrdersComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,6 @@ import { SubmitOrderComponent } from './submit-order/submit-order.component';
     MatFormFieldModule,
     MatNativeDateModule,
   ],
-  exports: [PaymentMethodsComponent, CartItemsComponent, CreditcardComponent,SubmitOrderComponent],
+  exports: [PaymentMethodsComponent, CartItemsComponent, CreditcardComponent,SubmitOrderComponent,UserOrdersComponent],
 })
 export class OrderModule {}

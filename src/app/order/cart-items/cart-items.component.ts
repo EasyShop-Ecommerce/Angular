@@ -23,9 +23,7 @@ export class CartItemsComponent {
   ngOnInit(): void {
     this.cartItemCount = this.cartService.getCartItemCount();
 
-    this.productSellerService.getAllProductSeller().subscribe(data=>{
-      this.prices=data
-    })
+
     this.cartService.cartItemCount$.subscribe((count) => {
       this.cartItemCount = count;
     });

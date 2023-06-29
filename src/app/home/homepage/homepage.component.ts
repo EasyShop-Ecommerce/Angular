@@ -44,11 +44,6 @@ export class HomepageComponent {
       console.log(this.products);
     });
 
-    this.productSellerService.getAllProductSeller().subscribe((data) => {
-      this.prices = data;
-      console.log(this.prices);
-    });
-
     console.log(this.pagedProducts);
     this.onPageChange({
       pageIndex: 0,

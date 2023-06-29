@@ -7,6 +7,7 @@ import { PaymentMethodsComponent } from './order/payment-methods/payment-methods
 import { CreditcardComponent } from './order/creditcard/creditcard.component';
 import { ProductDetailsComponent } from './home/product-details/product-details.component';
 import { SubmitOrderComponent } from './order/submit-order/submit-order.component';
+import { UserOrdersComponent } from './order/user-orders/user-orders.component';
 
 const scrollOptions: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
@@ -20,7 +21,9 @@ const routes: Routes = [
   { path: 'productDetails/:id', component: ProductDetailsComponent },
   { path: 'paymentMethod/:id', component: PaymentMethodsComponent },
   { path: 'creditCard', component: CreditcardComponent },
-  { path: 'submitOrder', component: SubmitOrderComponent },
+  { path: 'submitOrder/:id', component: SubmitOrderComponent },
+  { path: 'userOrders', component: UserOrdersComponent },
+
   {
     path: 'pages',
     loadChildren: () =>

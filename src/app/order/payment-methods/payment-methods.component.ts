@@ -39,6 +39,7 @@ export class PaymentMethodsComponent {
     this.route.params.subscribe(params => {
       this.productId = +params['id']; // Convert the route parameter to a number
       console.log(this.productId);
+      localStorage.setItem('productId', JSON.stringify(this.productId));
     })
 
     this.customerService.getCustomerById(1).subscribe((data) => {
@@ -119,10 +120,10 @@ export class PaymentMethodsComponent {
   }
 
   submitPaymentMethod(): void {
-    if (this.selectedMethod == 'Credit Card') {
-      this.router.navigate(['/creditCard']);
+    if (this.selectedMethod == 'credit Card') {
+      this.router.navigate(['/creditCard/']);
     } else {
-      this.router.navigate(['/submitOrder']);
+      this.router.navigate(["/submitOrder/ 2"]);
     }
   }
   customer: Customer = {
