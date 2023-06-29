@@ -3,11 +3,10 @@ import { Injectable } from '@angular/core';
 import { Shipper } from '../_Models/Shipper';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ShipperService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   dbUrl: string = 'https://localhost:44364/Shipper/';
 

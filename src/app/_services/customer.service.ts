@@ -23,7 +23,7 @@ export class CustomerService {
     return this.http.get<Customer>(this.dbUrl + id);
   }
   updateCustomer(id: number, cust: Customer) {
-    return this.http.patch<Customer>(this.dbUrl + id, cust);
+    return this.http.put<Customer>(this.dbUrl + id, cust);
   }
 
   deleteCustomerById(id: number) {

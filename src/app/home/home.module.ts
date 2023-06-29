@@ -34,6 +34,6 @@ import { RatingModule } from 'ngx-bootstrap/rating';
     MatMenuModule,
     RatingModule,
   ],
-  exports: [NavbarComponent, FooterComponent, HomepageComponent],
+  exports: [NavbarComponent, FooterComponent, HomepageComponent,ProductDetailsComponent],
 })
 export class HomeModule {}

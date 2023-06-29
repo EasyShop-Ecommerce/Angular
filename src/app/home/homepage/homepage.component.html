@@ -12,13 +12,25 @@
   <div class="row">
     <div class="col-md-4" *ngFor="let product of pagedProducts">
       <div class="card">
-        <!-- <img class="card-img-top" [src]="product.image" [alt]="product.name" /> -->
+        <img
+          class="card-img-top"
+          [src]="'data:image/jpeg;base64,' + product.defaultImage"
+          alt="Product Image"
+        />
         <div class="card-body">
-          <h5 class="card-title">{{ product.title }}</h5>
+          <h6 class="card-title">{{ product.title }}</h6>
+          <h6 class="card-title">BrandName: {{ product.brandName }}</h6>
           <h5 class="card-title" style="display: none">{{ product.id }}</h5>
-          <p class="card-text">Price: {{ product.price }}</p>
+          <h6 class="card-title">Price: ${{ product.price }}</h6>
+          <rating [(ngModel)]="product.reviewsAverage"></rating>
+
+          <!-- <ng-container *ngFor="let price of prices">
+            <ng-container *ngIf="product.id === price.productId">
+              <h6>Price: ${{price.price }}</h6>
+            </ng-container>
+            </ng-container> -->
           <button class="btn" (click)="addToCart(product)">Add to Cart</button>
-          <button class="btn" [routerLink]="'productDetails/' + product.id">
+          <button class="btn" [routerLink]="'/productDetails/' + product.id">
             Details
           </button>
         </div>

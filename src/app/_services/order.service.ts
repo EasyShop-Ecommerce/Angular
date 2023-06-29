@@ -9,7 +9,7 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  dbUrl: string = '';
+  dbUrl: string = 'https://localhost:44364/Order/';
 
   getAllOrders() {
     return this.http.get<Order[]>(this.dbUrl);
@@ -23,7 +23,7 @@ export class OrderService {
     return this.http.get<Order>(this.dbUrl + id);
   }
   updateOrder(id: number, Order: Order) {
-    return this.http.patch<Order>(this.dbUrl + id, Order);
+    return this.http.put<Order>(this.dbUrl + id, Order);
   }
 
   deleteOrderById(id: number) {

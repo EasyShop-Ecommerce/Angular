@@ -1,0 +1,15 @@
+
+   <div class="container">
+    <h2>Order Details</h2>
+    <p *ngIf="showproduct.brandName">BrandName: {{showproduct.brandName}}</p>
+    <p *ngIf="showproduct.title">Title: {{showproduct.title}}</p>
+    <p>Delivery On: {{date}}</p>
+    <p>Unit Price: ${{showproduct.price}}</p>
+    <p>Quantity: {{showproduct.Quantity}}</p>
+    <p>Ship Price: ${{shipPrice}}</p>
+    <hr>
+    <p>Total Price: ${{totalPrice +shipPrice}}</p>
+    <button class="btn" (click)="submitOrder()">Submit</button>
+
+   </div>
+  

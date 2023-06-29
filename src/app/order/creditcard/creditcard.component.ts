@@ -21,7 +21,7 @@ import {
   MatDatepicker,
   MatDatepickerModule,
 } from '@angular/material/datepicker';
-import { Data } from '@angular/router';
+import { Data, Router } from '@angular/router';
 
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
@@ -68,6 +68,7 @@ export class CreditcardComponent {
   constructor(
     private formBuilder: FormBuilder,
     private creditCard: CreditCardService,
+    private router:Router,
     @Inject(LOCALE_ID) public locale: string
   ) {}
 
@@ -96,7 +97,7 @@ export class CreditcardComponent {
       ],
       expirationDate: [this.date.value?.toISOString(), Validators.required],
       cardholder_name: ['', Validators.required],
-      customerId: 3,
+      customerId: 1,
     });
     console.log(this.creditCardForm.value);
   }
@@ -109,28 +110,38 @@ export class CreditcardComponent {
   submitCreditCardForm(): void {
     console.log(this.creditCardForm.value);
 
-    // if (this.creditCardForm.valid) {
-    // Process the form data and submit
-    this.submitted = true;
-    this.creditCard
-      .addcreditCard(this.creditCardForm.value)
-      .subscribe((data) => {
-        console.log(data);
+    if (this.creditCardForm.valid) {
+      // Process the form data and submit
+      this.submitted = true;
+      this.creditCard
+        .addcreditCard(this.creditCardForm.value)
+        .subscribe((data) => {
+          console.log(data);
+        });
+      Swal.fire({
+        title: 'Success!',
+        text: 'Data has been added successfully.',
+        icon: 'success',
+        showCloseButton: true,
+        confirmButtonText: 'Close',
+      }).then(() => {
+        // Optional: Perform any additional actions after the alert is closed
+        // ...
+        this.creditCardForm.reset();
+        this.creditCardForm.controls['cardholder_name'].clearValidators();
+        this.creditCardForm.controls[
+          'cardholder_name'
+        ].updateValueAndValidity();
+        this.creditCardForm.controls['cardNumber'].clearValidators();
+        this.creditCardForm.controls[
+          'cardNumber'
+        ].updateValueAndValidity();
       });
-    Swal.fire({
-      title: 'Success!',
-      text: 'Data has been added successfully.',
-      icon: 'success',
-      showCloseButton: true,
-      confirmButtonText: 'Close',
-    }).then(() => {
-      // Optional: Perform any additional actions after the alert is closed
-      // ...
-      this.creditCardForm.reset();
-    });
-    console.log(this.creditCardForm.value);
+      console.log(this.creditCardForm.value);
+      this.router.navigate(['submitOrder/1']);
+
+    }
   }
-  // }
 
   setMonthAndYear(
     normalizedMonthAndYear: Moment,

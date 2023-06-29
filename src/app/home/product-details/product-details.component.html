@@ -1,13 +1,20 @@
 <div class="container">
   <div class="product-details-container">
-    <div class="left-container">
+    <div class="left-container rounded rounded-2">
       <!-- Display product image here -->
-      <!-- <img [src]="product.image" alt="Product Image" /> -->
+      <img [src]="defaultImage" alt="Product Image" height="200" />
     </div>
     <div class="right-container">
       <h2>{{ product.title }}</h2>
       <p *ngIf="product.description">Description: {{ product.description }}</p>
-      <p *ngIf="product.price">price: {{ product.price }}</p>
+      <p>Price: ${{product.price}}</p>
+
+      <!-- <ng-container *ngFor="let price of prices">
+        <ng-container *ngIf="product.id === price.productId">
+          <p>Price: ${{ price.price }}</p>
+        </ng-container>
+      </ng-container> -->
+
       <p *ngIf="product.brandName">BrandName: {{ product.brandName }}</p>
       <p *ngIf="product.hardDiskSize">
         HardDiskSize: {{ product.hardDiskSize }}
@@ -19,10 +26,18 @@
       <p *ngIf="product.operatingSystem">
         OperatingSystem: {{ product.operatingSystem }}
       </p>
+      <rating style="display: inline-block;" [(ngModel)]="product.reviewsAverage"></rating>
+      <span style="display: inline-block; margin-left: 10px;"> {{ product.reviewsAverage }}</span>
+      <p> Reviews Count: {{product.reviewsCount}}</p>
       <button class="btn" (click)="addToCart(product)">Add To Cart</button>
-      <button class="btn" routerLink="/paymentMethod/{{ product.id }}">
+      <button class="btn" (click)="buyNow(product)" routerLink="/paymentMethod/{{ product.id }}">
         Buy Now
       </button>
+    </div>
+    <div class="deliverDetails">
+      <img class="Delivery" src="../../../assets/Images/fast-delivery.png" />
+       <p>Shipping Price: ${{ price }}</p> 
+      <p>Delivery On: {{ estimatedDeliveryDate }}</p>
     </div>
   </div>
 
@@ -46,12 +61,34 @@
     <div class="stars" *ngFor="let review of productreviews">
       <ng-container *ngFor="let customer of allCustomers">
         <ng-container *ngIf="review.customerId === customer.id">
-          <h4>{{ customer.name }}</h4>
+          <span class="text">{{ customer.name }}</span>
         </ng-container>
       </ng-container>
-      <rating [ngModel]="review.rate"></rating>
-      <p class="text">{{ review.comment }}</p>
-      <button>Remove</button>
+
+      <rating
+        [(ngModel)]="review.rate"
+        [disabled]="!review.isEditable"
+      ></rating>
+
+      <p *ngIf="!review.isEditable" class="text comment">
+        {{ review.comment }}
+      </p>
+
+      <div *ngIf="review.isEditable">
+        <textarea [(ngModel)]="review.comment"></textarea>
+        <button class="remove" (click)="saveReview(review)">Save</button>
+      </div>
+
+      <button class="remove" (click)="deleteReview(review.productId)">
+        Remove
+      </button>
+      <button
+        class="remove"
+        *ngIf="!review.isEditable"
+        (click)="enableEdit(review)"
+      >
+        Edit
+      </button>
     </div>
   </div>
 
@@ -63,19 +100,13 @@
       <div class="product-card" *ngFor="let product of randomProducts">
         <div class="card-container">
           <div class="row">
-            <!-- <img
-              class="card-img-top"
-              [src]="product.image"
-              [alt]="product."
-            /> -->
-            <div class="card-body">
-              <h5 class="card-title">{{ product.title }}</h5>
-              <h5 class="card-title" style="display: none">
-                {{ product.id }}
-              </h5>
-              <p class="card-text">Price: {{ product.price }}</p>
+            <h6 class="card-title">{{ product.title }}</h6>
+            <h6 class="card-title">BrandName: {{ product.brandName }}</h6>
+            <h5 class="card-title" style="display: none">{{ product.id }}</h5>
+            <h6 class="card-title">Price: ${{ product.price }}</h6>
+            <rating [(ngModel)]="product.reviewsAverage"></rating>
 
-              <button class="btn" [routerLink]="'productDetails/' + product.id">
+              <button class="btn random" (click)="goToProductDetails(product.id)">
                 Details
               </button>
             </div>
@@ -84,4 +115,4 @@
       </div>
     </div>
   </div>
-</div>
+

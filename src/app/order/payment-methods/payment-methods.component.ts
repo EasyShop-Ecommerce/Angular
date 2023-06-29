@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from 'src/app/_Models/customer';
 import { CustomerService } from 'src/app/_services/customer.service';
+import { PaymentMethod } from 'src/app/_Models/payment';
+import { PaymentService } from 'src/app/_services/payment.service';
+import { Address } from 'src/app/_Models/Address';
 
 @Component({
   selector: 'app-payment-methods',
@@ -11,59 +14,92 @@ import { CustomerService } from 'src/app/_services/customer.service';
 })
 export class PaymentMethodsComponent {
   userForm!: FormGroup;
-  paymentMethods: string[] = ['Credit Card', 'Vodafone Cash', 'Cash on Delivery'];
-  selectedMethod: string='';
+  paymentMethods: PaymentMethod[] = [];
+  selectedMethod: string = '';
   isEditable: boolean = false;
-  customer: Customer = {
-    id: 1,
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    address: {
-      Street: '123 Main Street',
-      City: 'City',
-      Government: 'Government',
-    },
-    phone: 45542555,
-    password: '',
-  };
+  productId:number=0
 
   constructor(
     private formBuilder: FormBuilder,
-    private customerService:CustomerService,
-    private router: Router
-    ) {}
+    private customerService: CustomerService,
+    private router: Router,
+    private paymentService: PaymentService,
+    private route: ActivatedRoute,
+  ) {
+    this.userForm = this.formBuilder.group({
+      street: [''],
+      city: [''],
+      government: [''],
+      phone: [''],
+    });
+  }
 
   ngOnInit(): void {
-    // Initialize the form with customer data
-    this.userForm = this.formBuilder.group({
-      street: [this.customer.address.Street],
-      city: [this.customer.address.City],
-      government: [this.customer.address.Government],
-      phone: [this.customer.phone],
+
+    this.route.params.subscribe(params => {
+      this.productId = +params['id']; // Convert the route parameter to a number
+      console.log(this.productId);
+      localStorage.setItem('productId', JSON.stringify(this.productId));
+    })
+
+    this.customerService.getCustomerById(1).subscribe((data) => {
+      this.customer = data;
+      this.userForm = this.formBuilder.group({
+        street: [this.customer.street],
+        city: [this.customer.city],
+        government: [this.customer.government],
+        phone: [this.customer.phone],
+      });
+
+      console.log(this.customer);
     });
+    this.paymentService.getAllPaymentMethods().subscribe((data) => {
+      this.paymentMethods = data;
+      console.log(this.paymentMethods);
+    });
+    // Initialize the form with customer data
+    console.log(this.customer);
+
     this.disaleAll();
   }
 
+  intializeForm() {
+    console.log(this.customer.street);
+    const street=this.customer.street
+
+    this.userForm = this.formBuilder.group({
+      street: [street],
+      city: [this.customer.city],
+      government: [this.customer.government],
+      phone: [this.customer.phone],
+    });
+  }
   saveUserAddress(): void {
     if (this.userForm.valid) {
+      console.log(this.userForm.value)
       const street = this.userForm.get('street')?.value;
       const city = this.userForm.get('city')?.value;
       const government = this.userForm.get('government')?.value;
       const mobileNumber = this.userForm.get('phone')?.value;
 
       // Update the customer's address and mobile number
-      this.customer.address.Street = street;
-      this.customer.address.City = city;
-      this.customer.address.Government = government;
+      this.customer.street = street;
+      this.customer.city = city;
+      this.customer.government = government;
       this.customer.phone = mobileNumber;
+       this.customer.name='mariam'
+      // this.customer.password=this.customer.password
+      // this.customer.email=this.customer.email
 
       console.log(this.customer);
       this.disaleAll();
-      this.isEditable=false;
+      this.isEditable = false;
 
-      this.customerService.updateCustomer(1,this.customer).subscribe(data=>{
-        console.log(data)
-      })
+      this.customerService
+        .updateCustomer(1, this.customer)
+        .subscribe((data) => {
+          console.log(data);
+        });
     }
   }
   toggleEditState(): void {
@@ -72,20 +108,34 @@ export class PaymentMethodsComponent {
     this.userForm.get('government')?.enable();
     this.userForm.get('city')?.enable();
     this.userForm.get('street')?.enable();
-    this.isEditable=true
+    this.isEditable = true;
   }
   disaleAll() {
-    this.userForm.get('phone')?.disable();
-    this.userForm.get('government')?.disable();
-    this.userForm.get('city')?.disable();
-    this.userForm.get('street')?.disable();
+    if (this.userForm) {
+      this.userForm.get('phone')?.disable();
+      this.userForm.get('government')?.disable();
+      this.userForm.get('city')?.disable();
+      this.userForm.get('street')?.disable();
+    }
   }
 
   submitPaymentMethod(): void {
-    if (this.selectedMethod === 'Credit Card') {
-      this.router.navigate(['/signIn']);
+    if (this.selectedMethod == 'credit Card') {
+      this.router.navigate(['/creditCard/']);
     } else {
-      this.router.navigate(['/signUp']);
+      this.router.navigate(["/submitOrder/ 2"]);
     }
   }
+  customer: Customer = {
+    id: 1,
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+
+    street: '123 Main Street',
+    city: 'City',
+    government: 'Government',
+
+    phone: '45542555',
+    password: '',
+  };
 }

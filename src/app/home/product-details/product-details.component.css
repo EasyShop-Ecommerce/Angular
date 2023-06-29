@@ -1,63 +1,88 @@
 .container {
-    margin: 20px;
-   
-  }
-  
-  .product-details-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .left-container {
-    flex: 1;
-  }
-  
-  .right-container {
-    flex: 2;
-    margin-left: 150px;
-    font-weight: bold;
-  
-  }
-  
-  .comment-section {
-    margin-top: 20px;
-    
-  }
-  
-  .other-products-section {
-    margin-top: 40px;
-  }
-  
-  .other-products-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  .product-card {
-    width: 30%;
-    background-color: #f4f4f4;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
- rating {
+  margin: 20px;
+}
+
+.product-details-container {
+  display: flex;
+  align-items: center;
+}
+
+.left-container {
+  flex: 1;
+}
+
+.right-container {
+  flex: 2;
+  margin-left: 150px;
+  font-weight: bold;
+}
+
+.comment-section {
+  margin-top: 20px;
+}
+
+.other-products-section {
+  margin-top: 40px;
+}
+
+.other-products-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.product-card {
+  width: 30%;
+  background-color: #f4f4f4;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+rating {
   color: rgb(228, 98, 12); /* Set the border color to black */
-  font-size: 30px; 
-  }
-  textarea{
-    width:400px;
-    height: 100px;
-  }
-  button{
-    background-color: chocolate;
-    margin-left: 10px;
-    margin-bottom: 30px;
-  }
-  button:hover{
-    background-color: darkgreen;
-    
-  }
-  .text{
-    font-weight: bold;
-  }
-  
+  font-size: 25px;
+  display: block;
+}
+textarea {
+  width: 400px;
+  height: 100px;
+}
+button {
+  background-color: chocolate;
+  margin-left: 10px;
+  margin-bottom: 30px;
+}
+button:hover {
+  background-color: darkgreen;
+}
+.text {
+  font-weight: bold;
+}
+.remove {
+  display: inline-block;
+  background-color:white;
+  border: none;
+  color: blue;
+}
+.remove:hover{
+  background-color: white;
+}
+.comment {
+  display: inline-block;
+}
+.deliverDetails{
+  display: inline-block;
+  border:2px solid chocolate;
+  padding: 7px;
+  font-weight: bold;
+  text-align: center;
+}
+.Delivery{
+  width: 100px;
+  height: 100px;
+}
+p{
+  font-size: 14px;
+}
+.random{
+  width: 150px;
+}

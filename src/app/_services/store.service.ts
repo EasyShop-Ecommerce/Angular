@@ -1,13 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Store } from '../_Models/Store';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StoreService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   dbUrl: string = '';
 

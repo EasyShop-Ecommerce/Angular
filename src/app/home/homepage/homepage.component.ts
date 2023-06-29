@@ -4,6 +4,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { PageEvent } from '@angular/material/paginator';
 import { CartService } from 'src/app/_services/cart.service';
 import { ProductService } from 'src/app/_services/product.service';
+import { ProductSellersService } from 'src/app/_services/ProductSellers.service';
+import { ProductSellers } from 'src/app/_Models/ProductSellers';
 
 @Component({
   selector: 'app-homepage',
@@ -12,37 +14,49 @@ import { ProductService } from 'src/app/_services/product.service';
 })
 export class HomepageComponent {
   pagedProducts: Product[] = [];
-  products: Product[] = []
+  products: Product[] = [];
+  productPrice: number = 0;
+  prices: ProductSellers[] = [];
   pageSize = 6;
   pageSizeOptions: number[] = [6, 18, 25, 100];
+  // defaultImage: string;
 
   constructor(
     private cartSrvices: CartService,
-    private productservice:ProductService
-    ) {
+    private productservice: ProductService,
+    private productSellerService: ProductSellersService
+  ) {
     this.onPageChange({
       pageIndex: 0,
       pageSize: this.pageSize,
       length: this.products.length,
     });
   }
-  ngOnInit(){
-      this.productservice.getAllProducts().subscribe(data=>{
-        this.products=data
-        this.onPageChange({ pageIndex: 0, pageSize: this.pageSize, length: this.products.length });
-        console.log(this.products)
-      })
-     
-      console.log(this.pagedProducts)
-      this.onPageChange({ pageIndex: 0, pageSize: this.pageSize, length: this.products.length });
-      
+  ngOnInit() {
+    this.productservice.getAllProducts().subscribe((data) => {
+      this.products = data;
+
+      this.onPageChange({
+        pageIndex: 0,
+        pageSize: this.pageSize,
+        length: this.products.length,
+      });
+      console.log(this.products);
+    });
+
+    console.log(this.pagedProducts);
+    this.onPageChange({
+      pageIndex: 0,
+      pageSize: this.pageSize,
+      length: this.products.length,
+    });
   }
 
   onPageChange(event: PageEvent): void {
     const startIndex = event.pageIndex * event.pageSize;
     const endIndex = startIndex + event.pageSize;
     this.pagedProducts = this.products.slice(startIndex, endIndex);
-    console.log(this.pagedProducts)
+    console.log(this.pagedProducts);
   }
 
   slides = [
@@ -53,8 +67,6 @@ export class HomepageComponent {
     { image: '../../../assets/Images/pexels-alexandra-maria-336372.jpg' },
     { image: '../../../assets/Images/pexels-godisable-jacob-1936848.jpg' },
   ];
- 
-    
 
   addToCart(product: Product): void {
     this.cartSrvices.addToCart(product);

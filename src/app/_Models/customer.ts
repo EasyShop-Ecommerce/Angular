@@ -4,12 +4,12 @@ import { User } from './Login';
 export class Customer implements User {
   id: number;
   name: string;
-  phone: number;
+  phone: string;
   email: string;
   password: string;
   address: Address;
   
-  constructor(id:number,name:string,phone:number,email:string,address:Address,password:string)
+  constructor(id:number,name:string,phone:string,email:string,address:Address,password:string)
    {
     this.id=id
     this.name=name

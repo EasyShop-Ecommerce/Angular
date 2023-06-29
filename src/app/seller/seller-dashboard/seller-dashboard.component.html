@@ -1,0 +1,50 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img
+        src="./../../../assets/Images/Logo.png"
+        alt=""
+        height="60"
+        class="d-inline-block align-text-center"
+      />
+      EASYSHOP Seller Center
+    </a>
+  </div>
+</nav>
+
+<div class="menu-item">
+  <ul class="nav nav-pills nav-justified flex-column">
+    <li class="nav-item p-2">
+      <a class="nav-link active" aria-current="page" href="#">Profile</a>
+    </li>
+
+    <li class="nav-item p-2">
+      <a class="nav-link bg-secondary text-light" aria-current="page" href="#"
+        >Orders</a
+      >
+    </li>
+
+    <li class="nav-item p-2">
+      <a class="nav-link bg-secondary text-light" href="#">Products</a>
+    </li>
+
+    <li class="nav-item p-2 mb-5">
+      <a class="nav-link bg-secondary text-light" href="#">Link</a>
+    </li>
+  </ul>
+
+  <div class="ps-5 mt-5">
+    <button
+      type="button"
+      class="btn btn-info"
+      [routerLink]="['add-product']"
+      routerLinkActive="router-link-active"
+    >
+      <span class="add-sign"> + </span> Add Product
+    </button>
+  </div>
+</div>
+
+<div class="dashboard-content">
+  <router-outlet name="dashboardOutlet"></router-outlet>
+</div>

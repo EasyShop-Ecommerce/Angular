@@ -63,6 +63,7 @@
   .text{
     display: block;
     margin-left: 50px;
+    text-align: center;
   }
 
   /* CSS */
@@ -75,7 +76,7 @@
   color: #333;
   outline: none;
   transition: border-color 0.3s;
-  margin-left: 20px;
+  margin-left: 0px;
 }
 
 .custom-select:hover,
@@ -85,5 +86,8 @@
 
 .custom-select option {
   padding: 8px;
+}
+h6{
+  font-size: 14px;
 }
 
