@@ -32,7 +32,6 @@ export class ProductDetailsComponent {
   product: Product = {
     title: 'Product Name',
     description: 'Product description',
-
     operatingSystem: '',
     id: 0,
     specialFeatures: '',

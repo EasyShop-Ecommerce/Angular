@@ -10,39 +10,40 @@ import { ProductDetailsComponent } from './home/product-details/product-details.
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./home/home.module').then(
-        (m) => m.HomeModule
-      ),
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   { path: 'productDetails/:id', component: ProductDetailsComponent },
-  {path:"paymentMethod/:id",component:PaymentMethodsComponent},
-  {path:"creditCard",component:CreditcardComponent},
+  { path: 'paymentMethod/:id', component: PaymentMethodsComponent },
+  { path: 'creditCard', component: CreditcardComponent },
   {
     path: 'pages',
     loadChildren: () =>
-      import('./pages/pages.module').then(
-        (m) => m.PagesModule
-      ),
+      import('./pages/pages.module').then((m) => m.PagesModule),
   },
   {
     path: 'order',
     loadChildren: () =>
-      import('./order/order.module').then(
-        (m) => m.OrderModule
-      ),
+      import('./order/order.module').then((m) => m.OrderModule),
   },
   {
     path: 'product',
     loadChildren: () =>
-      import('./product/product.module').then(
-        (m) => m.ProductModule
-      ),
+      import('./product/product.module').then((m) => m.ProductModule),
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
+    path: 'seller',
+    loadChildren: () =>
+      import('./seller/seller.module').then((m) => m.SellerModule),
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

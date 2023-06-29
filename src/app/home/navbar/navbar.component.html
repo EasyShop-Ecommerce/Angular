@@ -4,17 +4,19 @@
   <button mat-button [matMenuTriggerFor]="menu" class="menu">
     All
     <img class="down" src="../../../assets/Images/down.png" />
-  </button> 
+  </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="onCategoryChange(null)">
       All Categories
     </button>
-    <button mat-menu-item *ngFor="let cat of subcategories" (click)="onCategoryChange(cat.id)">
+    <button
+      mat-menu-item
+      *ngFor="let cat of subcategories"
+      (click)="onCategoryChange(cat.id)"
+    >
       {{ cat.subCategoryName }}
     </button>
   </mat-menu>
-  
-  
 
   <form>
     <input
@@ -31,6 +33,7 @@
     <span>
       <a routerLink="signIn">signIn</a>
       <a routerLink="signUp">signUp</a>
+      <a routerLink="admin">Admin</a>
       <a href="">Orders</a>
       <a routerLink="/cart">
         <span class="cart-link">
