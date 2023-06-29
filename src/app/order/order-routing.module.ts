@@ -6,7 +6,7 @@ import { SubmitOrderComponent } from './submit-order/submit-order.component';
 const routes: Routes = [
   { path: 'paymentMethod/:id', component: PaymentMethodChangeEvent },
   { path: 'creditCard', component: CreditcardComponent },
-  { path: 'submitOrder', component: SubmitOrderComponent },
+  { path: 'submitOrder/:id', component: SubmitOrderComponent },
 ];
 
 @NgModule({

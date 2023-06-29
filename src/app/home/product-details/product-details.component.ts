@@ -249,15 +249,14 @@ export class ProductDetailsComponent {
       'Shipdate',
       JSON.stringify(this.estimatedDeliveryDate)
     );
+    const selectedProduct = localStorage.getItem('selectedProduct');
+    if(selectedProduct){
+      const date=JSON.parse(selectedProduct);
+      console.log(date)
+
+    }
   }
 
-  // id: number;
-  // totalPrice: number;
 
-  // paymentMethodId: number;
-  // sellerId: number;
 
-  hasValue(attribute: any): boolean {
-    return attribute && attribute.trim().length > 0;
-  }
 }

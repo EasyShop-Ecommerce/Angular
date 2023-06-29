@@ -1,25 +1,15 @@
-<!-- 
-<div>
+
+   <div class="container">
     <h2>Order Details</h2>
-    <p>Order ID: {{ orderId }}</p>
-    <p>Order Date: {{ orderDate }}</p>
-    <p>Shipping Address: {{ shippingAddress }}</p>
-    <p>Order Items:</p>
-    <ul>
-      <li *ngFor="let item of orderItems">{{ item.name }} - {{ item.price }}</li>
-    </ul>
-    <p>Order Price: {{ orderPrice }}</p>
-    <p>Shipping Price: {{ shippingPrice }}</p>
-    <p>Delivery Date: {{ deliveryDate }}</p>
-    <p>Total Price: {{ totalPrice }}</p>
-    <button (click)="submitOrder()">Submit Order</button>
-  </div>
-   -->
-   <div>
-    <h2>Order Details</h2>
-    <p>BrandName: {{product.brandName}}</p>
-    <p>Title: {{product.title}}</p>
+    <p *ngIf="showproduct.brandName">BrandName: {{showproduct.brandName}}</p>
+    <p *ngIf="showproduct.title">Title: {{showproduct.title}}</p>
     <p>Delivery On: {{date}}</p>
+    <p>Unit Price: ${{showproduct.price}}</p>
+    <p>Quantity: {{showproduct.Quantity}}</p>
+    <p>Ship Price: ${{shipPrice}}</p>
+    <hr>
+    <p>Total Price: ${{totalPrice +shipPrice}}</p>
+    <button class="btn" (click)="submitOrder()">Submit</button>
 
    </div>
   

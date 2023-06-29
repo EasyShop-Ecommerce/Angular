@@ -9,7 +9,7 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  dbUrl: string = '';
+  dbUrl: string = 'https://localhost:44364/Order/';
 
   getAllOrders() {
     return this.http.get<Order[]>(this.dbUrl);

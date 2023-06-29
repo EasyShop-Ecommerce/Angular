@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'productDetails/:id', component: ProductDetailsComponent },
   { path: 'paymentMethod/:id', component: PaymentMethodsComponent },
   { path: 'creditCard', component: CreditcardComponent },
-  { path: 'submitOrder', component: SubmitOrderComponent },
+  { path: 'submitOrder/:id', component: SubmitOrderComponent },
   {
     path: 'pages',
     loadChildren: () =>

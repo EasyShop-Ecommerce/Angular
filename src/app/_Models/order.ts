@@ -1,5 +1,5 @@
 export interface Order {
-  id: number;
+  id?: number;
   totalPrice: number;
   date: Date;
   customerId: number;
@@ -9,5 +9,5 @@ export interface Order {
   shipPrice: number;
   unitPrice:number;
   quantity:number;
-  prodductId:number
+  productId:number
 }

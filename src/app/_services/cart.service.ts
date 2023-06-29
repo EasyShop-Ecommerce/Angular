@@ -95,6 +95,7 @@ export class CartService {
         brandName: product.brandName,
         price: product.price,
         sellerId: product.sellerId,
+        shipperId:product.shipperId,
         shipPrice: this.shipPrice,
         Quantity: 1
       };
