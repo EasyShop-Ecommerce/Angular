@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from 'src/app/_Models/customer';
 import { CustomerService } from 'src/app/_services/customer.service';
-import { switchMap } from 'rxjs/operators';
+import { PaymentMethod } from 'src/app/_Models/payment';
+import { PaymentService } from 'src/app/_services/payment.service';
+import { Address } from 'src/app/_Models/Address';
 
 @Component({
   selector: 'app-payment-methods',
@@ -12,25 +14,47 @@ import { switchMap } from 'rxjs/operators';
 })
 export class PaymentMethodsComponent {
   userForm!: FormGroup;
-  paymentMethods: string[] = [
-    'Credit Card',
-    
-    'Cash on Delivery',
-  ];
+  paymentMethods: PaymentMethod[] = [];
   selectedMethod: string = '';
   isEditable: boolean = false;
+  productId:number=0
 
   constructor(
     private formBuilder: FormBuilder,
     private customerService: CustomerService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private paymentService: PaymentService,
+    private route: ActivatedRoute,
+  ) {
+    this.userForm = this.formBuilder.group({
+      street: [''],
+      city: [''],
+      government: [''],
+      phone: [''],
+    });
+  }
 
   ngOnInit(): void {
+
+    this.route.params.subscribe(params => {
+      this.productId = +params['id']; // Convert the route parameter to a number
+      console.log(this.productId);
+    })
+
     this.customerService.getCustomerById(1).subscribe((data) => {
       this.customer = data;
+      this.userForm = this.formBuilder.group({
+        street: [this.customer.street],
+        city: [this.customer.city],
+        government: [this.customer.government],
+        phone: [this.customer.phone],
+      });
+
       console.log(this.customer);
-      this.intializeForm();
+    });
+    this.paymentService.getAllPaymentMethods().subscribe((data) => {
+      this.paymentMethods = data;
+      console.log(this.paymentMethods);
     });
     // Initialize the form with customer data
     console.log(this.customer);
@@ -39,29 +63,32 @@ export class PaymentMethodsComponent {
   }
 
   intializeForm() {
-    console.log(this.customer);
+    console.log(this.customer.street);
+    const street=this.customer.street
 
     this.userForm = this.formBuilder.group({
-      street: [this.customer.address.street],
-
-      city: [this.customer.address.city],
-      government: [this.customer.address.government],
+      street: [street],
+      city: [this.customer.city],
+      government: [this.customer.government],
       phone: [this.customer.phone],
     });
   }
-
   saveUserAddress(): void {
     if (this.userForm.valid) {
+      console.log(this.userForm.value)
       const street = this.userForm.get('street')?.value;
       const city = this.userForm.get('city')?.value;
       const government = this.userForm.get('government')?.value;
       const mobileNumber = this.userForm.get('phone')?.value;
 
       // Update the customer's address and mobile number
-      this.customer.address.street = street;
-      this.customer.address.city = city;
-      this.customer.address.government = government;
+      this.customer.street = street;
+      this.customer.city = city;
+      this.customer.government = government;
       this.customer.phone = mobileNumber;
+       this.customer.name='mariam'
+      // this.customer.password=this.customer.password
+      // this.customer.email=this.customer.email
 
       console.log(this.customer);
       this.disaleAll();
@@ -92,22 +119,22 @@ export class PaymentMethodsComponent {
   }
 
   submitPaymentMethod(): void {
-    if (this.selectedMethod === 'Credit Card') {
+    if (this.selectedMethod == 'Credit Card') {
       this.router.navigate(['/creditCard']);
     } else {
-      this.router.navigate(['/signUp']);
+      this.router.navigate(['/submitOrder']);
     }
   }
   customer: Customer = {
     id: 1,
     name: 'John Doe',
     email: 'john.doe@example.com',
-    address: {
-      street: '123 Main Street',
-      city: 'City',
-      government: 'Government',
-    },
-    phone: 45542555,
+
+    street: '123 Main Street',
+    city: 'City',
+    government: 'Government',
+
+    phone: '45542555',
     password: '',
   };
 }

@@ -30,10 +30,10 @@
     <input
       type="radio"
       name="paymentMethod"
-      [value]="method"
+      [value]="method.method"
       [(ngModel)]="selectedMethod"
     />
-    <label>{{ method }}</label>
+    <label>{{ method.method }}</label>
   </div>
 </div>
 <button class="btn Change" (click)="submitPaymentMethod()">Submit</button>

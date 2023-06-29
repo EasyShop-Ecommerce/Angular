@@ -39,7 +39,7 @@
 }
 rating {
   color: rgb(228, 98, 12); /* Set the border color to black */
-  font-size: 30px;
+  font-size: 25px;
   display: block;
 }
 textarea {
@@ -68,4 +68,21 @@ button:hover {
 }
 .comment {
   display: inline-block;
+}
+.deliverDetails{
+  display: inline-block;
+  border:2px solid chocolate;
+  padding: 7px;
+  font-weight: bold;
+  text-align: center;
+}
+.Delivery{
+  width: 100px;
+  height: 100px;
+}
+p{
+  font-size: 14px;
+}
+.random{
+  width: 150px;
 }

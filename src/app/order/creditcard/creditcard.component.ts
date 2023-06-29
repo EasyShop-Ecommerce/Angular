@@ -21,7 +21,7 @@ import {
   MatDatepicker,
   MatDatepickerModule,
 } from '@angular/material/datepicker';
-import { Data } from '@angular/router';
+import { Data, Router } from '@angular/router';
 
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
@@ -68,6 +68,7 @@ export class CreditcardComponent {
   constructor(
     private formBuilder: FormBuilder,
     private creditCard: CreditCardService,
+    private router:Router,
     @Inject(LOCALE_ID) public locale: string
   ) {}
 
@@ -137,6 +138,8 @@ export class CreditcardComponent {
         ].updateValueAndValidity();
       });
       console.log(this.creditCardForm.value);
+      this.router.navigate(['submitOrder']);
+
     }
   }
 

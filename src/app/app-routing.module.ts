@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes, Scroll } from '@angular/router';
 import { HomeModule } from './home/home.module';
 import { HomepageComponent } from './home/homepage/homepage.component';
 import { PagesModule } from './pages/pages.module';
 import { PaymentMethodsComponent } from './order/payment-methods/payment-methods.component';
 import { CreditcardComponent } from './order/creditcard/creditcard.component';
 import { ProductDetailsComponent } from './home/product-details/product-details.component';
+import { SubmitOrderComponent } from './order/submit-order/submit-order.component';
 
+const scrollOptions: ExtraOptions = {
+  scrollPositionRestoration: 'enabled',
+  scrollOffset: [0, 64],
+};
 const routes: Routes = [
   {
     path: '',
@@ -15,6 +20,7 @@ const routes: Routes = [
   { path: 'productDetails/:id', component: ProductDetailsComponent },
   { path: 'paymentMethod/:id', component: PaymentMethodsComponent },
   { path: 'creditCard', component: CreditcardComponent },
+  { path: 'submitOrder', component: SubmitOrderComponent },
   {
     path: 'pages',
     loadChildren: () =>
@@ -43,7 +49,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, scrollOptions)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

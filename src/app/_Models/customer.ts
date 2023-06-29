@@ -3,8 +3,10 @@ import { Address } from './Address';
 export interface Customer {
   id: number;
   name: string;
-  phone: number;
+  phone: string;
   email: string;
   password: string;
-  address: Address;
+  street: string;
+  city: string;
+  government: string;
 }
