@@ -92,7 +92,7 @@ export class SubmitOrderComponent {
           statusId: 1,
           shipPrice: this.shipPrice,
           unitPrice: this.unitPrice,
-          quantity: this.Quantity,
+          qty: this.Quantity,
           paymentMethodId: 1,
         };
       });

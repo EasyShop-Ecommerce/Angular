@@ -8,6 +8,7 @@ export interface Order {
   sellerId: number;
   shipPrice: number;
   unitPrice:number;
-  quantity:number;
-  productId:number
+  qty:number;
+  productId:number;
+  canCancell?:Boolean
 }
