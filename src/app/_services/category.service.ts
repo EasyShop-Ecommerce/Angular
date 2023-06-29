@@ -8,8 +8,7 @@ import { Category } from '../_Models/Category';
 export class CategoryService {
   constructor(private http: HttpClient) {}
 
-  //dbUrl: string = 'https://localhost:44364/api/Category/';
-  dbUrl: string = 'https://localhost:7239/api/Category/';
+  dbUrl: string = 'https://localhost:44364/api/Category/';
 
   getAllCategories() {
     return this.http.get<Category[]>(this.dbUrl);

@@ -81,21 +81,8 @@ export class AddProductComponent {
             const productId = productResponse.id;
             console.log(productId);
 
-            const productSeller: ProductSellers = {
-              quantity: this.productForm.get('quantity').value,
-              price: this.productForm.get('price').value,
-              productId: productId,
-              sellerId: 5,
-            };
-
-            return this.productService.addProductSeller(productSeller);
-          }),
-          concatMap((sellerResponse) => {
-            const sellerId = sellerResponse['sellerId'];
-            console.log(sellerId);
-
             return this.productService.uploadImages(
-              sellerResponse['productId'],
+              productId,
               this.productForm.get('color')?.value,
               this.images
             );

@@ -1,0 +1,87 @@
+<!-- <div *ngFor="let product of products">
+  <h3>{{ product.Title }}</h3>
+  <p>{{ product.Description }}</p>
+  <p>Price: {{ product.Price }}</p> -->
+<!-- Add more details as needed -->
+
+<!-- <button (click)="editProduct(product)">Update</button>
+  <button (click)="deleteProduct(product.Id)">Delete</button>
+</div> -->
+
+<mat-card>
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Filter" />
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Image</th>
+        <td mat-cell *matCellDef="let product">
+          <img
+            height="50"
+            [src]="'data:image/jpeg;base64,' + product.defaultImage"
+            alt="Product Image"
+          />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="BrandName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Brand Name</th>
+        <td mat-cell *matCellDef="let product">{{ product.brandName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+        <td mat-cell *matCellDef="let product">{{ product.title }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+        <td mat-cell *matCellDef="let product">${{ product.price }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="availableQuantity">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Available Quantity
+        </th>
+        <td mat-cell *matCellDef="let product">{{ product.qty }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let product">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <!-- <mat-icon
+              svgIcon="thumbs-up"
+              aria-hidden="false"
+              aria-label="Example thumbs up SVG icon"
+            ></mat-icon> -->
+          </button>
+          <mat-menu #menu="matMenu">
+            <button
+              mat-menu-item
+              (click)="updateProductPriceAndQuantity(product)"
+            >
+              Edit Details
+            </button>
+            <button mat-menu-item (click)="editImages(product)">
+              Edit Images
+            </button>
+            <button mat-menu-item (click)="deleteProduct(product)">
+              Delete
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 15, 20]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</mat-card>

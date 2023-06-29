@@ -9,8 +9,7 @@ import { ProductSellers } from '../_Models/ProductSellers';
 export class ProductService {
   constructor(private http: HttpClient) {}
 
-  //dbUrl: string = 'https://localhost:44364/api/Product/';
-  dbUrl: string = 'https://localhost:7239/api/Product/';
+  dbUrl: string = 'https://localhost:44364/api/Product/';
 
   getAllProducts() {
     return this.http.get<Product[]>(this.dbUrl);
@@ -31,12 +30,12 @@ export class ProductService {
     return this.http.delete(this.dbUrl + id);
   }
 
-  addProductSeller(productSeller: ProductSellers) {
-    return this.http.post<ProductSellers>(
-      `https://localhost:7239/api/productSeller`,
-      productSeller
-    );
-  }
+  // addProductSeller(productSeller: ProductSellers) {
+  //   return this.http.post<ProductSellers>(
+  //     `https://localhost:7239/api/productSeller`,
+  //     productSeller
+  //   );
+  // }
 
   uploadImages(productId: number, color: string, files: FileList) {
     const formData = new FormData();

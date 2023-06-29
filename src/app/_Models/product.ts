@@ -14,6 +14,7 @@ export interface Product {
   AvailableQuantity: number;
   price: number;
   sellerId: number;
-  reviewsCount?: number,
-    reviewsAverage?:number
+  defaultImage?:string;
+  reviewsCount?: number;
+  reviewsAverage?: number;
 }

@@ -34,7 +34,6 @@ export class ProductDetailsComponent {
   prices: ProductSellers[] = [];
   sellerId: number = 0;
   price: number;
-
   shipper!: Shipper;
   estimatedDeliveryDate!: any;
 
@@ -52,6 +51,7 @@ export class ProductDetailsComponent {
     memoryStorageCapacity: '',
     price: 0,
     sellerId: 1,
+    defaultImage: null,
     code: '',
     AvailableQuantity: 1,
   };
@@ -79,6 +79,7 @@ export class ProductDetailsComponent {
       this.productService.getProductById(this.productId).subscribe((data) => {
         this.product = data;
         console.log(this.product);
+        this.defaultImage = 'data:image/jpeg;base64,' + data.defaultImage;
         this.shipperService
           .getShipperById(this.product.shipperId)
           .subscribe((data) => {
