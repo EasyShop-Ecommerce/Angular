@@ -126,13 +126,15 @@ export class AddProductComponent {
   onCategoryChange(event: any): void {
     const categoryId = event.target.value;
     const selectedCategory = this.categories.find(
-      (category) => category.id === categoryId
+      (category) => category.id == categoryId
     );
+    console.log(categoryId);
+    console.log(selectedCategory);
 
     if (selectedCategory) {
       this.selectedCategoryName = selectedCategory.categoryName;
     } else {
-      this.selectedCategoryName = ''; // or any default value if needed
+      this.selectedCategoryName = '';
     }
     console.log(this.selectedCategoryName);
     if (categoryId) {
