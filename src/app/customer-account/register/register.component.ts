@@ -69,9 +69,9 @@ onSubmit() {
   if (this.registrationForm.valid) {
     const formData = this.registrationForm.value;
     const address: Address = {
-      Street: formData.street,
-      City: formData.city,
-      Government: formData.government
+      street: formData.street,
+      city: formData.city,
+      government: formData.government
     }
 
     this.customerService.register(this.registrationForm.value).subscribe(
