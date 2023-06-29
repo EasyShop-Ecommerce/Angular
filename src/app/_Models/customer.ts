@@ -21,5 +21,8 @@ export class Customer implements User {
     this.email=email
     this.phone=phone
     this.password=password
+    this.street=street
+    this.city=city
+    this.government=government
   }
 }
