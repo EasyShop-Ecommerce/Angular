@@ -9,8 +9,8 @@ import { ProductSellers } from '../_Models/ProductSellers';
 export class ProductService {
   constructor(private http: HttpClient) {}
 
-  dbUrl: string = 'https://localhost:44364/api/Product/';
-  //dbUrl: string = 'https://localhost:7239/api/Product/';
+  //dbUrl: string = 'https://localhost:44364/api/Product/';
+  dbUrl: string = 'https://localhost:7239/api/Product/';
 
   getAllProducts() {
     return this.http.get<Product[]>(this.dbUrl);
