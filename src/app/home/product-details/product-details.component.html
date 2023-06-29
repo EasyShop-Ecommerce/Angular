@@ -7,12 +7,13 @@
     <div class="right-container">
       <h2>{{ product.title }}</h2>
       <p *ngIf="product.description">Description: {{ product.description }}</p>
+      <p>Price: ${{product.price}}</p>
 
-      <ng-container *ngFor="let price of prices">
+      <!-- <ng-container *ngFor="let price of prices">
         <ng-container *ngIf="product.id === price.productId">
           <p>Price: ${{ price.price }}</p>
         </ng-container>
-      </ng-container>
+      </ng-container> -->
 
       <p *ngIf="product.brandName">BrandName: {{ product.brandName }}</p>
       <p *ngIf="product.hardDiskSize">
@@ -25,7 +26,9 @@
       <p *ngIf="product.operatingSystem">
         OperatingSystem: {{ product.operatingSystem }}
       </p>
-
+      <rating style="display: inline-block;" [(ngModel)]="product.reviewsAverage"></rating>
+      <span style="display: inline-block; margin-left: 10px;"> {{ product.reviewsAverage }}</span>
+      <p> Reviews Count: {{product.reviewsCount}}</p>
       <button class="btn" (click)="addToCart(product)">Add To Cart</button>
       <button class="btn" (click)="buyNow(product)" routerLink="/paymentMethod/{{ product.id }}">
         Buy Now
@@ -33,7 +36,7 @@
     </div>
     <div class="deliverDetails">
       <img class="Delivery" src="../../../assets/Images/fast-delivery.png" />
-      <p>Shipping Price: ${{ shipper.pricePerKm }}</p>
+       <p>Shipping Price: ${{ price }}</p> 
       <p>Delivery On: {{ estimatedDeliveryDate }}</p>
     </div>
   </div>
@@ -97,25 +100,13 @@
       <div class="product-card" *ngFor="let product of randomProducts">
         <div class="card-container">
           <div class="row">
-            <!-- <img
-              class="card-img-top"
-              [src]="product.image"
-              [alt]="product."
-            /> -->
-            <div class="card-body">
-              <h6 class="card-title">{{ product.title }}</h6>
-              <h6 class="card-title" style="display: none">
-                {{ product.id }}
-              </h6>
-              <h6 class="card-title">{{ product.brandName }}</h6>
+            <h6 class="card-title">{{ product.title }}</h6>
+            <h6 class="card-title">BrandName: {{ product.brandName }}</h6>
+            <h5 class="card-title" style="display: none">{{ product.id }}</h5>
+            <h6 class="card-title">Price: ${{ product.price }}</h6>
+            <rating [(ngModel)]="product.reviewsAverage"></rating>
 
-              <ng-container *ngFor="let price of prices">
-                <ng-container *ngIf="product.id === price.productId">
-                  <h6>Price: ${{ price.price }}</h6>
-                </ng-container>
-              </ng-container>
-
-              <button class="btn" (click)="goToProductDetails(product.id)">
+              <button class="btn random" (click)="goToProductDetails(product.id)">
                 Details
               </button>
             </div>
@@ -124,4 +115,4 @@
       </div>
     </div>
   </div>
-</div>
+

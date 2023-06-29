@@ -32,7 +32,8 @@ export class ProductDetailsComponent {
   reviews: Review[] = [];
   productreviews: Review[] = [];
   prices: ProductSellers[] = [];
-  sellerId:number=0
+  sellerId: number = 0;
+  price: number;
 
   shipper!: Shipper;
   estimatedDeliveryDate!: any;
@@ -49,12 +50,10 @@ export class ProductDetailsComponent {
     hardDiskSize: '',
     material: '',
     memoryStorageCapacity: '',
-    price:0,
-    sellerId:1,
-    code:'',
-    AvailableQuantity:1
-
-  
+    price: 0,
+    sellerId: 1,
+    code: '',
+    AvailableQuantity: 1,
   };
 
   newReview!: Review;
@@ -66,21 +65,28 @@ export class ProductDetailsComponent {
     private reviewService: ReviewService,
     private customerService: CustomerService,
     private cartService: CartService,
-    private productSellerService: ProductSellersService,
-    private router:  Router,
-    private  shipperService: ShipperService
+    private router: Router,
+    private shipperService: ShipperService
   ) {}
 
   ngOnInit() {
+    /// the product Id
     this.route.params.subscribe((params) => {
       this.productId = +params['id']; // Convert the route parameter to a number
       console.log(this.productId);
-   
-    //the product u opend
-    this.productService.getProductById(this.productId).subscribe((data) => {
-      this.product = data;
-      console.log(this.product);
-    }); })
+
+      //the product u opend + shipperdata
+      this.productService.getProductById(this.productId).subscribe((data) => {
+        this.product = data;
+        console.log(this.product);
+        this.shipperService
+          .getShipperById(this.product.shipperId)
+          .subscribe((data) => {
+            this.price = data.pricePerKm;
+            this.calculateEstimatedDeliveryDate(data.daysForShipment);
+          });
+      });
+    });
     // All reviews
     this.reviewService.getAllReviews().subscribe((data) => {
       this.reviews = data;
@@ -109,19 +115,10 @@ export class ProductDetailsComponent {
     this.productService.getAllProducts().subscribe((data) => {
       this.products = data;
 
-      this.productSellerService.getAllProductSeller().subscribe((data) => {
-        this.prices = data;
-      });
-
       //randomProducts
       this.randomProducts = this.getRandomProducts(3);
       console.log(this.randomProducts);
     });
-
-this.productSellerService.getAllProductSeller().subscribe(data=>{
-  //this.sellerId=data.filter(e=>e.productId == this.product.id)
-})
-
 
     this.productreviews = this.productreviews.map((review) => ({
       ...review,
@@ -145,7 +142,7 @@ this.productSellerService.getAllProductSeller().subscribe(data=>{
     this.editedReview.isEditable = false;
     console.log(this.editedReview);
 
-    this.reviewService.updateReview(this.productId, 1, review).subscribe(
+    this.reviewService.updateReview(this.productId, 2, review).subscribe(
       () => {
         console.log('Review saved successfully');
       },
@@ -246,21 +243,21 @@ this.productSellerService.getAllProductSeller().subscribe(data=>{
 
     return `${day}/${month}/${year}`;
   }
-  buyNow(product:Product){
+  buyNow(product: Product) {
     localStorage.setItem('selectedProduct', JSON.stringify(product));
-    localStorage.setItem('Shipdate', JSON.stringify(this.estimatedDeliveryDate));
+    localStorage.setItem(
+      'Shipdate',
+      JSON.stringify(this.estimatedDeliveryDate)
+    );
   }
 
   // id: number;
   // totalPrice: number;
- 
- 
- 
+
   // paymentMethodId: number;
   // sellerId: number;
-  
- 
 
-
+  hasValue(attribute: any): boolean {
+    return attribute && attribute.trim().length > 0;
   }
-
+}

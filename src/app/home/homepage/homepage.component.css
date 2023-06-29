@@ -42,5 +42,13 @@
   .card-body{
     margin-top: -2;
   }
+  rating {
+    color: rgb(228, 98, 12); /* Set the border color to black */
+    font-size: 25px;
+    display: block;
+  }
+  h6{
+    font-size: 14px;
+  }
   
   

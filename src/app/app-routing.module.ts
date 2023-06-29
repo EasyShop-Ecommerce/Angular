@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes, Scroll } from '@angular/router';
 import { HomeModule } from './home/home.module';
 import { HomepageComponent } from './home/homepage/homepage.component';
 import { PagesModule } from './pages/pages.module';
@@ -8,43 +8,38 @@ import { CreditcardComponent } from './order/creditcard/creditcard.component';
 import { ProductDetailsComponent } from './home/product-details/product-details.component';
 import { SubmitOrderComponent } from './order/submit-order/submit-order.component';
 
+const scrollOptions: ExtraOptions = {
+  scrollPositionRestoration: 'enabled',
+  scrollOffset: [0, 64],
+};
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./home/home.module').then(
-        (m) => m.HomeModule
-      ),
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   { path: 'productDetails/:id', component: ProductDetailsComponent },
-  {path:"paymentMethod/:id",component:PaymentMethodsComponent},
-  {path:"creditCard",component:CreditcardComponent},
-  {path:"submitOrder",component:SubmitOrderComponent},
+  { path: 'paymentMethod/:id', component: PaymentMethodsComponent },
+  { path: 'creditCard', component: CreditcardComponent },
+  { path: 'submitOrder', component: SubmitOrderComponent },
   {
     path: 'pages',
     loadChildren: () =>
-      import('./pages/pages.module').then(
-        (m) => m.PagesModule
-      ),
+      import('./pages/pages.module').then((m) => m.PagesModule),
   },
   {
     path: 'order',
     loadChildren: () =>
-      import('./order/order.module').then(
-        (m) => m.OrderModule
-      ),
+      import('./order/order.module').then((m) => m.OrderModule),
   },
   {
     path: 'product',
     loadChildren: () =>
-      import('./product/product.module').then(
-        (m) => m.ProductModule
-      ),
+      import('./product/product.module').then((m) => m.ProductModule),
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, scrollOptions)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
