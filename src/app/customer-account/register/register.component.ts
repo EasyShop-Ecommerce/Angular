@@ -9,77 +9,93 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-registrationForm!: FormGroup;
-submitted = false; 
-customer!:Customer
+  registrationForm!: FormGroup;
+  submitted = false;
+  customer!: Customer;
 
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private customerService: CustomerAccountService,
+    private router: Router
+  ) {}
 
-constructor(private formBuilder: FormBuilder, private http: HttpClient,private customerService:CustomerAccountService,private router:Router) {}
+  ngOnInit() {
+    this.registrationForm = this.formBuilder.group({
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.pattern('^[a-zA-Z]+$'),
+        ],
+      ],
+      phone: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^(015|012|011|010)[0-9]{8}$'),
+        ],
+      ],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      street: ['', Validators.required],
+      city: ['', Validators.required],
+      government: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+    });
+  }
 
-ngOnInit() {
-  this.registrationForm = this.formBuilder.group({
-    name: ['', [Validators.required,Validators.minLength(3), Validators.pattern('^[a-zA-Z]+$')]],
-    phone: ['',[ Validators.required,Validators.pattern('^(015|012|011|010)[0-9]{8}$')]],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
-    street: ['', Validators.required],
-    city: ['', Validators.required],
-    government: ['', Validators.required],
-    confirmPassword: ['', Validators.required]
-  });
-}
+  get nameControl() {
+    return this.registrationForm.get('name');
+  }
 
-get nameControl() {
-  return this.registrationForm.get('name');
-}
+  get phoneControl() {
+    return this.registrationForm.get('phone');
+  }
 
-get phoneControl() {
-  return this.registrationForm.get('phone');
-}
+  get emailControl() {
+    return this.registrationForm.get('email');
+  }
 
-get emailControl() {
-  return this.registrationForm.get('email');
-}
+  get passwordControl() {
+    return this.registrationForm.get('password');
+  }
 
-get passwordControl() {
-  return this.registrationForm.get('password');
-}
+  get streetControl() {
+    return this.registrationForm.get('street');
+  }
 
-get streetControl() {
-  return this.registrationForm.get('street');
-}
+  get cityControl() {
+    return this.registrationForm.get('city');
+  }
 
-get cityControl() {
-  return this.registrationForm.get('city');
-}
+  get governmentControl() {
+    return this.registrationForm.get('government');
+  }
 
-get governmentControl() {
-  return this.registrationForm.get('government');
-}
+  get confirmPasswordControl() {
+    return this.registrationForm.get('confirmPassword');
+  }
 
-get confirmPasswordControl() {
-  return this.registrationForm.get('confirmPassword');
-}
+  onSubmit() {
+    this.submitted = true; // Set submitted to true
+    // if (this.registrationForm.valid) {
+    //   const formData = this.registrationForm.value;
 
-onSubmit() {
-  this.submitted = true; // Set submitted to true
-  if (this.registrationForm.valid) {
-    const formData = this.registrationForm.value;
-    
-      this.customer.street= formData.street ,
-      this.customer.city= formData.city,
-      this.customer.government= formData.government
-    }
+    //   (this.customer.street = formData.street),
+    //     (this.customer.city = formData.city),
+    //     (this.customer.government = formData.government);
+    // }
 
-    this.customerService.register(this.registrationForm.value).subscribe(
-      {
-        next:user=>this.router.navigateByUrl("/")
-      })
-  
-      console.log(this.customer);
+    this.customerService.register(this.registrationForm.value).subscribe({
+      next: (user) => this.router.navigateByUrl(''),
+    });
+
+    console.log(this.customer);
     // Make an HTTP POST request to the backend API endpoint
     // this.http.post('/api/customers', this.customer)
     //   .subscribe(
@@ -94,5 +110,3 @@ onSubmit() {
     //   );
   }
 }
-
-

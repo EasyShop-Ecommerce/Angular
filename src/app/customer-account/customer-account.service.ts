@@ -16,9 +16,13 @@ export class CustomerAccountService {
 
   register(values: any) {
     return this.http
-      .post<Customer>('https://localhost:44364/CustomerAccount/', values)
+      .post<Customer>(
+        'https://localhost:44364/CustomerAccount/register',
+        values
+      )
       .pipe(
         map((customer) => {
+          console.log(customer);
           this.currentUserSource.next(customer);
           return customer;
         })
@@ -32,6 +36,7 @@ export class CustomerAccountService {
       .get<Login>('https://localhost:44364/CustomerAccount/user', { headers })
       .pipe(
         map((user) => {
+          console.log(user);
           localStorage.setItem('token', user.token);
           this.currentUserSource.next(user);
         })
@@ -43,6 +48,7 @@ export class CustomerAccountService {
       .post<Login>('https://localhost:44364/CustomerAccount/login', values)
       .pipe(
         map((customer) => {
+          console.log(customer);
           localStorage.setItem('token', customer.token);
           this.currentUserSource.next(customer);
           return customer;
