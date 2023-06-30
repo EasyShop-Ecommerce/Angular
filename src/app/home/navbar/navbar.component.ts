@@ -39,7 +39,8 @@ export class NavbarComponent {
     private subcategoryService: SubSubcategoryService,
     private bycatservice: SearchbycatService,
     public customerService: CustomerAccountService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
@@ -95,5 +96,15 @@ export class NavbarComponent {
     console.log(categoryId);
   }
 
-  order() {}
+  order() {
+    if (localStorage.getItem('customerId')) {
+      console.log(localStorage.getItem('customerId'));
+      this.loggedInCustomer = JSON.parse(localStorage.getItem('customerId'));
+      console.log(this.loggedInCustomer);
+
+      this.route.navigate(['/userOrders/' + this.loggedInCustomer]);
+    } else {
+      this.route.navigate(['CustomerAccount/login']);
+    }
+  }
 }
