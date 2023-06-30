@@ -1,5 +1,9 @@
 <nav class="navbar navbar-dark bg-light firstnav">
-  <img class="logo" src="../../assets/Images/images-removebg-preview.png" />
+  <img
+    class="logo"
+    src="../../assets/Images/images-removebg-preview.png"
+    routerLink=""
+  />
 
   <button mat-button [matMenuTriggerFor]="menu" class="menu">
     All
@@ -58,7 +62,6 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="collapse navbar-collapse secondnav" id="navbarSupportedContent">
- 
     <li class="nav-item active" (click)="toggleSidebar()">
       <button class="sidebar-toggle" (click)="toggleSidebar()">
         <span (click)="toggleSidebar()" *ngIf="!isSidebarOpen"
@@ -67,26 +70,12 @@
       </button>
     </li>
 
-    <ul class="navbar-nav mr-auto" *ngFor="let cat of subcategories">
+    <ul class="navbar-nav mr-auto" *ngFor="let cat of showcat">
       <li class="nav-item active">
         <a class="nav-link" (click)="onCategoryChange(cat.id)"
           >{{ cat.subCategoryName }}
         </a>
       </li>
-
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="#">Electronic</a>
-      </li>
-
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Fashion </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Mobile Phones</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Furniture</a>
-      </li> -->
     </ul>
   </div>
   <button class="sell" routerLink="seller">
@@ -103,49 +92,41 @@
   <h2 class="hello">Hello</h2>
   <ul class="navcontent">
     <li (click)="toggleDisplayDiv()">
-      Mobile,tablet and Accsoceries<img
-        class="arrow"
-        src="../../assets/Images/right-arrow.png"
-      />
+      Clothing<img class="arrow" src="../../assets/Images/right-arrow.png" />
     </li>
-    <ul [hidden]="isShowDiv" class="sub">
-      <li>Mobile Phone</li>
-      <li>tablets</li>
-      <li>Covers</li>
-    </ul>
+    <span *ngFor="let cat of subcategories">
+      <ul [hidden]="isShowDiv" class="sub" *ngIf="cat.categoryId == 2">
+        <li (click)="onCategoryChange(cat.id)">{{ cat.subCategoryName }}</li>
+      </ul>
+    </span>
     <li (click)="togglefashion()">
-      Fashion<img class="arrow" src="../../assets/Images/right-arrow.png" />
+      Electronics<img class="arrow" src="../../assets/Images/right-arrow.png" />
     </li>
-    <ul [hidden]="isfashion" class="sub">
-      <li>men</li>
-      <li>Woman</li>
-      <li>Kids</li>
-    </ul>
+    <span *ngFor="let cat of subcategories">
+      <ul [hidden]="isfashion" class="sub" *ngIf="cat.categoryId == 1">
+        <li (click)="onCategoryChange(cat.id)">{{ cat.subCategoryName }}</li>
+      </ul>
+    </span>
     <li (click)="togglehome()">
-      Furniture,Home<img
-        class="arrow"
-        src="../../assets/Images/right-arrow.png"
-      />
+      Grocery<img class="arrow" src="../../assets/Images/right-arrow.png" />
     </li>
-    <ul [hidden]="ishome" class="sub">
-      <li>carpets</li>
-      <li>curtains</li>
-      <li>Bed</li>
-      <li>Office</li>
-      <li>Chair</li>
-      <li>Sofa</li>
-    </ul>
+    <span *ngFor="let cat of subcategories">
+      <ul [hidden]="ishome" class="sub" *ngIf="cat.categoryId == 4">
+        <li (click)="onCategoryChange(cat.id)">{{ cat.subCategoryName }}</li>
+      </ul>
+    </span>
     <li (click)="togglesup()">
-      Supermarket<img class="arrow" src="../../assets/Images/right-arrow.png" />
+      Perfumes<img class="arrow" src="../../assets/Images/right-arrow.png" />
     </li>
-    <ul [hidden]="issub" class="sub">
-      <li>Pasta,rice</li>
-      <li>Vegtables,Fruit</li>
-      <li>Coffee,Tea,Beverage</li>
-    </ul>
+    <span *ngFor="let cat of subcategories">
+      <ul [hidden]="issub" class="sub" *ngIf="cat.categoryId == 3">
+        <li (click)="onCategoryChange(cat.id)">{{ cat.subCategoryName }}</li>
+      </ul>
+    </span>
     <li>Help</li>
     <li>Sing in</li>
   </ul>
+
   <button class="close-button" *ngIf="isSidebarOpen" (click)="toggleSidebar()">
     <img class="close" src="../../assets/Images/close.png" />
   </button>
