@@ -4,10 +4,11 @@
 }
 
 .user-info {
-  margin: 40px;
+  margin: 50px;
   border: 2px solid chocolate;
   padding: 7px;
   font-family:serif;
+  font-size: 20px;
 }
 
 .user-address,
@@ -16,9 +17,11 @@
 }
 
 .Change {
-  margin-left: 10px;
+  /* margin-left: 10px; */
   background-color: chocolate;
-  margin-top: 10px;
+  margin-top: -40px; 
+  right: 50px;
+  position: absolute;
 }
 
 .payment-methods {
@@ -34,5 +37,10 @@
   display: flex;
   border: none;
   background-color: white;
+}
+
+.info{
+  background-color: chocolate;
+  margin-left: 5px;
 }
 

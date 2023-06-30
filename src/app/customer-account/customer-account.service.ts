@@ -16,10 +16,7 @@ export class CustomerAccountService {
 
   register(values: any) {
     return this.http
-      .post<Customer>(
-        'https://localhost:44364/CustomerAccount/register',
-        values
-      )
+      .post<Customer>('https://localhost:44364/CustomerAccount/', values)
       .pipe(
         map((customer) => {
           this.currentUserSource.next(customer);
