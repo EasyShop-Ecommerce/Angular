@@ -6,6 +6,7 @@ export interface User {
 
 export class Login implements User {
   customerId: number;
+  sellerId: number;
   email: string;
   password: string;
   token: string;

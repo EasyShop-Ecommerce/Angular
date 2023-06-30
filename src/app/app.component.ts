@@ -9,11 +9,14 @@ import { CustomerAccountService } from './customer-account/customer-account.serv
 })
 export class AppComponent {
   title = 'app';
-  constructor(private router: Router,private customerService:CustomerAccountService) {}
+  constructor(
+    private router: Router,
+    private customerService: CustomerAccountService
+  ) {}
   shouldDisplayNavbarAndFooter(): boolean {
     // Get the current route path
     const currentRoute = this.router.url;
-  
+
     // Specify the route paths where the navbar and footer should not be displayed
     const disallowedRoutes = [
       '/signIn',
@@ -21,16 +24,17 @@ export class AppComponent {
       '/seller',
       '/creditCard/:id',
       '/CustomerAccount/login',
-      '/CustomerAccount/register'
+      '/CustomerAccount/register',
+      '/seller/add-product',
+      '/sellerDashboard'
     ];
-  
+
     // Check if the current route is in the disallowed routes
     return !disallowedRoutes.includes(currentRoute);
   }
-  
-  loadCurrentUser()
-  {
-    const token=localStorage.getItem('token')
-    if(token) this.customerService.loadCurrentUser(token).subscribe()
+
+  loadCurrentUser() {
+    const token = localStorage.getItem('token');
+    if (token) this.customerService.loadCurrentUser(token).subscribe();
   }
 }

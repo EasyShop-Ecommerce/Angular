@@ -15,10 +15,13 @@ export class UserOrdersComponent {
   userOrders: Order[] = [];
   customerId: 2;
   statusName: string;
-  canCancell:boolean=false
-  product:Product[]
+  canCancell: boolean = false;
+  product: Product[];
 
-  constructor(private orderService: OrderService, private productService:ProductService) {}
+  constructor(
+    private orderService: OrderService,
+    private productService: ProductService
+  ) {}
 
   ngOnInit(): void {
     // Fetch user orders from the service
@@ -32,9 +35,9 @@ export class UserOrdersComponent {
       );
       console.log(this.userOrders);
     });
-    this.productService.getAllProducts().subscribe(data=>{
-      this.product=data
-    })
+    this.productService.getAllProducts().subscribe((data) => {
+      this.product = data;
+    });
   }
 
   getStatusName(statusId: number): string {
@@ -88,7 +91,7 @@ export class UserOrdersComponent {
         return '';
     }
   }
-  cancel(order:Order) {
+  cancel(order: Order) {
     if (order.statusId == 1) {
       Swal.fire({
         icon: 'success',
@@ -96,13 +99,12 @@ export class UserOrdersComponent {
         text: 'the order Cancelled',
         confirmButtonText: 'Okay',
       });
-      order.canCancell=true
-      order.statusId=4
-      this.orderService.updateOrder(order.id,order).subscribe(data=>{
-        console.log(data)
-      })
-    }
-    else{
+      order.canCancell = true;
+      order.statusId = 4;
+      this.orderService.updateOrder(order.id, order).subscribe((data) => {
+        console.log(data);
+      });
+    } else {
       Swal.fire({
         icon: 'error',
         title: 'Alert',
