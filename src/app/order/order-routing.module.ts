@@ -6,7 +6,7 @@ import { UserOrdersComponent } from './user-orders/user-orders.component';
 
 const routes: Routes = [
   { path: 'paymentMethod/:id', component: PaymentMethodChangeEvent },
-  { path: 'creditCard', component: CreditcardComponent },
+  { path: 'creditCard/:id', component: CreditcardComponent },
   { path: 'submitOrder/:id', component: SubmitOrderComponent },
   { path: 'userOrders', component: UserOrdersComponent },
 ];

@@ -18,7 +18,7 @@ export class CustomerAccountService {
 
   register(values:any)
   {
-    return this.http.post<Customer>('https://localhost:7239/CustomerAccount/register',values).pipe(
+    return this.http.post<Customer>('https://localhost:44364/CustomerAccount/',values).pipe(
       map(customer=>{
         this.currentUserSource.next(customer);
         return customer

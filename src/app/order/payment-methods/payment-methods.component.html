@@ -17,10 +17,10 @@
       <label for="phone">Mobile Number:</label>
       <input class="input" id="phone" type="text" formControlName="phone" />
     </div>
-    <button class="btn Change" type="button" (click)="toggleEditState()">
+    <button class="btn info" type="button" (click)="toggleEditState()">
       Change
     </button>
-    <button class="btn Change" type="submit" *ngIf="isEditable">Save</button>
+    <button class="btn info" type="submit" *ngIf="isEditable">Save</button>
   </form>
 </div>
 
@@ -33,7 +33,7 @@
       [value]="method.method"
       [(ngModel)]="selectedMethod"
     />
-    <label>{{ method.method }}</label>
+    <label style="margin-left: 5px;">{{ method.method }}</label>
   </div>
 </div>
 <button class="btn Change" (click)="submitPaymentMethod()">Submit</button>

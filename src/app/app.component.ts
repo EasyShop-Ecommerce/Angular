@@ -19,7 +19,7 @@ export class AppComponent {
       '/signIn',
       '/signUp',
       '/seller',
-      '/creditCard',
+      '/creditCard/:id',
       '/CustomerAccount/login',
       '/CustomerAccount/register'
     ];

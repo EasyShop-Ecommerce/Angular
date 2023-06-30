@@ -121,7 +121,7 @@ export class PaymentMethodsComponent {
 
   submitPaymentMethod(): void {
     if (this.selectedMethod == 'credit Card') {
-      this.router.navigate(['/creditCard/']);
+      this.router.navigate(['/creditCard/1']);
     } else {
       this.router.navigate(["/submitOrder/ 2"]);
     }
