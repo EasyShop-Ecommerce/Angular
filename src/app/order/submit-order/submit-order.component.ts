@@ -4,6 +4,7 @@ import { Product } from 'src/app/_Models/product';
 import { OrderService } from 'src/app/_services/order.service';
 import { ShipperService } from 'src/app/_services/shipper.service';
 import { Order } from '../../_Models/order';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-submit-order',
@@ -26,7 +27,8 @@ export class SubmitOrderComponent {
 
   constructor(
     private shipperService: ShipperService,
-    private orderservice: OrderService
+    private orderservice: OrderService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -102,6 +104,7 @@ export class SubmitOrderComponent {
     console.log(this.neworder);
     this.orderservice.addOrder(this.neworder).subscribe((data) => {
       console.log(data);
+      this.router.navigate(["/userOrders/"+ this.neworder.customerId]);
     });
   }
 }

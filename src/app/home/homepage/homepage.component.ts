@@ -24,7 +24,6 @@ export class HomepageComponent {
   constructor(
     private cartSrvices: CartService,
     private productservice: ProductService,
-    private productSellerService: ProductSellersService
   ) {
     this.onPageChange({
       pageIndex: 0,

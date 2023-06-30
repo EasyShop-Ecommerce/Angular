@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'paymentMethod/:id', component: PaymentMethodsComponent },
   { path: 'creditCard/:id', component: CreditcardComponent },
   { path: 'submitOrder/:id', component: SubmitOrderComponent },
-  { path: 'userOrders', component: UserOrdersComponent },
+  { path: 'userOrders/:id', component: UserOrdersComponent },
 
   {
     path: 'pages',
