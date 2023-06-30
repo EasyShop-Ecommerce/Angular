@@ -1,29 +1,57 @@
 <div class="login-container">
-    <img  src="../../assets/Images/Reset password-pana.png" alt="Image" class="login-image">
-    <form (ngSubmit)="onSubmit()"  class="login-form" [formGroup]="loginForm">
-      <h2>Login</h2>
-      <div>
-        <label for="Email">Email</label>
-        <input type="text"
-        [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
-         formControlName="email" id="Email" name="Email"  required>
-         
-         <div *ngIf="loginForm.get('email')?.errors?.['required']" class="invalid-feedback">Email is required</div>
+  <img
+    src="../../assets/Images/Reset password-pana.png"
+    alt="Image"
+    class="login-image"
+  />
+  <form (ngSubmit)="onSubmit()" class="login-form" [formGroup]="loginForm">
+    <h2>Login</h2>
+    <div>
+      <label for="Email">Email</label>
+      <input
+        type="text"
+        [class.is-invalid]="
+          loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+        "
+        formControlName="email"
+        id="Email"
+        name="Email"
+        required
+      />
+
+      <div
+        *ngIf="loginForm.get('email')?.errors?.['required']"
+        class="invalid-feedback"
+      >
+        Email is required
       </div>
-      <div>
-        <label for="password"> Password </label>
-        <input type="password" 
-        [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
-        formControlName="password" id="password" name="password" required>
-        
-        <div *ngIf="loginForm.get('password')?.errors?.['required']" class="invalid-feedback">Password is required</div>
+    </div>
+    <div>
+      <label for="password"> Password </label>
+      <input
+        type="password"
+        [class.is-invalid]="
+          loginForm.get('password')?.invalid &&
+          loginForm.get('password')?.touched
+        "
+        formControlName="password"
+        id="password"
+        name="password"
+        required
+      />
+
+      <div
+        *ngIf="loginForm.get('password')?.errors?.['required']"
+        class="invalid-feedback"
+      >
+        Password is required
       </div>
-      <span class="btns">
-      <button [disabled]="loginForm.invalid" class="btn" type="submit">Login</button>
+    </div>
+    <span class="btns">
+      <button [disabled]="loginForm.invalid" class="btn" type="submit">
+        Login
+      </button>
       <button class="btn" type="submit" routerLink="">Cancel</button>
-      </span>
-    </form>
-
-  </div>
-  
-
+    </span>
+  </form>
+</div>

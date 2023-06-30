@@ -66,6 +66,7 @@ export class AddProductComponent {
       hardDiskSize: [''],
       material: [''],
       color: [''],
+      sellerId: [1],
     });
   }
 
