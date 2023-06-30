@@ -33,6 +33,8 @@ export class SellerAccountService {
         map((seller) => {
           console.log(seller);
           localStorage.setItem('Seller token', seller.token);
+          localStorage.setItem('SellerId', seller.sellerId?.toString());
+
           this.currentSellerSource.next(seller);
           return seller;
         })
@@ -41,6 +43,7 @@ export class SellerAccountService {
 
   logout() {
     localStorage.removeItem('Seller token');
+    localStorage.removeItem('SellerId');
     this.currentSellerSource.next(null);
     this.router.navigateByUrl('SellerAccount/login');
   }

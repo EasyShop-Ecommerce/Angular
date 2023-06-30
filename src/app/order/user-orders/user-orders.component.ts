@@ -16,32 +16,35 @@ export class UserOrdersComponent {
   userOrders: Order[] = [];
   customerId: number;
   statusName: string;
-  canCancell:boolean=false
-  product:Product[]
+  canCancell: boolean = false;
+  product: Product[];
 
-  constructor(private orderService: OrderService,
-     private productService:ProductService,
-     private route:ActivatedRoute) {}
+  constructor(
+    private orderService: OrderService,
+    private productService: ProductService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     // Fetch user orders from the service
 
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.customerId = +params['id']; // Convert the route parameter to a number
-      console.log(this.customerId);})
+      console.log(this.customerId);
+    });
 
     this.orderService.getAllOrders().subscribe((data) => {
       this.orders = data;
       console.log(this.orders);
-      
+
       this.userOrders = this.orders.filter(
         (e) => e.customerId == this.customerId
       );
       console.log(this.userOrders);
     });
-    this.productService.getAllProducts().subscribe(data=>{
-      this.product=data
-    })
+    this.productService.getAllProducts().subscribe((data) => {
+      this.product = data;
+    });
   }
 
   getStatusName(statusId: number): string {
@@ -95,7 +98,7 @@ export class UserOrdersComponent {
         return '';
     }
   }
-  cancel(order:Order) {
+  cancel(order: Order) {
     if (order.statusId == 1) {
       Swal.fire({
         icon: 'success',
@@ -103,13 +106,12 @@ export class UserOrdersComponent {
         text: 'the order Cancelled',
         confirmButtonText: 'Okay',
       });
-      order.canCancell=true
-      order.statusId=4
-      this.orderService.updateOrder(order.id,order).subscribe(data=>{
-        console.log(data)
-      })
-    }
-    else{
+      order.canCancell = true;
+      order.statusId = 4;
+      this.orderService.updateOrder(order.id, order).subscribe((data) => {
+        console.log(data);
+      });
+    } else {
       Swal.fire({
         icon: 'error',
         title: 'Alert',

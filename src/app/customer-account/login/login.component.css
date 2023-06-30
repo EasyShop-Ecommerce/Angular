@@ -18,13 +18,12 @@
 
 .login-image {
   margin-left: -100px;
-  width: 400px; 
-  height: 600px; 
+  width: 400px;
+  height: 600px;
 }
 button {
   background-color: chocolate;
   width: 100px;
-  margin-top: 10px;
   height: 35px;
   font-weight: bold;
   margin-right: 10px;
@@ -32,12 +31,19 @@ button {
 button:hover {
   background-color: green;
 }
-input{
+input {
   position: relative;
   margin-left: 50px;
   margin-top: 5px;
 }
-#password{
+#password {
   margin-left: 20px;
+}
 
+.btn {
+  width: 150px;
+  margin-top: 10px;
+}
+.can {
+  margin-top: 20px;
 }

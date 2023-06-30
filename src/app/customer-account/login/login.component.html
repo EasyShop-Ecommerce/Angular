@@ -48,10 +48,23 @@
       </div>
     </div>
     <span class="btns">
-      <button [disabled]="loginForm.invalid" class="btn" type="submit">
-        Login
+      <button
+        [disabled]="loginForm.invalid"
+        class="btn"
+        type="submit"
+        (click)="submitCustomer()"
+      >
+        Customer Login
       </button>
-      <button class="btn" type="submit" routerLink="">Cancel</button>
+      <button
+        [disabled]="loginForm.invalid"
+        class="btn"
+        type="submit"
+        (click)="submitSeller()"
+      >
+        Seller Login
+      </button>
+      <button class="can" type="submit" routerLink="">Cancel</button>
     </span>
   </form>
 </div>

@@ -1,1 +1,40 @@
-<p>seller-orders works!</p>
+<div>
+  <div
+    *ngFor="let order of sellerOrders"
+    class="order-container"
+    [ngClass]="getStatusClass(order.statusId)"
+  >
+    <div class="order-details">
+      <span style="display: inline-block">
+        <h4>Order</h4>
+        <ng-container *ngFor="let product of product">
+          <ng-container *ngIf="order.productId == product.id">
+            <p>{{ product.title }}</p>
+          </ng-container>
+        </ng-container>
+        <p>Delivery On: {{ order.date }}</p>
+        <p>Quantity: {{ order.qty }}</p>
+        <p>totalPrice: ${{ order.totalPrice }}</p>
+      </span>
+      <img src="../../../assets/Images/package.png" />
+      <!-- Add more order details as needed -->
+      <div *ngIf="!order.canCancell || order.statusId !== 4">
+        <span style="margin-right: 250px">InProgress</span>
+        <span style="margin-right: 130px">InTrasit</span>
+        <span>Shipped</span>
+        <div class="progress-bar" style="display: inline-block">
+          <div
+            class="progress"
+            [style.width]="getProgressBarWidth(order.statusId)"
+          ></div>
+        </div>
+        <button style="display: inline-block" (click)="cancel(order)">
+          cancel
+        </button>
+      </div>
+    </div>
+    <div *ngIf="order.canCancell || order.statusId == 4" class="cancel">
+      the order Cancelled
+    </div>
+  </div>
+</div>

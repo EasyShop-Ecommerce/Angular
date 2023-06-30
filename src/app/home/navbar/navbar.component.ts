@@ -93,7 +93,5 @@ export class NavbarComponent {
     console.log(categoryId);
   }
 
-  order() {
-    
-  }
+  order() {}
 }

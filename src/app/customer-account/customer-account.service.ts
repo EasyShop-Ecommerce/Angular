@@ -60,6 +60,7 @@ export class CustomerAccountService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('customerId');
     this.currentUserSource.next(null);
     this.router.navigateByUrl('CustomerAccount/login');
   }
