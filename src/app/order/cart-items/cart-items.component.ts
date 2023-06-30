@@ -14,15 +14,14 @@ export class CartItemsComponent {
   cartItem: any;
   constructor(
     private cartService: CartService,
-    private productSellerService:ProductSellersService
-    ) {}
+    private productSellerService: ProductSellersService
+  ) {}
   quantityOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  cartItems: cart[] = []; 
-  prices:ProductSellers[]=[]
+  cartItems: cart[] = [];
+  prices: ProductSellers[] = [];
 
   ngOnInit(): void {
     this.cartItemCount = this.cartService.getCartItemCount();
-
 
     this.cartService.cartItemCount$.subscribe((count) => {
       this.cartItemCount = count;
@@ -55,6 +54,4 @@ export class CartItemsComponent {
   removeFromCart(cart: any) {
     this.cartService.removeFromCart(cart);
   }
-
-  
 }

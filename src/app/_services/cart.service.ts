@@ -63,7 +63,7 @@ export class CartService {
   //     (this.cart.price = product.price);
   //   this.cart.sellerId = product.sellerId;
   //   this.cart.shipPrice = this.shipPrice;
-    
+
   //   // (this.cart.Image = product.defaultImage);
 
   //   // Add the new product to the cart items
@@ -76,15 +76,17 @@ export class CartService {
   // }}
   addToCart(product: Product): void {
     this.cartItemCount.next(this.cartItemCount.value + 1);
-  
+
     // Retrieve the cart items from Local Storage
     const cartItemsString = localStorage.getItem('cartItems');
     if (cartItemsString) {
       this.cartItems = JSON.parse(cartItemsString);
     }
-  
+
     // Find the existing product in the cart
-    const existingProduct = this.cartItems.find((item) => item.productId === product.id);
+    const existingProduct = this.cartItems.find(
+      (item) => item.productId === product.id
+    );
     if (existingProduct) {
       existingProduct.Quantity++; // Increase the quantity by one
     } else {
@@ -95,21 +97,22 @@ export class CartService {
         brandName: product.brandName,
         price: product.price,
         sellerId: product.sellerId,
-        shipperId:product.shipperId,
+        shipperId: product.shipperId,
         shipPrice: this.shipPrice,
-        Quantity: 1
+        Quantity: 1,
+        Image: product.defaultImage,
       };
-  
+
       // Add the new cart item to the cart items
       this.cartItems.push(newCartItem);
     }
-  
+
     // Save the updated cart items back to Local Storage
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
-  
+
     console.log(this.cartItems);
   }
-  
+
   removeFromCart(item: cart): void {
     const index = this.cartItems.findIndex(
       (cartItem) => cartItem.productId === item.productId
