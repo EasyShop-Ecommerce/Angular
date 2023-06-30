@@ -30,6 +30,8 @@ export class NavbarComponent {
   try: number = 0;
   cartItemCount = 0;
   loggedInCustomer: number;
+  showcat: Subcategory[];
+
   constructor(
     private cartService: CartService,
     private productSearchService: ProductSearchServiceService,
@@ -47,6 +49,7 @@ export class NavbarComponent {
     this.subcategoryService.getAllSubcategories().subscribe((data) => {
       this.subcategories = data;
       console.log(this.subcategories);
+      this.showcat = this.subcategories.slice(0, 5);
     });
     this.categoryService.getAllCategories().subscribe((data) => {
       this.categories = data;

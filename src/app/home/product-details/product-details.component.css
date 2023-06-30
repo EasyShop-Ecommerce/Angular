@@ -86,3 +86,9 @@ p{
 .random{
   width: 150px;
 }
+.card-img-top{
+  width: 270px;
+  height: 180px;
+  padding: 5px;
+  margin: auto;
+}

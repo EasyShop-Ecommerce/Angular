@@ -100,6 +100,11 @@
       <div class="product-card" *ngFor="let product of randomProducts">
         <div class="card-container">
           <div class="row">
+            <img
+            class="card-img-top"
+            [src]="'data:image/jpeg;base64,' + product.defaultImage"
+            alt="Product Image"
+          />
             <h6 class="card-title">{{ product.title }}</h6>
             <h6 class="card-title">BrandName: {{ product.brandName }}</h6>
             <h5 class="card-title" style="display: none">{{ product.id }}</h5>

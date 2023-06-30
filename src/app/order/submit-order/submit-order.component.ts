@@ -83,7 +83,7 @@ export class SubmitOrderComponent {
         // Sample date string
         const dateObject = new Date(this.date); // Convert string to Date object
 
-        console.log(dateObject); // Output: Sun Jun 18 2023 00:00:00 GMT+0000 (Coordinated Universal Time)
+        console.log(dateObject); // 
 
         this.neworder = {
           productId: this.currentProductId,
