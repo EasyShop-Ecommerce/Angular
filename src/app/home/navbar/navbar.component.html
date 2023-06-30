@@ -6,10 +6,11 @@
     <img class="down" src="../../../assets/Images/down.png" />
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="onCategoryChange(null)">
+    <button class="none" mat-menu-item (click)="onCategoryChange(null)">
       All Categories
     </button>
     <button
+      class="none"
       mat-menu-item
       *ngFor="let cat of subcategories"
       (click)="onCategoryChange(cat.id)"
@@ -57,19 +58,23 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="collapse navbar-collapse secondnav" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active" (click)="toggleSidebar()">
-        <button class="sidebar-toggle" (click)="toggleSidebar()">
-          <span (click)="toggleSidebar()" *ngIf="!isSidebarOpen"
-            ><img class="menu2" src="../../assets/Images/list.png"
-          /></span>
-        </button>
-      </li>
+ 
+    <li class="nav-item active" (click)="toggleSidebar()">
+      <button class="sidebar-toggle" (click)="toggleSidebar()">
+        <span (click)="toggleSidebar()" *ngIf="!isSidebarOpen"
+          ><img class="menu2" src="../../assets/Images/list.png"
+        /></span>
+      </button>
+    </li>
+
+    <ul class="navbar-nav mr-auto" *ngFor="let cat of subcategories">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="">Home </a>
+        <a class="nav-link" (click)="onCategoryChange(cat.id)"
+          >{{ cat.subCategoryName }}
+        </a>
       </li>
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="#">Electronic</a>
       </li>
 
@@ -81,7 +86,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Furniture</a>
-      </li>
+      </li> -->
     </ul>
   </div>
   <button class="sell" routerLink="seller">

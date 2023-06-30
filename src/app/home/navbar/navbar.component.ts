@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Category } from 'src/app/_Models/Category';
 import { Subcategory } from 'src/app/_Models/Subcategory';
 import { CartService } from 'src/app/_services/cart.service';
+import { CategoryService } from 'src/app/_services/category.service';
 import { ProductSearchServiceService } from 'src/app/_services/product-search.service';
 import { SearchbycatService } from 'src/app/_services/searchbycat.service';
 import { SubSubcategoryService } from 'src/app/_services/sub-category.service';
@@ -23,6 +25,7 @@ export class NavbarComponent {
   isSidebarOpen = false;
   isbutton = false;
   subcategories: Subcategory[] = [];
+  categories:Category[]
   selectedCategoryId: number | null = null;
   try: number = 0;
   cartItemCount = 0;
@@ -33,7 +36,8 @@ export class NavbarComponent {
     private router: Router,
     private subcategoryService: SubSubcategoryService,
     private bycatservice: SearchbycatService,
-    public customerService: CustomerAccountService
+    public customerService: CustomerAccountService,
+    private categoryService:CategoryService
   ) {}
 
   ngOnInit(): void {
@@ -44,6 +48,9 @@ export class NavbarComponent {
       this.subcategories = data;
       console.log(this.subcategories);
     });
+    this.categoryService.getAllCategories().subscribe(data=>{
+        this.categories=data
+    })
 
     this.cartItemCount = this.cartService.cartItems.length;
   }
