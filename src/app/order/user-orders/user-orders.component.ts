@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Order } from 'src/app/_Models/order';
 import { Product } from 'src/app/_Models/product';
 import { OrderService } from 'src/app/_services/order.service';
@@ -13,20 +14,26 @@ import Swal from 'sweetalert2';
 export class UserOrdersComponent {
   orders: Order[] = [];
   userOrders: Order[] = [];
-  customerId: 2;
+  customerId: number;
   statusName: string;
   canCancell:boolean=false
   product:Product[]
 
-  constructor(private orderService: OrderService, private productService:ProductService) {}
+  constructor(private orderService: OrderService,
+     private productService:ProductService,
+     private route:ActivatedRoute) {}
 
   ngOnInit(): void {
     // Fetch user orders from the service
 
+    this.route.params.subscribe(params => {
+      this.customerId = +params['id']; // Convert the route parameter to a number
+      console.log(this.customerId);})
+
     this.orderService.getAllOrders().subscribe((data) => {
       this.orders = data;
       console.log(this.orders);
-      this.customerId = 2;
+      
       this.userOrders = this.orders.filter(
         (e) => e.customerId == this.customerId
       );
