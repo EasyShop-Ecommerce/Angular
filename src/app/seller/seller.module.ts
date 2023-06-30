@@ -44,6 +44,6 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule,
     FormsModule,
   ],
-  exports: [SellerDashboardComponent],
+  exports: [SellerDashboardComponent, SellerSidebarComponent],
 })
 export class SellerModule {}

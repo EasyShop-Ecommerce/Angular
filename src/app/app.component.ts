@@ -25,8 +25,10 @@ export class AppComponent {
       '/creditCard/:id',
       '/CustomerAccount/login',
       '/CustomerAccount/register',
-      '/seller/add-product',
-      '/sellerDashboard'
+      '/sellerDashboard/add-product',
+      '/sellerDashboard',
+      '/sellerDashboard/products',
+      '/sellerDashboard/orders',
     ];
 
     // Check if the current route is in the disallowed routes

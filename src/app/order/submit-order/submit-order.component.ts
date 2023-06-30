@@ -28,7 +28,7 @@ export class SubmitOrderComponent {
   constructor(
     private shipperService: ShipperService,
     private orderservice: OrderService,
-    private router:Router
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -104,7 +104,7 @@ export class SubmitOrderComponent {
     console.log(this.neworder);
     this.orderservice.addOrder(this.neworder).subscribe((data) => {
       console.log(data);
-      this.router.navigate(["/userOrders/"+ this.neworder.customerId]);
+      this.router.navigate(['/userOrders/' + this.neworder.customerId]);
     });
   }
 }

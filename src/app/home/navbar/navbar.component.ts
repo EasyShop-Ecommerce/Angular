@@ -25,11 +25,11 @@ export class NavbarComponent {
   isSidebarOpen = false;
   isbutton = false;
   subcategories: Subcategory[] = [];
-  categories:Category[]
+  categories: Category[];
   selectedCategoryId: number | null = null;
   try: number = 0;
   cartItemCount = 0;
-
+  loggedInCustomer: number;
   constructor(
     private cartService: CartService,
     private productSearchService: ProductSearchServiceService,
@@ -37,7 +37,7 @@ export class NavbarComponent {
     private subcategoryService: SubSubcategoryService,
     private bycatservice: SearchbycatService,
     public customerService: CustomerAccountService,
-    private categoryService:CategoryService
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
@@ -48,9 +48,10 @@ export class NavbarComponent {
       this.subcategories = data;
       console.log(this.subcategories);
     });
-    this.categoryService.getAllCategories().subscribe(data=>{
-        this.categories=data
-    })
+    this.categoryService.getAllCategories().subscribe((data) => {
+      this.categories = data;
+    });
+    this.loggedInCustomer = JSON.parse(localStorage.getItem('customerId'));
 
     this.cartItemCount = this.cartService.cartItems.length;
   }

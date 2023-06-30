@@ -244,20 +244,18 @@ export class ProductDetailsComponent {
 
     return `${day}/${month}/${year}`;
   }
+
   buyNow(product: Product) {
+    console.log(this.estimatedDeliveryDate);
     localStorage.setItem('selectedProduct', JSON.stringify(product));
     localStorage.setItem(
       'Shipdate',
       JSON.stringify(this.estimatedDeliveryDate)
     );
     const selectedProduct = localStorage.getItem('selectedProduct');
-    if(selectedProduct){
-      const date=JSON.parse(selectedProduct);
-      console.log(date)
-
+    if (selectedProduct) {
+      const date = JSON.parse(selectedProduct);
+      console.log(date);
     }
   }
-
-
-
 }

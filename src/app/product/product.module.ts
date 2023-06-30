@@ -10,10 +10,8 @@ import { ProductRoutingModule } from './product-routing.module';
 import { AddProductComponent } from './add-product/add-product.component';
 import { SearchComponent } from './search/search.component';
 import { SearchByCatComponent } from './search-by-cat/search-by-cat.component';
-import {
-  MatFormFieldControl,
-  MatFormFieldModule,
-} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { SellerModule } from '../seller/seller.module';
 
 @NgModule({
   declarations: [AddProductComponent, SearchComponent, SearchByCatComponent],
@@ -27,6 +25,7 @@ import {
     MatCardModule,
     MatPaginatorModule,
     MatFormFieldModule,
+    SellerModule,
   ],
   exports: [AddProductComponent],
 })

@@ -6,6 +6,7 @@ import { CustomerService } from 'src/app/_services/customer.service';
 import { PaymentMethod } from 'src/app/_Models/payment';
 import { PaymentService } from 'src/app/_services/payment.service';
 import { Address } from 'src/app/_Models/Address';
+import { CustomerAccountService } from 'src/app/customer-account/customer-account.service';
 
 @Component({
   selector: 'app-payment-methods',
@@ -17,14 +18,15 @@ export class PaymentMethodsComponent {
   paymentMethods: PaymentMethod[] = [];
   selectedMethod: string = '';
   isEditable: boolean = false;
-  productId:number=0
-
+  productId: number = 0;
+  loggedInCustomer: number;
   constructor(
     private formBuilder: FormBuilder,
     private customerService: CustomerService,
     private router: Router,
     private paymentService: PaymentService,
     private route: ActivatedRoute,
+    private authService: CustomerAccountService
   ) {
     this.userForm = this.formBuilder.group({
       street: [''],
@@ -35,24 +37,26 @@ export class PaymentMethodsComponent {
   }
 
   ngOnInit(): void {
-
-    this.route.params.subscribe(params => {
+    this.loggedInCustomer = this.authService.GetCurrentCustomer();
+    this.route.params.subscribe((params) => {
       this.productId = +params['id']; // Convert the route parameter to a number
       console.log(this.productId);
       localStorage.setItem('productId', JSON.stringify(this.productId));
-    })
-
-    this.customerService.getCustomerById(1).subscribe((data) => {
-      this.customer = data;
-      this.userForm = this.formBuilder.group({
-        street: [this.customer.street],
-        city: [this.customer.city],
-        government: [this.customer.government],
-        phone: [this.customer.phone],
-      });
-
-      console.log(this.customer);
     });
+
+    this.customerService
+      .getCustomerById(this.loggedInCustomer)
+      .subscribe((data) => {
+        this.customer = data;
+        this.userForm = this.formBuilder.group({
+          street: [this.customer.street],
+          city: [this.customer.city],
+          government: [this.customer.government],
+          phone: [this.customer.phone],
+        });
+
+        console.log(this.customer);
+      });
     this.paymentService.getAllPaymentMethods().subscribe((data) => {
       this.paymentMethods = data;
       console.log(this.paymentMethods);
@@ -65,7 +69,7 @@ export class PaymentMethodsComponent {
 
   intializeForm() {
     console.log(this.customer.street);
-    const street=this.customer.street
+    const street = this.customer.street;
 
     this.userForm = this.formBuilder.group({
       street: [street],
@@ -76,7 +80,7 @@ export class PaymentMethodsComponent {
   }
   saveUserAddress(): void {
     if (this.userForm.valid) {
-      console.log(this.userForm.value)
+      console.log(this.userForm.value);
       const street = this.userForm.get('street')?.value;
       const city = this.userForm.get('city')?.value;
       const government = this.userForm.get('government')?.value;
@@ -87,7 +91,6 @@ export class PaymentMethodsComponent {
       this.customer.city = city;
       this.customer.government = government;
       this.customer.phone = mobileNumber;
-       this.customer.name='mariam'
       // this.customer.password=this.customer.password
       // this.customer.email=this.customer.email
 
@@ -96,7 +99,7 @@ export class PaymentMethodsComponent {
       this.isEditable = false;
 
       this.customerService
-        .updateCustomer(1, this.customer)
+        .updateCustomer(this.loggedInCustomer, this.customer)
         .subscribe((data) => {
           console.log(data);
         });
@@ -121,10 +124,9 @@ export class PaymentMethodsComponent {
 
   submitPaymentMethod(): void {
     if (this.selectedMethod == 'credit Card') {
-      
       this.router.navigate(['/creditCard/1']);
     } else {
-      this.router.navigate(["/submitOrder/ 2"]);
+      this.router.navigate(['/submitOrder/ 2']);
     }
   }
   customer: Customer = {

@@ -45,6 +45,14 @@ export class SellerAccountService {
     localStorage.removeItem('Seller token');
     localStorage.removeItem('SellerId');
     this.currentSellerSource.next(null);
-    this.router.navigateByUrl('SellerAccount/login');
+    this.router.navigateByUrl('CustomerAccount/login');
+  }
+
+  GetCurrentSeller(): number {
+    if (localStorage.getItem('SellerId') != null) {
+      var id = parseInt(localStorage.getItem('SellerId'));
+      return id;
+    }
+    return null;
   }
 }

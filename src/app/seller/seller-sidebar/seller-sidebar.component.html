@@ -1,0 +1,38 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img
+        src="./../../../assets/Images/Logo.png"
+        alt=""
+        height="60"
+        class="d-inline-block align-text-center"
+      />
+      EASYSHOP Seller Center
+    </a>
+    <span
+      style="
+        color: white;
+        font-size: medium;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: bold;
+      "
+    >
+      Hello, {{ sellerName }}
+    </span>
+    <span
+      *ngIf="loggedInSeller"
+      style="
+        color: rgb(208, 152, 49);
+        font-size: large;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background-color: white;
+        font-weight: bold;
+      "
+      class="p-2"
+      [routerLink]="['/sellerDashboard']"
+      routerLinkActive="router-link-active"
+    >
+      {{ bussiness }} Bussiness
+    </span>
+  </div>
+</nav>

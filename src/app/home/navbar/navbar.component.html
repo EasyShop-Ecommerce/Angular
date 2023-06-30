@@ -1,5 +1,9 @@
 <nav class="navbar navbar-dark bg-light firstnav">
-  <img class="logo" src="../../assets/Images/images-removebg-preview.png" />
+  <img
+    class="logo"
+    src="../../assets/Images/images-removebg-preview.png"
+    [routerLink]="['']"
+  />
 
   <button mat-button [matMenuTriggerFor]="menu" class="menu">
     All
@@ -36,10 +40,13 @@
         <a routerLink="/CustomerAccount/login">signIn</a>
         <a routerLink="/CustomerAccount/register">signUp</a>
       </ng-container>
-      <ng-container *ngIf="customerService.currentUser$ | async as customer">
-        <a>Hi {{ customer.name }}</a>
-        <a (click)="customerService.logout()">logout</a>
+      <ng-container *ngIf="loggedInCustomer">
+        <span *ngIf="customerService.currentUser$ | async as customer">
+          <a>Hi {{ customer.name }}</a>
+          <a (click)="customerService.logout()">logout</a>
+        </span>
       </ng-container>
+
       <a (click)="order()">Orders</a>
       <a routerLink="/cart">
         <span class="cart-link">
@@ -58,7 +65,6 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="collapse navbar-collapse secondnav" id="navbarSupportedContent">
- 
     <li class="nav-item active" (click)="toggleSidebar()">
       <button class="sidebar-toggle" (click)="toggleSidebar()">
         <span (click)="toggleSidebar()" *ngIf="!isSidebarOpen"

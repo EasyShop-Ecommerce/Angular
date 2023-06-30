@@ -4,6 +4,7 @@ import { Order } from 'src/app/_Models/order';
 import { Product } from 'src/app/_Models/product';
 import { OrderService } from 'src/app/_services/order.service';
 import { ProductService } from 'src/app/_services/product.service';
+import { CustomerAccountService } from 'src/app/customer-account/customer-account.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -22,17 +23,18 @@ export class UserOrdersComponent {
   constructor(
     private orderService: OrderService,
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: CustomerAccountService
   ) {}
 
   ngOnInit(): void {
     // Fetch user orders from the service
 
-    this.route.params.subscribe((params) => {
-      this.customerId = +params['id']; // Convert the route parameter to a number
-      console.log(this.customerId);
-    });
-
+    // this.route.params.subscribe((params) => {
+    //   this.customerId = +params['id']; // Convert the route parameter to a number
+    //   console.log(this.customerId);
+    // });
+    this.customerId = this.authService.GetCurrentCustomer();
     this.orderService.getAllOrders().subscribe((data) => {
       this.orders = data;
       console.log(this.orders);

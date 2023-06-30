@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { concatMap } from 'rxjs/operators';
 import { Category } from 'src/app/_Models/Category';
 import { ProductSellers } from 'src/app/_Models/ProductSellers';
@@ -31,7 +32,8 @@ export class AddProductComponent {
     private subcatService: SubSubcategoryService,
     private catService: CategoryService,
     private shipperservice: ShipperService,
-    private productService: ProductService
+    private productService: ProductService,
+    private route: Router
   ) {}
   // Dummy data for subCategories and shippers
 
@@ -102,6 +104,7 @@ export class AddProductComponent {
               confirmButtonText: 'Close',
             });
             this.productForm.reset();
+            this.route.navigate(['sellerDashboard/products']);
           },
           error: (error) => {
             console.error('Error adding product:', error);

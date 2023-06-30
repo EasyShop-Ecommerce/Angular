@@ -3,19 +3,20 @@ table {
 }
 .example-container {
   width: 80%;
-  margin: 20px auto;
-  border: 2px solid rgb(23, 87, 127);
+  margin: 50px auto;
+  border: 5px solid rgb(182, 120, 32);
   border-radius: 15px;
 }
 .mat-mdc-form-field {
-  font-size: 14px;
+  font-size: 18px;
   width: 100%;
 }
 
 td,
 th {
-  width: 25%;
+  width: 28%;
   text-align: center;
+  padding: 5px;
 }
 
 th {

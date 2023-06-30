@@ -64,4 +64,12 @@ export class CustomerAccountService {
     this.currentUserSource.next(null);
     this.router.navigateByUrl('CustomerAccount/login');
   }
+
+  GetCurrentCustomer(): number {
+    if (localStorage.getItem('customerId') != null) {
+      var id = parseInt(localStorage.getItem('customerId'));
+      return id;
+    }
+    return null;
+  }
 }

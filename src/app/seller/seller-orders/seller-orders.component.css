@@ -1,0 +1,40 @@
+.order-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 800px;
+  margin: 10px auto;
+  margin-bottom: 10px;
+  border: 2px solid chocolate;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: bold;
+}
+
+.order-details img {
+  display: inline-block;
+}
+
+.progress-bar {
+  width: 70%;
+  height: 5px;
+  background-color: #ccc;
+}
+
+.progress {
+  height: 100%;
+  background-color: chocolate;
+}
+button {
+  color: blue;
+  border: none;
+  background-color: white;
+  margin-left: 40px;
+}
+img {
+  margin-left: 150px;
+  margin-top: -120px;
+  width: 100px;
+}
+.cancel {
+  color: red;
+  font-weight: bold;
+}

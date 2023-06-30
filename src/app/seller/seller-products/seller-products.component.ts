@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,6 +8,7 @@ import { EditImagesDialogComponent } from '../edit-images-dialog/edit-images-dia
 import { MatDialog } from '@angular/material/dialog';
 import { EditProductDialogComponent } from '../edit-product-dialog/edit-product-dialog.component';
 import { DeleteProductDialogComponent } from '../delete-product-dialog/delete-product-dialog.component';
+import { SellerAccountService } from 'src/app/seller-account/seller-account.service';
 
 @Component({
   selector: 'app-seller-products',
@@ -28,13 +29,16 @@ export class SellerProductsComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   products: Product[];
-  loggedSellerId: number = 1;
+  loggedSellerId: number;
+  @Input() item = '';
   constructor(
     private productService: ProductService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authService: SellerAccountService
   ) {}
 
   ngOnInit() {
+    this.loggedSellerId = this.authService.GetCurrentSeller();
     this.getAllSellerProducts();
   }
 

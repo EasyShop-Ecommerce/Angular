@@ -3,6 +3,7 @@ import { Order } from 'src/app/_Models/order';
 import { Product } from 'src/app/_Models/product';
 import { OrderService } from 'src/app/_services/order.service';
 import { ProductService } from 'src/app/_services/product.service';
+import { SellerAccountService } from 'src/app/seller-account/seller-account.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,14 +14,15 @@ import Swal from 'sweetalert2';
 export class SellerOrdersComponent {
   orders: Order[] = [];
   sellerOrders: Order[] = [];
-  loggedSellerId: 2;
+  loggedSellerId: number;
   statusName: string;
   canCancell: boolean = false;
   product: Product[];
 
   constructor(
     private orderService: OrderService,
-    private productService: ProductService
+    private productService: ProductService,
+    private authService: SellerAccountService
   ) {}
 
   ngOnInit(): void {
@@ -29,9 +31,9 @@ export class SellerOrdersComponent {
     this.orderService.getAllOrders().subscribe((data) => {
       this.orders = data;
       console.log(this.orders);
-      this.loggedSellerId = 2;
+      this.loggedSellerId = this.authService.GetCurrentSeller();
       this.sellerOrders = this.orders.filter(
-        (e) => e.customerId == this.loggedSellerId
+        (e) => e.sellerId == this.loggedSellerId
       );
       console.log(this.sellerOrders);
     });
