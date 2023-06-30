@@ -5,7 +5,7 @@
     All
     <img class="down" src="../../../assets/Images/down.png" />
   </button>
-  <mat-menu #menu="matMenu" >
+  <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="onCategoryChange(null)">
       All Categories
     </button>
@@ -31,15 +31,15 @@
     </button>
 
     <span>
-      <ng-container *ngIf="(customerService.currentUser$ | async)==null">
+      <ng-container *ngIf="(customerService.currentUser$ | async) == null">
         <a routerLink="/CustomerAccount/login">signIn</a>
         <a routerLink="/CustomerAccount/register">signUp</a>
-      </ng-container >
-      <ng-container *ngIf="customerService.currentUser$ | async as customer" >
-        <a>Hi {{customer.name}}</a>
+      </ng-container>
+      <ng-container *ngIf="customerService.currentUser$ | async as customer">
+        <a>Hi {{ customer.name }}</a>
         <a (click)="customerService.logout()">logout</a>
       </ng-container>
-      <a href="">Orders</a>
+      <a (click)="order()">Orders</a>
       <a routerLink="/cart">
         <span class="cart-link">
           <span class="cart-no">{{ cartItemCount }}</span>

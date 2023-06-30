@@ -50,6 +50,8 @@ export class CustomerAccountService {
         map((customer) => {
           console.log(customer);
           localStorage.setItem('token', customer.token);
+          localStorage.setItem('customerId', customer.customerId.toString());
+
           this.currentUserSource.next(customer);
           return customer;
         })

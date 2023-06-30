@@ -19,6 +19,7 @@ export class SellerAccountService {
       .post<Seller>('https://localhost:44364/SellerAccount/register', values)
       .pipe(
         map((seller) => {
+          console.log(seller);
           this.currentSellerSource.next(seller);
           return seller;
         })
@@ -30,6 +31,7 @@ export class SellerAccountService {
       .post<Login>('https://localhost:44364/SellerAccount/login', values)
       .pipe(
         map((seller) => {
+          console.log(seller);
           localStorage.setItem('Seller token', seller.token);
           this.currentSellerSource.next(seller);
           return seller;

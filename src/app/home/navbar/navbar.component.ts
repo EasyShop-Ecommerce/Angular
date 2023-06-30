@@ -32,8 +32,8 @@ export class NavbarComponent {
     private productSearchService: ProductSearchServiceService,
     private router: Router,
     private subcategoryService: SubSubcategoryService,
-    private bycatservice:SearchbycatService,
-    public customerService:CustomerAccountService
+    private bycatservice: SearchbycatService,
+    public customerService: CustomerAccountService
   ) {}
 
   ngOnInit(): void {
@@ -82,5 +82,9 @@ export class NavbarComponent {
     console.log(categoryId);
     this.router.navigate(['/searchCat']);
     console.log(categoryId);
+  }
+
+  order() {
+    
   }
 }

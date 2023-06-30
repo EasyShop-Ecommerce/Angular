@@ -11,94 +11,123 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
+  registrationForm!: FormGroup;
+  submitted = false;
+  seller!: Seller;
 
-registrationForm!: FormGroup;
-submitted = false; 
-seller!:Seller
-
-
-constructor(
-  private formBuilder: FormBuilder,
-  private http: HttpClient,
-  private sellerService:SellerService,
-  private router:Router,
-  private sellerAccoutService:SellerAccountService
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private sellerService: SellerService,
+    private router: Router,
+    private sellerAccoutService: SellerAccountService
   ) {}
 
-ngOnInit() {
-  this.registrationForm = this.formBuilder.group({
-    firstName: ['', [Validators.required,Validators.minLength(3), Validators.pattern('^[a-zA-Z]+$')]],
-    middleName: ['', [Validators.required,Validators.minLength(3), Validators.pattern('^[a-zA-Z]+$')]],
-    lastName: ['', [Validators.required,Validators.minLength(3), Validators.pattern('^[a-zA-Z]+$')]],
-    phone: ['',[ Validators.required,Validators.pattern('^(015|012|011|010)[0-9]{8}$')]],
-    email: ['', [Validators.required, Validators.email]],
-    sSN: ['', [Validators.required, Validators.minLength(14), Validators.pattern('^[0-9]{14}$')]],
-    businessName: ['', Validators.required],
-    password: ['', [Validators.required, Validators.minLength(8)]],
-    street: ['', Validators.required],
-    city: ['', Validators.required],
-    government: ['', Validators.required],
-    confirmPassword:['', Validators.required]
-  });
-}
+  ngOnInit() {
+    this.registrationForm = this.formBuilder.group({
+      firstName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.pattern('^[a-zA-Z]+$'),
+        ],
+      ],
+      middleName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.pattern('^[a-zA-Z]+$'),
+        ],
+      ],
+      lastName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.pattern('^[a-zA-Z]+$'),
+        ],
+      ],
+      phone: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^(015|012|011|010)[0-9]{8}$'),
+        ],
+      ],
+      email: ['', [Validators.required, Validators.email]],
+      sSN: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(14),
+          Validators.pattern('^[0-9]{14}$'),
+        ],
+      ],
+      businessName: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      street: ['', Validators.required],
+      city: ['', Validators.required],
+      government: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+    });
+  }
 
-get firstNameControl() {
-  return this.registrationForm.get('firstName');
-}
+  get firstNameControl() {
+    return this.registrationForm.get('firstName');
+  }
 
-get lastNameControl() {
-  return this.registrationForm.get('lastName');
-}
+  get lastNameControl() {
+    return this.registrationForm.get('lastName');
+  }
 
-get middleNameControl() {
-  return this.registrationForm.get('middleName');
-}
+  get middleNameControl() {
+    return this.registrationForm.get('middleName');
+  }
 
-get phoneControl() {
-  return this.registrationForm.get('phone');
-}
+  get phoneControl() {
+    return this.registrationForm.get('phone');
+  }
 
-get emailControl() {
-  return this.registrationForm.get('email');
-}
+  get emailControl() {
+    return this.registrationForm.get('email');
+  }
 
-get passwordControl() {
-  return this.registrationForm.get('password');
-}
+  get passwordControl() {
+    return this.registrationForm.get('password');
+  }
 
-get streetControl() {
-  return this.registrationForm.get('street');
-}
+  get streetControl() {
+    return this.registrationForm.get('street');
+  }
 
-get cityControl() {
-  return this.registrationForm.get('city');
-}
+  get cityControl() {
+    return this.registrationForm.get('city');
+  }
 
-get governmentControl() {
-  return this.registrationForm.get('government');
-}
-get sSNControl() {
-  return this.registrationForm.get('sSN');
-}
+  get governmentControl() {
+    return this.registrationForm.get('government');
+  }
+  get sSNControl() {
+    return this.registrationForm.get('sSN');
+  }
 
-get businessNameControl() {
-  return this.registrationForm.get('businessName');
-}
+  get businessNameControl() {
+    return this.registrationForm.get('businessName');
+  }
 
-get confirmPasswordControl(){
-  return this.registrationForm.get('confirmPassword');
-}
-onSubmit()
-{
-  this.sellerAccoutService.register(this.registrationForm.value).subscribe(
-    {
-      next:user=>this.router.navigateByUrl("/")
-    })
-
-}
+  get confirmPasswordControl() {
+    return this.registrationForm.get('confirmPassword');
+  }
+  onSubmit() {
+    this.sellerAccoutService.register(this.registrationForm.value).subscribe({
+      next: (user) => this.router.navigateByUrl(''),
+    });
+  }
 }
 
 // onSubmit() {
@@ -113,11 +142,7 @@ onSubmit()
 //       Government: formData.government
 //     };
 
-   
-  
 //       console.log(this.seller);
-
-
 
 //     // this.sellerService.addSeller(this.seller)
 //     //   .subscribe(
@@ -128,10 +153,10 @@ onSubmit()
 //     //         text: 'The seller has been successfully added.',
 //     //         icon: 'success',
 //     //       });
-      
+
 //     //       // Clear input fields
 //     //       this.registrationForm.reset()
-       
+
 //     //       console.log('Customer data saved successfully:', response);
 //     //     },
 //     //     // (error) => {
@@ -140,5 +165,3 @@ onSubmit()
 //     //     // }
 //     //   );
 //   }
-
-

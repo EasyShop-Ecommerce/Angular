@@ -45,11 +45,17 @@ const routes: Routes = [
       import('./admin/admin.module').then((m) => m.AdminModule),
   },
   {
-    path: 'seller',
+    path: 'sellerDashboard',
     loadChildren: () =>
       import('./seller/seller.module').then((m) => m.SellerModule),
   },
-  { path: 'CustomerAccount',loadChildren: () =>import('./customer-account/customer-account.module').then((m) => m.CustomerAccountModule),},
+  {
+    path: 'CustomerAccount',
+    loadChildren: () =>
+      import('./customer-account/customer-account.module').then(
+        (m) => m.CustomerAccountModule
+      ),
+  },
 ];
 
 @NgModule({

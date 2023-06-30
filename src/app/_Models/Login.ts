@@ -5,6 +5,7 @@ export interface User {
 }
 
 export class Login implements User {
+  customerId: number;
   email: string;
   password: string;
   token: string;
@@ -12,6 +13,7 @@ export class Login implements User {
   name: string;
 
   constructor(
+    customerId: number,
     email: string,
     password: string,
     token: string,
@@ -23,5 +25,6 @@ export class Login implements User {
     this.email = email;
     this.password = password;
     this.name = name;
+    this.customerId = customerId;
   }
 }
